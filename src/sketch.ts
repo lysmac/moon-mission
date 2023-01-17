@@ -1,5 +1,5 @@
 //---- GLOBAL VARIABLES ----//
-let game: Game
+
 // let sound: p5.SoundFile
 
 /**
@@ -23,7 +23,7 @@ function setup() {
 
   frameRate(60)
 
-  game = new Game()
+  
 }
 
 /**
