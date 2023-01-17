@@ -34,24 +34,15 @@ class ScoreBoard {
     update() { }
     draw() { }
 }
-let game;
 function preload() {
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
-    game = new Game();
 }
 function draw() { }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-}
-class SpeedBoost extends GameEntity {
-    constructor() {
-        super();
-    }
-    update() { }
-    draw() { }
 }
 class Alien extends Enemy {
     constructor() {
@@ -101,6 +92,13 @@ class Score extends GameEntity {
     draw() { }
 }
 class SpaceShip extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class SpeedBoost extends GameEntity {
     constructor() {
         super();
     }
