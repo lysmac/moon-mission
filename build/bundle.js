@@ -38,9 +38,11 @@ let game;
 function preload() {
 }
 function setup() {
+    createCanvas(windowWidth, windowHeight);
+    frameRate(60);
+    game = new Game();
 }
-function draw() {
-}
+function draw() { }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
