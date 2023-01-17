@@ -1,51 +1,108 @@
 "use strict";
+class Background {
+    constructor() { }
+    update() { }
+    draw() { }
+}
 class Game {
-    constructor() {
-        this.position = createVector(width * 0.5, height * 0.5);
-        this.isCircleVisible = false;
-    }
-    update() {
-        this.position.set(mouseX, mouseY);
-        this.isCircleVisible = mouseIsPressed;
-    }
-    draw() {
-        background('black');
-        this.drawText();
-        if (this.isCircleVisible) {
-            this.drawCircle();
-        }
-    }
-    drawText() {
-        push();
-        fill('white');
-        textSize(width * 0.1);
-        textStyle('bold');
-        textAlign('center');
-        text('Click & Drag', width * 0.5, height * 0.5);
-        pop();
-    }
-    drawCircle() {
-        push();
-        fill('green');
-        stroke('white');
-        strokeWeight(width * 0.01);
-        circle(this.position.x, this.position.y, width * 0.2);
-        pop();
-    }
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class GameEngine {
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class GameMenu {
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class GameOverScreen {
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class PauseMenu {
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class ScoreBoard {
+    constructor() { }
+    update() { }
+    draw() { }
 }
 let game;
 function preload() {
 }
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    frameRate(60);
-    game = new Game();
 }
 function draw() {
-    game.update();
-    game.draw();
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+class SpeedBoost extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class Alien extends Enemy {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class Astroid extends Enemy {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class Enemy extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class GameEntity {
+    constructor() { }
+    update() { }
+    draw() { }
+}
+class OxygenDisplay extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class OxygenTank extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class Score extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
+}
+class SpaceShip extends GameEntity {
+    constructor() {
+        super();
+    }
+    update() { }
+    draw() { }
 }
 //# sourceMappingURL=bundle.js.map

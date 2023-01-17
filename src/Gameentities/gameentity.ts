@@ -1,4 +1,4 @@
-class Game {
+abstract class GameEntity {
   constructor() {}
 
   public update() {}

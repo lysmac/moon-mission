@@ -18,10 +18,7 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  frameRate(60);
-
-  game = new Game();
+ 
 }
 
 /**
@@ -30,8 +27,7 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  game.update();
-  game.draw();
+  
 }
 
 /**
