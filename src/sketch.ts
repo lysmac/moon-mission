@@ -19,7 +19,7 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(600, 800)
   frameRate(60)
   game = new Game()
 }

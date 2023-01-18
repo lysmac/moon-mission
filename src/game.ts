@@ -12,21 +12,18 @@ class Game {
   private currentScene: string
 
   constructor() {
-    this.gameMenu = new GameMenu(50, 50, 600, 600, 'red')
-
+    this.gameMenu = new GameMenu(100, 300, 400, 300, "#566E93")
+    this.gameEngine = new GameEngine()
+    
     // new GameMenu(this)
     // Stod i klassschemat, vet inte exakt hur den ska användas?
-    
-
   }
 
   public update(): void {
     this.gameMenu.update()
   }
 
-
   public draw(): void {
-
     this.gameMenu.draw()
   }
 
