@@ -6,7 +6,8 @@ class Background {
 }
 class Game {
     constructor() {
-        this.gameMenu = new GameMenu(50, 50, 600, 600, 'red');
+        this.gameMenu = new GameMenu(100, 300, 400, 300, "#566E93");
+        this.gameEngine = new GameEngine();
     }
     update() {
         this.gameMenu.update();
@@ -26,22 +27,34 @@ class GameMenu {
     constructor(x, y, width, height, color) {
         this.x = 0;
         this.y = 0;
-        this.color = 'red';
         this.width = 100;
         this.height = 100;
+        this.textSize = 20;
+        this.text = "GAME MENU";
+        this.textPlay = "PLAY";
+        this.textHowToPlay = "HOW TO PLAY";
+        this.textColor = "black";
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
     }
-    update() {
-        this.x = 1;
-        this.y = 0;
-    }
+    update() { }
     draw() {
+        background(255, 204, 0);
         fill(this.color);
-        rect(this.x, this.y, this.width, this.height);
+        rect(this.x, this.y, this.width, this.height, 20);
+        noStroke();
+        textSize(this.textSize);
+        textAlign(CENTER - textWidth(this.text));
+        fill(this.textColor);
+        textFont("times new roman");
+        text(this.text, this.x + 140, this.y + 30);
+        textAlign(CENTER - textWidth(this.textPlay));
+        text(this.textPlay, this.x + 160, this.y + 60);
+        textAlign(CENTER - textWidth(this.textHowToPlay));
+        text(this.textHowToPlay, this.x + 130, this.y + 90);
     }
 }
 class GameOverScreen {
@@ -63,7 +76,7 @@ let game;
 function preload() {
 }
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(600, 800);
     frameRate(60);
     game = new Game();
 }
