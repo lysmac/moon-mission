@@ -1,5 +1,5 @@
 //---- GLOBAL VARIABLES ----//
-
+let game: Game
 // let sound: p5.SoundFile
 
 /**
@@ -20,10 +20,8 @@ function preload() {
  */
 function setup() {
   createCanvas(windowWidth, windowHeight)
-
   frameRate(60)
-
-  
+  game = new Game()
 }
 
 /**
@@ -32,7 +30,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {}
-
+game.update()
+game.draw()
 /**
  *  Built in windowResize listener function in P5
  */
