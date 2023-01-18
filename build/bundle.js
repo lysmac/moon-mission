@@ -5,9 +5,13 @@ class Background {
     draw() { }
 }
 class Game {
-    constructor() { }
+    constructor() {
+        this.gameMenu = new GameMenu();
+    }
     update() { }
     draw() { }
+    startNewGame() { }
+    resumeGame() { }
 }
 class GameEngine {
     constructor() { }
@@ -34,13 +38,17 @@ class ScoreBoard {
     update() { }
     draw() { }
 }
+let game;
 function preload() {
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+    game = new Game();
 }
 function draw() { }
+game.update();
+game.draw();
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
