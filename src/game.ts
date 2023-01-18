@@ -1,7 +1,15 @@
 class Game {
-  constructor() {}
+  private gameEngine: GameEngine;
 
-  public update() {}
+  constructor() {
+    this.gameEngine = new GameEngine();
+  }
 
-  public draw() {}
+  public update() {
+    this.gameEngine.update();
+  }
+
+  public draw() {
+    this.gameEngine.draw();
+  }
 }

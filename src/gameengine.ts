@@ -1,7 +1,15 @@
 class GameEngine {
-    constructor() {}
+  private background: Background; 
+
+    constructor() {
+      this.background = new Background();
+    }
   
-    public update() {}
+    public update() {
+      this.background.update();
+    }
   
-    public draw() {}
+    public draw() {
+      this.background.draw();
+    }
   }

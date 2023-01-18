@@ -1,18 +1,61 @@
 "use strict";
+class Star {
+    constructor() {
+        this.x = random(width);
+        this.y = random(-height, 0);
+        this.speed = random(1, 5);
+    }
+    show() {
+        stroke(255);
+        point(this.x, this.y);
+    }
+    fall() {
+        this.y += this.speed;
+        if (this.y > height) {
+            this.y = random(-height, 0);
+        }
+    }
+}
 class Background {
-    constructor() { }
-    update() { }
-    draw() { }
+    constructor() {
+        this.stars = [];
+        for (let i = 0; i < 1000; i++) {
+            this.stars[i] = new Star();
+        }
+    }
+    update() {
+        for (let i = 0; i < this.stars.length; i++) {
+            this.stars[i].fall();
+        }
+    }
+    draw() {
+        background(0);
+        for (let i = 0; i < this.stars.length; i++) {
+            this.stars[i].show();
+        }
+    }
 }
 class Game {
-    constructor() { }
-    update() { }
-    draw() { }
+    constructor() {
+        this.gameEngine = new GameEngine();
+    }
+    update() {
+        this.gameEngine.update();
+    }
+    draw() {
+        this.gameEngine.draw();
+    }
 }
 class GameEngine {
-    constructor() { }
-    update() { }
-    draw() { }
+    constructor() {
+        this.background = new Background();
+    }
+    update() {
+        this.background.update();
+    }
+    draw() {
+        this.background.draw();
+    }
 }
 class GameMenu {
     constructor() { }
@@ -34,13 +77,18 @@ class ScoreBoard {
     update() { }
     draw() { }
 }
+let game;
 function preload() {
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+    game = new Game();
 }
-function draw() { }
+function draw() {
+    game.update();
+    game.draw();
+}
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
