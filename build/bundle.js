@@ -6,10 +6,14 @@ class Background {
 }
 class Game {
     constructor() {
-        this.gameMenu = new GameMenu();
+        this.gameMenu = new GameMenu(50, 50, 600, 600, 'red');
     }
-    update() { }
-    draw() { }
+    update() {
+        this.gameMenu.update();
+    }
+    draw() {
+        this.gameMenu.draw();
+    }
     startNewGame() { }
     resumeGame() { }
 }
@@ -19,9 +23,26 @@ class GameEngine {
     draw() { }
 }
 class GameMenu {
-    constructor() { }
-    update() { }
-    draw() { }
+    constructor(x, y, width, height, color) {
+        this.x = 0;
+        this.y = 0;
+        this.color = 'red';
+        this.width = 100;
+        this.height = 100;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+    update() {
+        this.x = 1;
+        this.y = 0;
+    }
+    draw() {
+        fill(this.color);
+        rect(this.x, this.y, this.width, this.height);
+    }
 }
 class GameOverScreen {
     constructor() { }
@@ -46,9 +67,10 @@ function setup() {
     frameRate(60);
     game = new Game();
 }
-function draw() { }
-game.update();
-game.draw();
+function draw() {
+    game.update();
+    game.draw();
+}
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }

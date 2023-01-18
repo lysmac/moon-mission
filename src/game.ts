@@ -1,8 +1,8 @@
 // Is this right or should it be in a separate file?
-interface IstartGame {
-  startNewGame(): void
-  resumeGame(): void
-}
+// interface IstartGame {
+//   startNewGame(): void
+//   resumeGame(): void
+// }
 class Game {
   private gameMenu: GameMenu
 
@@ -12,7 +12,7 @@ class Game {
   private currentScene: string
 
   constructor() {
-    this.gameMenu = new GameMenu()
+    this.gameMenu = new GameMenu(50, 50, 600, 600, 'red')
 
     // new GameMenu(this)
     // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -20,9 +20,15 @@ class Game {
 
   }
 
-  public update(): void {}
+  public update(): void {
+    this.gameMenu.update()
+  }
 
-  public draw(): void {}
+
+  public draw(): void {
+
+    this.gameMenu.draw()
+  }
 
   public startNewGame(): void {}
 
