@@ -4,27 +4,30 @@ interface IstartGame {
   resumeGame(): void
 }
 class Game {
+
+  private gameEngine: GameEngine;
   private gameMenu: GameMenu
-
-  // playerScore är nu kopplad till GameEntity i klassschemat, kan behöva flyttas/ändras
-  private playerScore: Score
-  private gameEngine: GameEngine
+   private playerScore: Score
+ 
   private currentScene: string
-
+  
   constructor() {
+    this.gameEngine = new GameEngine();
     this.gameMenu = new GameMenu()
-
-    // new GameMenu(this)
+  }
+   // new GameMenu(this)
     // Stod i klassschemat, vet inte exakt hur den ska användas?
-    
 
+  public update(): void {
+    this.gameEngine.update();
   }
 
-  public update(): void {}
+  public draw(): void {
+    this.gameEngine.draw();
+  }
 
-  public draw(): void {}
-
-  public startNewGame(): void {}
+    public startNewGame(): void {}
 
   public resumeGame(): void {}
+
 }
