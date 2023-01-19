@@ -30,7 +30,7 @@ class GameEngine {
   }
 
   private spawnEnemy() {
-    this.spawnTimout -= deltaTime;
+    // this.spawnTimout -= deltaTime; // Denna rad är osäker.
     if (this.spawnTimout < 0) {
       const randomX = width / 2;
       const position = createVector(randomX, 0);

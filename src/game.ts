@@ -7,10 +7,8 @@ class Game {
 
   private gameEngine: GameEngine;
   private gameMenu: GameMenu
-   private playerScore: Score
- 
-  private currentScene: string
-  
+  //  private playerScore: Score
+   
   constructor() {
     this.gameMenu = new GameMenu(100, 300, 400, 300, "#566E93")
     this.gameEngine = new GameEngine()
