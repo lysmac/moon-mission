@@ -2,11 +2,13 @@ class GameEngine {
   private background: Background;
   private isPaused: boolean;
   private wasEscapeKeyDown: boolean;
+  private pauseMenu: PauseMenu;
 
   constructor() {
     this.background = new Background();
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
+    this.pauseMenu = new PauseMenu(100, 300, 400, 300, "#566E93");
   }
 
   public update() {
@@ -19,7 +21,7 @@ class GameEngine {
   public draw() {
     this.background.draw();
     if (this.isPaused) {
-      text("PAUSE!!", 0, 0);
+      this.pauseMenu.draw();
     }
   }
 
