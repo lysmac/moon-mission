@@ -21,7 +21,8 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(600, 800);
+  background(255, 204, 0);
   frameRate(60);
   game = new Game();
 }
@@ -39,6 +40,6 @@ function draw() {
 /**
  *  Built in windowResize listener function in P5
  */
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
