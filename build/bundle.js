@@ -1,7 +1,9 @@
 "use strict";
 class Game {
     constructor() {
+
         this.gameEngine = new GameEngine();
+          this.gameMenu = new GameMenu();
     }
     update() {
         this.gameEngine.update();
@@ -9,6 +11,9 @@ class Game {
     draw() {
         this.gameEngine.draw();
     }
+    startNewGame() { }
+    resumeGame() { }
+
 }
 class GameEngine {
     constructor() {
@@ -48,11 +53,13 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
     game = new Game();
+
 }
 function draw() {
     game.update();
     game.draw();
 }
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
