@@ -12,7 +12,7 @@ class GameEngine {
   }
 
   public draw() {
-    this.togglePause();
+    // this.togglePause();
     this.background.draw();
   }
 

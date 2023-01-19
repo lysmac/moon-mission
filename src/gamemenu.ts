@@ -27,7 +27,7 @@ class GameMenu {
   public update() {}
 
   public draw() {
-    background(255, 204, 0);
+    //background(255, 204, 0);
 
     fill(this.color);
     rect(this.x, this.y, this.width, this.height, 20);
