@@ -1,7 +1,13 @@
 abstract class GameEntity {
-  constructor() {}
+  protected position: p5.Vector;
+
+  constructor(position: p5.Vector) {
+    this.position = position;
+  }
 
   public update() {}
 
-  public draw() {}
+  public draw() {
+    // image(this.image, this.position.x, this.position.y, this.size.x, this.size.y);
+  }
 }
