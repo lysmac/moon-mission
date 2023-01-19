@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game
+let img: p5.Image
 // let sound: p5.SoundFile
 
 /**
@@ -10,6 +11,7 @@ let game: Game
 function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
+  img = loadImage('assets/testpil.png'); 
 }
 
 /**
@@ -19,7 +21,7 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(600, 800)
+  createCanvas(windowWidth, windowHeight)
   frameRate(60)
   game = new Game()
 }
@@ -30,9 +32,11 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-game.update()
-game.draw()
+  game.update()
+  game.draw()
 }
+
+
 /**
  *  Built in windowResize listener function in P5
  */

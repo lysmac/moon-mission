@@ -55,6 +55,7 @@ class GameMenu {
         text(this.textPlay, this.x + 160, this.y + 60);
         textAlign(CENTER - textWidth(this.textHowToPlay));
         text(this.textHowToPlay, this.x + 130, this.y + 90);
+        image(img, 0, 0);
     }
 }
 class GameOverScreen {
@@ -73,10 +74,12 @@ class ScoreBoard {
     draw() { }
 }
 let game;
+let img;
 function preload() {
+    img = loadImage('assets/testpil.png');
 }
 function setup() {
-    createCanvas(600, 800);
+    createCanvas(windowWidth, windowHeight);
     frameRate(60);
     game = new Game();
 }
