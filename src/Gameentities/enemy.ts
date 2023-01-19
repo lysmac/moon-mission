@@ -1,6 +1,8 @@
+/// <reference path="gameentity.ts" />
+
 class Enemy extends GameEntity {
   constructor() {
-    super()
+    super();
   }
 
   public update() {}

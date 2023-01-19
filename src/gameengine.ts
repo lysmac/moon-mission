@@ -1,30 +1,38 @@
 class GameEngine {
   private background: Background;
-  private isPaused: boolean = false;
+  private isPaused: boolean;
+  private wasEscapeKeyDown: boolean;
 
   constructor() {
     this.background = new Background();
     this.isPaused = false;
+    this.wasEscapeKeyDown = false;
   }
 
   public update() {
+    this.togglePause();
+    if (this.isPaused) return;
+
     this.background.update();
   }
 
   public draw() {
-    // this.togglePause();
     this.background.draw();
+    if (this.isPaused) {
+      text("PAUSE!!", 0, 0);
+    }
   }
 
   public togglePause() {
-    if (keyCode === ESCAPE) {
-      // Hide pause menu and resume game
-      this.isPaused = false;
-    } else {
+    const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
+    // const espaceWasReleased = this.wasEscapeKeyDown && !keyIsDown(ESCAPE);
+
+    if (espaceWasPressed) {
       // Show pause menu and pause game
-      this.isPaused = true;
-      this.pauseMenu.draw();
+      this.isPaused = !this.isPaused;
     }
+
+    this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
 

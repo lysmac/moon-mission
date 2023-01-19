@@ -9,14 +9,17 @@ class GameMenu {
   textPlay: string = "PLAY";
   textHowToPlay: string = "HOW TO PLAY";
   textColor: string = "black";
+  game: IStartGame;
 
   constructor(
+    game: IStartGame,
     x: number,
     y: number,
     width: number,
     height: number,
     color: string
   ) {
+    this.game = game;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -24,7 +27,11 @@ class GameMenu {
     this.color = color;
   }
 
-  public update() {}
+  public update() {
+    if (true) {
+      this.game.startNewGame();
+    }
+  }
 
   public draw() {
     //background(255, 204, 0);
