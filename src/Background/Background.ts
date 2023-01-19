@@ -1,4 +1,3 @@
-
 class Background {
   private stars: Star[];
   private atmosphere: Atmosphere;
@@ -19,23 +18,17 @@ class Background {
       this.stars[i].fall();
     }
 
-    this.atmosphere.move();
-    this.atmosphere.display();
-
-    this.earth.move();
-    this.earth.display();
+    this.atmosphere.update();
+    this.earth.update();
   }
-  
+
   public draw() {
     background(0);
     for (let i = 0; i < this.stars.length; i++) {
-        this.stars[i].show();
+      this.stars[i].show();
     }
 
-    this.atmosphere.move();
-    this.atmosphere.display();
-
-    this.earth.move();
-    this.earth.display();
+    this.atmosphere.draw();
+    this.earth.draw();
   }
 }

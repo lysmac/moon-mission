@@ -25,7 +25,7 @@ class Game {
 
   public draw(): void {
     this.gameMenu.draw()
-    // this.gameEngine.draw();
+    this.gameEngine.draw();
   }
 
 

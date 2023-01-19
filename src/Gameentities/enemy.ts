@@ -1,9 +1,12 @@
 class Enemy extends GameEntity {
-  constructor() {
-    super()
+  constructor(position: p5.Vector) {
+    super(position)
   }
 
   public update() {}
 
-  public draw() {}
+  // public draw() {
+  //   // super.draw();
+  //   // rita ut mer saker....
+  // }
 }
