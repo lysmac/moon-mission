@@ -1,3 +1,5 @@
+/// <reference path="gameentity.ts" />
+
 class Enemy extends GameEntity {
   constructor(position: p5.Vector) {
     super(position)

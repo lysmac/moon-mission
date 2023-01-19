@@ -1,6 +1,8 @@
+/// <reference path="enemy.ts" />
+
 class Alien extends Enemy {
   constructor() {
-    super()
+    super();
   }
 
   public update() {}
