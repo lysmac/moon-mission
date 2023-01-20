@@ -1,6 +1,7 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
 let img: p5.Image;
+let asteroid: p5.Image;
 // let sound: p5.SoundFile
 
 /**
@@ -12,6 +13,7 @@ function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
   img = loadImage("assets/testpil.png");
+  asteroid = loadImage('/assets/Astroid.png')
 }
 
 /**
