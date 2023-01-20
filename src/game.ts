@@ -16,7 +16,7 @@ class Game implements IStartGame {
     this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "#566E93");
     this.pauseMenu = new PauseMenu(100, 300, 400, 300, "#566E93");
     this.gameEngine = new GameEngine();
-    this.currentScene = "play";
+    this.currentScene = "start";
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?

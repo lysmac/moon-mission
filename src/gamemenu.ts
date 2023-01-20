@@ -41,14 +41,16 @@ class GameMenu {
     noStroke();
 
     textSize(this.textSize);
-    textAlign(CENTER - textWidth(this.text));
+    textAlign(CENTER);
     fill(this.textColor);
     textFont("times new roman");
-    text(this.text, this.x + 140, this.y + 30);
-    textAlign(CENTER - textWidth(this.textPlay));
-    text(this.textPlay, this.x + 160, this.y + 60);
-    textAlign(CENTER - textWidth(this.textHowToPlay));
-    text(this.textHowToPlay, this.x + 130, this.y + 90);
+
+    let textPlayY = this.y + 60;
+    let textHowToPlayY = this.y + 90;
+
+    text(this.text, this.x + (this.width / 2), this.y + 70);
+    text(this.textPlay, this.x + (this.width / 2), textPlayY);
+    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY);
 
     image(img, 0, 0);
   }
