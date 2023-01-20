@@ -10,6 +10,7 @@ class GameMenu {
   textHowToPlay: string = "HOW TO PLAY";
   textColor: string = "black";
   game: IStartGame;
+  background: Background; 
 
   constructor(
     game: IStartGame,
@@ -22,20 +23,25 @@ class GameMenu {
     this.game = game;
     this.x = x;
     this.y = y;
+    // this.position = createVector(0, 0)
     this.width = width;
     this.height = height;
     this.color = color;
+    this.background = new Background(true);
   }
 
   public update() {
     if (true) {
       this.game.startNewGame();
     }
+
+    this.background.update();
   }
-
+  
   public draw() {
+    this.background.draw();
     //background(255, 204, 0);
-
+    
     fill(this.color);
     rect(this.x, this.y, this.width, this.height, 20);
     noStroke();

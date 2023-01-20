@@ -2,8 +2,10 @@ class Background {
   private stars: Star[];
   private atmosphere: Atmosphere;
   private earth: Earth;
+  private onlyStars: boolean;
 
-  constructor() {
+  constructor(onlyStars: boolean = false) {
+    this.onlyStars = onlyStars;
     this.stars = [];
     for (let i = 0; i < 1000; i++) {
       this.stars[i] = new Star();
@@ -27,8 +29,10 @@ class Background {
     for (let i = 0; i < this.stars.length; i++) {
       this.stars[i].show();
     }
-
-    this.atmosphere.draw();
-    this.earth.draw();
+    
+    if (!this.onlyStars) {
+      this.atmosphere.draw();
+      this.earth.draw();
+    }
   }
 }
