@@ -1,14 +1,13 @@
 /// <reference path="gameentity.ts" />
 
 class Enemy extends GameEntity {
-  constructor(position: p5.Vector) {
-    super(position)
+  constructor(position: p5.Vector, size: p5.Vector, image: p5.Image) {
+    super(position, size, image)
   }
 
-  public update() {}
 
   // public draw() {
-  //   // super.draw();
+  //   super.draw();
   //   // rita ut mer saker....
   // }
 }
