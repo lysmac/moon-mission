@@ -53,12 +53,13 @@ class GameEngine {
   }
 
   private spawnEnemy() {
-    // this.spawnTimout -= deltaTime; // Denna rad är osäker.
+    this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const randomX = width / 2;
-      const position = createVector(randomX, 0);
-      this.gameEntities.push(new Enemy(position));
-      this.spawnTimout = 2000;
+      const x = random(-width, width);
+      const y = random(-height, -500)
+      const position = createVector(x, y);
+      this.gameEntities.push(new Astroid(position));
+      this.spawnTimout = random(1000, 2000);
     }
   }
 }
