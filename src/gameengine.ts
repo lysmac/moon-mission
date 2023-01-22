@@ -20,7 +20,8 @@ class GameEngine {
 
     this.background.update();
     this.moveEntities();
-    this.spawnEnemy();
+    this.spawnAsteroid();
+    this.spawnAlien();
   }
 
   public draw() {
@@ -52,14 +53,24 @@ class GameEngine {
     }
   }
 
-  private spawnEnemy() {
+  private spawnAsteroid() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
       const x = random(-width, width);
       const y = random(-height, -500)
       const position = createVector(x, y);
       this.gameEntities.push(new Astroid(position));
-      this.spawnTimout = random(1000, 2000);
+      this.spawnTimout = random(1000, 5000);
+    }
+  }
+  private spawnAlien() {
+    this.spawnTimout -= deltaTime;
+    if (this.spawnTimout < 0) {
+      const x = random(-width, width);
+      const y = random(-height, -500)
+      const position = createVector(x, y);
+      this.gameEntities.push(new Alien(position));
+      this.spawnTimout = random(1000, 8000);
     }
   }
 }
