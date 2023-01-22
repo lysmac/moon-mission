@@ -67,11 +67,10 @@ class GameEngine {
   private displaySpaceship() {
     for(let i=0; i<this.gameEntities.length; i++) {
       if(this.gameEntities[i] instanceof SpaceShip) {
-          this.gameEntities.splice(i, 1);
-          break;
+        return
       }
-  }
-    const position = createVector(width/2-50, height-400)
+    }
+    let position = createVector(width/2-50, height-400)
     this.gameEntities.push(new SpaceShip(position));
   }
 }
