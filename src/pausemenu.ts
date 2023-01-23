@@ -29,8 +29,6 @@ class PauseMenu {
   public update() {
     // console.log(game);
     if (keyIsDown(32)) {
-      console.log("update from pausemenu");
-
       game.startNewGame();
     }
   }
