@@ -2,7 +2,14 @@
 let game: Game;
 let img: p5.Image;
 let asteroid: p5.Image;
+
 let alien: p5.Image;
+
+let raket3: p5.Image;
+let raket4: p5.Image;
+let raket5: p5.Image;
+
+
 // let sound: p5.SoundFile
 
 /**
@@ -14,8 +21,13 @@ function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
   img = loadImage("assets/testpil.png");
-  asteroid = loadImage('/assets/Astroid.png');
+
   alien = loadImage('/assets/Alien.png');
+  asteroid = loadImage('/assets/Astroid.png')
+  raket3 = loadImage('assets/Raket3.png');
+  raket4 = loadImage('assets/Raket4.png');
+  raket5 = loadImage('assets/Raket5.png');
+
 }
 
 /**
@@ -25,7 +37,8 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(600, 800);
+  background(255, 204, 0);
   frameRate(60);
   game = new Game();
 }
@@ -43,6 +56,6 @@ function draw() {
 /**
  *  Built in windowResize listener function in P5
  */
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
