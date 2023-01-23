@@ -3,8 +3,7 @@
 class Astroid extends Enemy {
 
   constructor(position: p5.Vector) {
-    const size = createVector(random(100, 500), random(100, 500));
+    const size = createVector(125, 125);
     super(position, size, asteroid);
-    
   }
 }
