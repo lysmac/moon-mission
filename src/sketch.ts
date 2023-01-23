@@ -39,7 +39,7 @@ function preload() {
 function setup() {
   createCanvas(600, 800);
   background(255, 204, 0);
-  frameRate(60);
+  frameRate(2);
   game = new Game();
 }
 

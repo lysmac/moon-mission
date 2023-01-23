@@ -30,7 +30,8 @@ class GameMenu {
   }
 
   public update() {
-    if (true) {
+    // 32 is keycode for space
+    if (keyIsDown(32)) {
       this.game.startNewGame();
     }
 
@@ -71,6 +72,10 @@ class GameMenu {
 
  
   }
+
+
+
+
   }
 
 

@@ -49,7 +49,9 @@ class Game implements IStartGame {
     }
   }
 
-  public startNewGame(): void {}
+  public startNewGame(): void {
+    this.currentScene = "play"
+  }
 
   public resumeGame(): void {}
 }
