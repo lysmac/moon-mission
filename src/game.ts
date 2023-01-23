@@ -13,7 +13,7 @@ class Game implements IStartGame {
   private currentScene: "start" | "play" | "pause" | "end"
 
   constructor() {
-    this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "#566E93")
+    this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)")
     this.pauseMenu = new PauseMenu(100, 300, 400, 300, "#566E93")
     this.gameEngine = new GameEngine()
     this.currentScene = "start"
