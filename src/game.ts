@@ -39,7 +39,7 @@ class Game implements IStartGame {
       "rgba(255, 0, 0, 0.3)"
     );
     this.gameEngine = new GameEngine();
-    this.currentScene = "play";
+    this.currentScene = "pause";
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -79,7 +79,10 @@ class Game implements IStartGame {
   }
 
   public startNewGame(): void {
+    // Denna behövs bara när man börjar på currentScene "Pause"
     this.currentScene = "play";
+
+    this.gameEngine = new GameEngine();
   }
 
   public resumeGame(): void {}
