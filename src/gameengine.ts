@@ -87,7 +87,7 @@ class GameEngine {
         return
       }
     }
-    const position = createVector(width/2-25, height-200)
+    const position = createVector(width/2-25, height-210)
     this.gameEntities.push(new SpaceShip(position));
   }
 }
