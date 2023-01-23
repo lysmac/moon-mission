@@ -46,9 +46,9 @@ class GameMenu {
     rect(this.x, this.y, this.width, this.height, 20);
     noStroke();
 
+    fill("#FDCA51");
     textSize(70);
     textAlign(CENTER);
-    fill("#FDCA51");
     textFont("sofia sans");
     
     

@@ -13,12 +13,16 @@ class GameEngine {
     this.spawnTimout = 2000;
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
-    this.pauseMenu = new PauseMenu(100, 300, 800, 600, "#566E93");
+    this.pauseMenu = new PauseMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
   }
 
   public update() {
     this.togglePause();
-    if (this.isPaused) return;
+    // if (this.isPaused) return;
+    if (this.isPaused) {
+      this.pauseMenu.update();
+      return;
+    }
 
     this.background.update();
     this.moveEntities();
@@ -50,6 +54,7 @@ class GameEngine {
     if (espaceWasPressed) {
       // Show pause menu and pause game
       this.isPaused = !this.isPaused;
+      
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
