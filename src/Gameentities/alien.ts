@@ -3,11 +3,10 @@
 class Alien extends Enemy {
   private velocity: p5.Vector;
 
-
   constructor(position: p5.Vector) {
-    const size = createVector(180, 150);
+    const size = createVector(130, 100);
     super(position, size, alien);
-    this.velocity = createVector(1, 3);
+    this.velocity = createVector(0.5, 1);
   }
 
   update() {

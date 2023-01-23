@@ -1,6 +1,6 @@
 abstract class GameEntity {
-  protected position: p5.Vector;
-  protected size: p5.Vector;
+  public position: p5.Vector;
+  public size: p5.Vector;
   protected speed: p5.Vector;
   protected image: p5.Image;
 

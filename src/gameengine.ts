@@ -6,6 +6,8 @@ class GameEngine {
   private isPaused: boolean;
   private wasEscapeKeyDown: boolean;
   private pauseMenu: PauseMenu;
+  private score: number;
+  private isScoreBlinking: boolean;
 
   constructor() {
     this.background = new Background();
@@ -13,7 +15,12 @@ class GameEngine {
     this.spawnTimout = 2000;
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
+
     this.pauseMenu = new PauseMenu(game, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
+
+    this.score = 0;
+    this.isScoreBlinking = false;
+
   }
 
   public update() {
@@ -24,6 +31,9 @@ class GameEngine {
       this.pauseMenu.update();
       return;
     }
+
+    this.checkCollision();
+    this.incrementScore();
 
     this.background.update();
     this.moveEntities();
@@ -38,6 +48,12 @@ class GameEngine {
 
   public draw() {
     this.background.draw();
+
+    if (this.isPaused) {
+      this.pauseMenu.draw();
+    }
+
+    this.displayScore();
 
     
     for(const gameEntity of this.gameEntities) {
@@ -64,6 +80,44 @@ class GameEngine {
   private moveEntities() {
     for(const gameEntity of this.gameEntities) {
       gameEntity.update();
+    }
+  }
+
+  private displayScore() {
+    textSize(32);
+    if (this.isScoreBlinking) {
+        fill(255, 255, 0);
+    } else {
+        fill(255);
+    }
+    text(`Score: ${this.score}`, 20, 40);
+  }
+
+  private incrementScore() {
+    this.score += 1;
+    if (this.score % 500 === 0 && !this.isScoreBlinking) {
+        this.isScoreBlinking = true;
+        setTimeout(() => {
+            this.isScoreBlinking = false;
+        }, 500);
+    }
+  }
+
+  private checkCollision() {
+    const spaceship = this.gameEntities.find(e => e instanceof SpaceShip);
+    if (!spaceship) return;
+
+    for (let i = 0; i < this.gameEntities.length; i++) {
+      const entity = this.gameEntities[i];
+      if (entity === spaceship) continue;
+
+      if (spaceship.position.x < entity.position.x + entity.size.x &&
+          spaceship.position.x + spaceship.size.x > entity.position.x &&
+          spaceship.position.y < entity.position.y + entity.size.y &&
+          spaceship.size.y + spaceship.position.y > entity.position.y) {
+
+          this.isPaused = true;
+      }
     }
   }
 
@@ -94,7 +148,7 @@ class GameEngine {
         return
       }
     }
-    const position = createVector(width/2-25, height-200)
+    const position = createVector(width/2-25, height-210)
     this.gameEntities.push(new SpaceShip(position));
   }
 }
