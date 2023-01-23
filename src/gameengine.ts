@@ -15,14 +15,22 @@ class GameEngine {
     this.spawnTimout = 2000;
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
-    this.pauseMenu = new PauseMenu(100, 300, 800, 600, "#566E93");
+
+    this.pauseMenu = new PauseMenu(game, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
+
     this.score = 0;
     this.isScoreBlinking = false;
+
   }
 
   public update() {
     this.togglePause();
-    if (this.isPaused) return;
+    // if (this.isPaused) return;
+    if (this.isPaused) {
+      
+      this.pauseMenu.update();
+      return;
+    }
 
     this.checkCollision();
     this.incrementScore();
@@ -31,7 +39,7 @@ class GameEngine {
     this.moveEntities();
 
     this.spawnAsteroid();
-    this.spawnAlien();
+    this.spawnAlien(); 
 
     
     this.displaySpaceship();
@@ -40,14 +48,19 @@ class GameEngine {
 
   public draw() {
     this.background.draw();
+
     if (this.isPaused) {
       this.pauseMenu.draw();
     }
 
     this.displayScore();
+
     
     for(const gameEntity of this.gameEntities) {
       gameEntity.draw();
+    }
+    if (this.isPaused) {
+      this.pauseMenu.draw();
     }
   }
 
@@ -58,6 +71,7 @@ class GameEngine {
     if (espaceWasPressed) {
       // Show pause menu and pause game
       this.isPaused = !this.isPaused;
+      
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);

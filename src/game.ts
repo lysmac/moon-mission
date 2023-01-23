@@ -7,16 +7,16 @@ interface IStartGame {
 class Game implements IStartGame {
   private gameEngine: GameEngine
   private gameMenu: GameMenu
-  private pauseMenu: PauseMenu
+ private pauseMenu: PauseMenu
   // private playerScore: Score;
 
   private currentScene: "start" | "play" | "pause" | "end"
 
   constructor() {
-    this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "#566E93")
-    this.pauseMenu = new PauseMenu(100, 300, 400, 300, "#566E93")
+    this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)")
+    this.pauseMenu = new PauseMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
     this.gameEngine = new GameEngine()
-    this.currentScene = "start"
+    this.currentScene = "pause"
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -49,7 +49,12 @@ class Game implements IStartGame {
     }
   }
 
-  public startNewGame(): void {}
+  public startNewGame(): void {
+    this.currentScene = "play"
+  }
 
   public resumeGame(): void {}
+
+
+
 }

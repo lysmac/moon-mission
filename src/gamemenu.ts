@@ -5,10 +5,9 @@ class GameMenu {
   width: number = 100;
   height: number = 100;
   textSize: number = 20;
-  text: string = "GAME MENU";
-  textPlay: string = "PLAY";
-  textHowToPlay: string = "HOW TO PLAY";
-  textColor: string = "black";
+  titleText: string = "MOON MISSION";
+  textPlay: string = 'PRESS "SPACE" TO PLAY';
+  textHowToPlay: string = "USE ARROW LEFT AND RIGHT TO MOVE";
   game: IStartGame;
   background: Background; 
 
@@ -31,7 +30,8 @@ class GameMenu {
   }
 
   public update() {
-    if (true) {
+    // 32 is keycode for space
+    if (keyIsDown(32)) {
       this.game.startNewGame();
     }
 
@@ -46,18 +46,39 @@ class GameMenu {
     rect(this.x, this.y, this.width, this.height, 20);
     noStroke();
 
-    textSize(this.textSize);
+    fill("#FDCA51");
+    textSize(70);
     textAlign(CENTER);
-    fill(this.textColor);
-    textFont("times new roman");
-
+    textFont("sofia sans");
+    
+    
+    
     let textPlayY = this.y + 60;
     let textHowToPlayY = this.y + 90;
+    
+    text(this.titleText, this.x + (this.width / 2), this.y - 90);
+    fill("#D9D9D9");
+    
+    textFont("secular one");
+    textSize(this.textSize);
+    text(this.textPlay, this.x + (this.width / 2), textPlayY  + 30);
+    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY + 30);
+    
+    angleMode(DEGREES);
+    rotate(25);
 
-    text(this.text, this.x + (this.width / 2), this.y + 70);
-    text(this.textPlay, this.x + (this.width / 2), textPlayY);
-    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY);
+    image(raket3, 330, 350, 80, 190, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
+    
 
-    image(img, 0, 0);
+ 
   }
-}
+
+
+
+
+  }
+
+
+// font-family: 'Kanit', sans-serif;
+// font-family: 'Secular One', sans-serif;
+// font-family: 'Sofia Sans', sans-serif;
