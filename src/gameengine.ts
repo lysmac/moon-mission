@@ -13,13 +13,14 @@ class GameEngine {
     this.spawnTimout = 2000;
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
-    this.pauseMenu = new PauseMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
+    this.pauseMenu = new PauseMenu(game, 100, 300, 400, 300, "rgba(255, 0, 0, 0.3)");
   }
 
   public update() {
     this.togglePause();
     // if (this.isPaused) return;
     if (this.isPaused) {
+      
       this.pauseMenu.update();
       return;
     }
@@ -28,7 +29,7 @@ class GameEngine {
     this.moveEntities();
 
     this.spawnAsteroid();
-    this.spawnAlien();
+    this.spawnAlien(); 
 
     
     this.displaySpaceship();

@@ -5,12 +5,11 @@ class PauseMenu {
   width: number = 100;
   height: number = 100;
   textSize: number = 20;
-  titleText: string = "MOON MISSION";
+  titleText: string = "MOON MISSION ";
   textPlay: string = "PRESS SPACE TO RESTART GAME";
   textResume: string = "PRESS ESC TO RESUME GAME";
-  // game: IStartGame;
+  game: IStartGame;
 
-  
 
   constructor(
     game: IStartGame,
@@ -25,13 +24,17 @@ class PauseMenu {
     this.width = width;
     this.height = height;
     this.color = color;
-    // this.game = game;
+    this.game = game;
 
   }
 
   public update() {
+    // console.log(game);
     if (keyIsDown(32)) {
-      // this.game.startNewGame();
+      console.log("update from pausemenu")
+
+      game.startNewGame();
+     
     }
 
 
