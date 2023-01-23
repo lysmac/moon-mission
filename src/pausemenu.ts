@@ -5,11 +5,10 @@ class PauseMenu {
   width: number = 100;
   height: number = 100;
   textSize: number = 20;
-  titleText: string = "MOON MISSION ";
+  titleText: string = "MOON MISSION";
   textPlay: string = "PRESS SPACE TO RESTART GAME";
   textResume: string = "PRESS ESC TO RESUME GAME";
   game: IStartGame;
-
 
   constructor(
     game: IStartGame,
@@ -25,23 +24,19 @@ class PauseMenu {
     this.height = height;
     this.color = color;
     this.game = game;
-
   }
 
   public update() {
     // console.log(game);
     if (keyIsDown(32)) {
-      console.log("update from pausemenu")
+      console.log("update from pausemenu");
 
       game.startNewGame();
-     
     }
-
-
   }
 
   public draw() {
-    fill((this.color));
+    fill(this.color);
     rect(this.x, this.y, this.width, this.height, 20);
     noStroke();
 
@@ -51,21 +46,18 @@ class PauseMenu {
     // fill("#D9D9D9");
 
     textFont("sofia sans");
-    
-    
-    
+
     let resumeY = this.y + 60;
     let restartY = this.y + 130;
-    
+
     // Title
-    text(this.titleText, this.x + (this.width / 2), this.y - 90);
+    text(this.titleText, this.x + this.width / 2, this.y - 90);
     fill("#D9D9D9");
-    
+
     textFont("secular one");
     textSize(this.textSize);
-    text(this.textResume, this.x + (this.width / 2), resumeY + 30);
-    text(this.textPlay, this.x + (this.width / 2), restartY  + 30);
-
+    text(this.textResume, this.x + this.width / 2, resumeY + 30);
+    text(this.textPlay, this.x + this.width / 2, restartY + 30);
 
     // fill(this.color);
     // rect(this.x, this.y, this.width, this.height, 20);
@@ -80,6 +72,5 @@ class PauseMenu {
     // text(this.textPlay, this.x + 160, this.y + 60);
     // textAlign(CENTER - textWidth(this.textHowToPlay));
     // text(this.textHowToPlay, this.x + 130, this.y + 90);
-
   }
 }
