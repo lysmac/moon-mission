@@ -43,6 +43,5 @@ class PauseMenu {
     textAlign(CENTER - textWidth(this.textHowToPlay));
     text(this.textHowToPlay, this.x + 130, this.y + 90);
 
-    image(img, 0, 0);
   }
 }

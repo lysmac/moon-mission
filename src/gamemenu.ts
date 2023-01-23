@@ -55,9 +55,8 @@ class GameMenu {
     let textHowToPlayY = this.y + 90;
 
     text(this.text, this.x + (this.width / 2), this.y + 70);
-    text(this.textPlay, this.x + (this.width / 2), textPlayY);
-    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY);
+    text(this.textPlay, this.x + (this.width / 2), textPlayY  + 30);
+    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY + 30);
 
-    image(img, 0, 0);
   }
 }
