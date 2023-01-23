@@ -25,7 +25,11 @@ class GameOver {
     this.game = game;
   }
 
-  public update() {}
+  public update() {
+    if (keyIsDown(32)) {
+      game.startNewGame();
+    }
+  }
 
   public draw() {
     fill(this.color);
