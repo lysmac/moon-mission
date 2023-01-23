@@ -23,6 +23,7 @@ class GameEngine {
     this.background.update();
     this.moveEntities();
     this.spawnEnemy();
+    this.displaySpaceship();
   }
 
   public draw() {
@@ -63,5 +64,15 @@ class GameEngine {
       this.gameEntities.push(new Astroid(position));
       this.spawnTimout = random(1000, 2000);
     }
+  }
+
+  private displaySpaceship() {
+    for(let i=0; i<this.gameEntities.length; i++) {
+      if(this.gameEntities[i] instanceof SpaceShip) {
+        return
+      }
+    }
+    const position = createVector(width/2-25, height-200)
+    this.gameEntities.push(new SpaceShip(position));
   }
 }
