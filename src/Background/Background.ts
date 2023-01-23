@@ -7,7 +7,7 @@ class Background {
   constructor(onlyStars: boolean = false) {
     this.onlyStars = onlyStars;
     this.stars = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 300; i++) {
       this.stars[i] = new Star();
     }
 
