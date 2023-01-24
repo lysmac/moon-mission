@@ -4,10 +4,10 @@ class GameMenu {
   color: string;
   width: number = 100;
   height: number = 100;
-  textSize: number = 20;
-  titleText: string = "MOON MISSION";
-  textPlay: string = 'PRESS "SPACE" TO PLAY';
-  textHowToPlay: string = "USE ARROW LEFT AND RIGHT TO MOVE";
+  //textSize: number = 20;
+  //titleText: string = "MOON MISSION";
+  //textPlay: string = 'PRESS "SPACE" TO PLAY';
+  //textHowToPlay: string = "USE ARROW LEFT AND RIGHT TO MOVE";
   game: IStartGame;
   background: Background; 
 
@@ -43,34 +43,41 @@ class GameMenu {
     //background(255, 204, 0);
     
     fill(this.color);
+    stroke("#D9D9D9");
+    strokeWeight(2);
     rect(this.x, this.y, this.width, this.height, 20);
-    noStroke();
+    //noStroke();
 
-    fill("#FDCA51");
-    textSize(70);
-    textAlign(CENTER);
-    textFont("sofia sans");
+    
+    // fill("#FDCA51");
+    // textSize(70);
+     
+    // textFont("sofia sans");
     
     
+   let textPlayY = this.y + 40;
+   //let textHowToPlayY = this.y + 120;
     
-    let textPlayY = this.y + 60;
-    let textHowToPlayY = this.y + 90;
-    
-    text(this.titleText, this.x + (this.width / 2), this.y - 90);
+    // text(this.titleText, this.x + (this.width / 2), this.y - 90);
+
     fill("#D9D9D9");
-    
     textFont("secular one");
-    textSize(this.textSize);
-    text(this.textPlay, this.x + (this.width / 2), textPlayY  + 30);
-    text(this.textHowToPlay, this.x + (this.width / 2), textHowToPlayY + 30);
+    textSize(21);
+    // textAlign(CENTER);
+    noStroke();
+    text("PRESS ", this.x +53, this.y+70);
+    fill("#FDCA51");
+    text("SPACE", this.x + textWidth("PRESS ")+60, this.y + 70);
+    fill("#D9D9D9");
+    text(" TO START GAME", this.x +textWidth("PRESS SPACE")+67, this.y + 70);
     
+    text("HOW TO PLAY", this.x+ 130, textPlayY  + 100);
+    
+    //Spaceschip
     angleMode(DEGREES);
     rotate(25);
-
-    image(raket3, 330, 350, 80, 190, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
+    image(raket3, 330, 350, 80, 250, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
     
-
- 
   }
 
 

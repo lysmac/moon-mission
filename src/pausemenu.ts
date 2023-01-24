@@ -6,8 +6,8 @@ class PauseMenu {
   height: number = 100;
   textSize: number = 20;
   titleText: string = "MOON MISSION";
-  textPlay: string = "PRESS SPACE TO RESTART GAME";
-  textResume: string = "PRESS ESC TO RESUME GAME";
+  //textPlay: string = "PRESS SPACE TO RESTART GAME";
+  //textResume: string = "PRESS ESC TO RESUME GAME";
   game: IStartGame;
 
   constructor(
@@ -35,7 +35,9 @@ class PauseMenu {
 
   public draw() {
     fill(this.color);
-    rect(this.x, this.y, this.width, this.height, 20);
+    stroke("#D9D9D9");
+    strokeWeight(3);
+    rect(this.x, this.y, 400, 250, 20);
     noStroke();
 
     fill("#FDCA51");
@@ -53,9 +55,23 @@ class PauseMenu {
     fill("#D9D9D9");
 
     textFont("secular one");
-    textSize(this.textSize);
-    text(this.textResume, this.x + this.width / 2, resumeY + 30);
-    text(this.textPlay, this.x + this.width / 2, restartY + 30);
+    textSize(21);
+
+    text("PRESS", this.x +130, this.y+90);
+    fill("#FDCA51");
+    text("ESC", this.x + textWidth("PRESS ")+120, this.y + 90);
+    fill("#D9D9D9");
+    text("TO RESUME", this.x +textWidth("PRESS SPACE")+140, this.y + 90);
+
+    text("PRESS", this.x +65, this.y+160);
+    fill("#FDCA51");
+    text("SPACE", this.x + textWidth("PRESS ")+70, this.y + 160);
+    fill("#D9D9D9");
+    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+145, this.y + 160);
+    
+
+    // text("PRESS ESC TO RESUME", this.x + this.width / 2, resumeY + 30);
+    // text("PRESS SPACE TO START NEW GAME", this.x + this.width / 2, restartY + 30);
 
     // fill(this.color);
     // rect(this.x, this.y, this.width, this.height, 20);
