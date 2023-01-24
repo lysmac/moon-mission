@@ -67,21 +67,17 @@ class GameEngine {
   public draw() {
     this.background.draw();
 
-    if (this.isPaused) {
-      this.pauseMenu.draw();
-    }
-
-    if (this.dead) {
-      this.gameOver.draw();
-    }
-
     this.displayScore();
 
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
-    if (this.isPaused) {
+    if (this.isPaused && !this.dead) {
       this.pauseMenu.draw();
+    }
+
+    if (this.dead) {
+      this.gameOver.draw();
     }
   }
 
