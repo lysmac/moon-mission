@@ -1,4 +1,6 @@
-/// <reference path="./Gameentities/gameEntity.ts"/>
+
+/// <reference path="./Gameentities/gameentity.ts"/> 
+
 class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
@@ -54,12 +56,10 @@ class GameEngine {
 
     this.checkCollision();
     this.incrementScore();
-
     this.background.update();
     this.moveEntities();
-
     this.spawnAsteroid();
-    this.spawnAlien();
+    this.spawnAlien(); 
 
     this.displaySpaceship();
   }
@@ -84,12 +84,11 @@ class GameEngine {
   public togglePause() {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
     // const espaceWasReleased = this.wasEscapeKeyDown && !keyIsDown(ESCAPE);
-
     if (espaceWasPressed) {
       // Show pause menu and pause game
       this.isPaused = !this.isPaused;
     }
-
+    
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 
@@ -100,7 +99,7 @@ class GameEngine {
   }
 
   private displayScore() {
-    textSize(32);
+    textSize(24);
     if (this.isScoreBlinking) {
       fill(255, 255, 0);
     } else {
