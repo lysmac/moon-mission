@@ -19,6 +19,7 @@ class GameEngine {
     this.wasEscapeKeyDown = false;
     this.dead = false;
     this.gameOver = new GameOver(
+      this,
       game,
       100,
       300,
@@ -109,7 +110,18 @@ class GameEngine {
     text(`Score: ${this.score}`, 20, 40);
   }
 
+  public scoreForBoard() {
+    if (this.dead) {
+      let score = this.score;
+      text(score, 280, 430);
+      console.log(score);
+    }
+  }
+
   private incrementScore() {
+    if (this.dead) {
+      return;
+    }
     this.score += 1;
     if (this.score % 500 === 0 && !this.isScoreBlinking) {
       this.isScoreBlinking = true;

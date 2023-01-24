@@ -8,8 +8,10 @@ class GameOver {
   titleText: string = "GAME OVER";
   textPlay: string = "PRESS SPACE TO PLAY AGAIN";
   game: IStartGame;
+  gameengine: GameEngine;
 
   constructor(
+    gameengine: GameEngine,
     game: IStartGame,
     x: number,
     y: number,
@@ -23,6 +25,7 @@ class GameOver {
     this.height = height;
     this.color = color;
     this.game = game;
+    this.gameengine = gameengine;
   }
 
   public update() {
@@ -52,5 +55,11 @@ class GameOver {
     textFont("secular one");
     textSize(this.textSize);
     text(this.textPlay, this.x + this.width / 2, restartY + 30);
+
+    // let score = this.gameengine.scoreForBoard;
+    // text(score, this.x + this.width / 2, restartY + 60);
+    this.gameengine.scoreForBoard();
+
+    // this.gameengine.displayScore();
   }
 }
