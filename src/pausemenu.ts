@@ -37,37 +37,38 @@ class PauseMenu {
     fill(this.color);
     stroke("#D9D9D9");
     strokeWeight(3);
-    rect(this.x, this.y, 400, 250, 20);
+    rect(this.x, this.y, 400, 240, 20);
     noStroke();
 
-    fill("#FDCA51");
-    textSize(70);
-    textAlign(CENTER);
-    // fill("#D9D9D9");
-
-    textFont("sofia sans");
+    
 
     let resumeY = this.y + 60;
     let restartY = this.y + 130;
 
     // Title
+    fill("#FDCA51");
+    textSize(70);
+    textAlign(CENTER);
+
+    textFont("sofia sans");
     text(this.titleText, this.x + this.width / 2, this.y - 90);
     fill("#D9D9D9");
 
+    // MENU TEXT
+
     textFont("secular one");
     textSize(21);
-
-    text("PRESS", this.x +130, this.y+90);
+    text("PRESS", this.x +123, this.y+90);
     fill("#FDCA51");
-    text("ESC", this.x + textWidth("PRESS ")+120, this.y + 90);
+    text("ESC", this.x + textWidth("PRESS ")+113, this.y + 90);
     fill("#D9D9D9");
-    text("TO RESUME", this.x +textWidth("PRESS SPACE")+140, this.y + 90);
+    text("TO RESUME", this.x +textWidth("PRESS SPACE")+132, this.y + 90);
 
-    text("PRESS", this.x +65, this.y+160);
+    text("PRESS", this.x +60, this.y+160);
     fill("#FDCA51");
-    text("SPACE", this.x + textWidth("PRESS ")+70, this.y + 160);
+    text("SPACE", this.x + textWidth("PRESS ")+63, this.y + 160);
     fill("#D9D9D9");
-    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+145, this.y + 160);
+    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+140, this.y + 160);
     
 
     // text("PRESS ESC TO RESUME", this.x + this.width / 2, resumeY + 30);

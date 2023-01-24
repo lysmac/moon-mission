@@ -60,6 +60,7 @@ class GameMenu {
     
     // text(this.titleText, this.x + (this.width / 2), this.y - 90);
 
+    //MENU TEXT
     fill("#D9D9D9");
     textFont("secular one");
     textSize(21);
@@ -70,7 +71,6 @@ class GameMenu {
     text("SPACE", this.x + textWidth("PRESS ")+60, this.y + 70);
     fill("#D9D9D9");
     text(" TO START GAME", this.x +textWidth("PRESS SPACE")+67, this.y + 70);
-    
     text("HOW TO PLAY", this.x+ 130, textPlayY  + 100);
     
     //Spaceschip

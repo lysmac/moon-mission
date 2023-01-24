@@ -33,7 +33,9 @@ class GameOver {
 
   public draw() {
     fill(this.color);
-    rect(this.x, this.y, this.width, this.height, 20);
+    stroke("#D9D9D9");
+    strokeWeight(3);
+    rect(this.x, this.y, 400, 200, 20);
     noStroke();
 
     textFont("sofia sans");
@@ -42,19 +44,26 @@ class GameOver {
     let restartY = this.y + 130;
 
     // Title
+    
     fill("#c90a0a");
     textSize(70);
     textAlign(CENTER);
-    text("GAME OVER", this.x + this.width / 2, this.y - 90);
+    text("GAME OVER", this.x + this.width / 2, this.y - 60);
+
+    // MENU TEXT
+    fill("#D9D9D9");
+    textSize(26);
+    textAlign(CENTER);
+    text("YOUR SCORE:", this.x + this.width / 2, this.y+60);
 
     fill("#D9D9D9");
     textSize(21);
-    text("PRESS", this.x +65, this.y+160);
+    text("PRESS", this.x +65, this.y+140);
     fill("#FDCA51");
     
-    text("SPACE", this.x + textWidth("PRESS ")+70, this.y + 160);
+    text("SPACE", this.x + textWidth("PRESS ")+72, this.y + 140);
     fill("#D9D9D9");
-    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+145, this.y + 160);
+    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+145, this.y + 140);
 
     // textFont("secular one");
     // textSize(this.textSize);

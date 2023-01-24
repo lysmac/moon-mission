@@ -28,7 +28,7 @@ class Game implements IStartGame {
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.3)"
+      "rgba(255, 0, 0, 0.5)"
     );
     this.gameOver = new GameOver(
       this,
