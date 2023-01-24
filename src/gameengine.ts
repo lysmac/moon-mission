@@ -72,7 +72,7 @@ class GameEngine {
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
-    if (this.isPaused) {
+    if (this.isPaused && !this.dead) {
       this.pauseMenu.draw();
     }
 
