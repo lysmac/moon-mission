@@ -4,9 +4,7 @@ class GameOver {
   color: string;
   width: number = 100;
   height: number = 100;
-  //textSize: number = 20;
-  //titleText: string = "GAME OVER";
-  //textPlay: string = "PRESS SPACE TO PLAY AGAIN";
+
   game: IStartGame;
 
   constructor(
@@ -29,22 +27,23 @@ class GameOver {
     if (keyIsDown(32)) {
       game.startNewGame();
     }
+
   }
 
   public draw() {
+
+    //BACKGROUND SQUARE MENU
     fill(this.color);
     stroke("#D9D9D9");
-    strokeWeight(3);
     rect(this.x, this.y, 400, 200, 20);
     noStroke();
 
     textFont("sofia sans");
 
     // let resumeY = this.y + 60;
-    let restartY = this.y + 130;
+   // let restartY = this.y + 130;
 
-    // Title
-    
+    // TITLE
     fill("#c90a0a");
     textSize(70);
     textAlign(CENTER);
@@ -69,4 +68,7 @@ class GameOver {
     // textSize(this.textSize);
     // text(this.textPlay, this.x + this.width / 2, restartY + 30);
   }
+
+
+  
 }
