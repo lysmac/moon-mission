@@ -36,7 +36,7 @@ class SpaceShip extends GameEntity {
 
   private shootLaserBeam() {
     if (keyIsDown(32) && this.laserBeamTimer % this.laserBeamDelay === 0) {
-      const laserBeam = new LaserBeam(this.position.x + this.size.x / 2, this.position.y-15);
+      const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
       this.laserBeams.push(laserBeam);
       this.laserBeamTimer = 0;
     }
