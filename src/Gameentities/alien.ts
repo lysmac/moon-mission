@@ -5,7 +5,8 @@ class Alien extends Enemy {
 
   constructor(position: p5.Vector) {
     const size = createVector(130, 100);
-    super(position, size, alien);
+    let hp = 4
+    super(position, size, alien, hp);
     this.velocity = createVector(0.5, 1);
   }
 
