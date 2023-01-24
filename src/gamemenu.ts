@@ -7,7 +7,7 @@ class GameMenu {
   textSize: number = 20;
   titleText: string = "MOON MISSION";
   textPlay: string = 'PRESS "SPACE" TO PLAY';
-  textHowToPlay: string = "USE ARROW LEFT AND RIGHT TO MOVE";
+  textHowToPlay: string = "USE ARROW KEYS TO MOVE";
   game: IStartGame;
   background: Background; 
 
