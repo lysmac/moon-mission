@@ -20,16 +20,18 @@ let gameplaymusic: p5.SoundFile
 function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
-
+  
   // Music
   menumusic = loadSound("assets/bgm/menu.mp3")
-
-  //Images
+  gameplaymusic = loadSound("assets/bgm/play.mp3")
+  
   alien = loadImage("/assets/Alien.png")
   asteroid = loadImage("/assets/Astroid.png")
   raket3 = loadImage("assets/Raket3.png")
   raket4 = loadImage("assets/Raket4.png")
   raket5 = loadImage("assets/Raket5.png")
+  
+
 }
 
 /**
@@ -40,6 +42,7 @@ function preload() {
  */
 function setup() {
   createCanvas(600, 800)
+  //background(255, 204, 0);
   frameRate(60)
   game = new Game()
 }
