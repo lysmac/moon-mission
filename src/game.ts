@@ -20,7 +20,7 @@ class Game implements IStartGame {
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.3)"
+      "rgba(255, 0, 0, 0.4)"
     );
     this.pauseMenu = new PauseMenu(
       this,
@@ -28,7 +28,7 @@ class Game implements IStartGame {
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.3)"
+      "rgba(255, 0, 0, 0.4)"
     );
     this.gameOver = new GameOver(
       this,
@@ -36,7 +36,7 @@ class Game implements IStartGame {
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.3)"
+      "rgba(255, 0, 0, 0.4)"
     );
     this.gameEngine = new GameEngine();
     this.currentScene = "play";
