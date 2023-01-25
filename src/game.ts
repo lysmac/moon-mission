@@ -40,7 +40,7 @@ class Game implements IStartGame {
       case "play":
         this.gameEngine.update()
         this.stopMusic()
-        // this.playMusic()
+        this.playMusic()
         
         
         break
@@ -80,21 +80,21 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   public playMusic(): void {
-    if(this.currentScene == "start" && !this.bgmIsPlaying) {
+    if(this.currentScene === "start" && !this.bgmIsPlaying) {
       this.bgmIsPlaying = true
       this.menumusic.play()
-    } else if (this.currentScene == "play" && this.bgmIsPlaying) {
-      this.bgmIsPlaying = false
+    } else if (this.currentScene === "play" && !this.bgmIsPlaying) {
+      this.bgmIsPlaying = true
       this.gameplaymusic.play()
     }
   }
   public stopMusic(): void {
-    if (this.currentScene == "play" && this.bgmIsPlaying) 
-    console.log(bgmIsPlaying){
+    if (this.currentScene !== "start" && this.bgmIsPlaying && this.menumusic.isPlaying()) {
       this.bgmIsPlaying = false
       this.menumusic.stop()
-    } else if (this.currentScene == "start" && this.bgmIsPlaying) {
-      this.bgmIsPlaying = true
+    }
+     else  if (this.currentScene !== "play" && this.bgmIsPlaying && this.gameplaymusic.isPlaying()) {
+      this.bgmIsPlaying = false
       this.gameplaymusic.stop()
     }
   }

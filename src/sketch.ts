@@ -1,4 +1,5 @@
 //---- GLOBAL VARIABLES ----//
+let countdown: number = 3;
 let game: Game
 let asteroid: p5.Image
 let alien: p5.Image
@@ -19,6 +20,8 @@ let gameplaymusic: p5.SoundFile
 function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
+  menumusic = loadSound("assets/bgm/menu.mp3")
+  gameplaymusic = loadSound("assets/bgm/play.mp3")
   
   alien = loadImage("/assets/Alien.png")
   asteroid = loadImage("/assets/Astroid.png")
@@ -27,8 +30,6 @@ function preload() {
   raket5 = loadImage("assets/Raket5.png")
   
   //Music
-  menumusic = loadSound("assets/bgm/menu.mp3")
-  gameplaymusic = loadSound("assets/bgm/play.mp3")
   // endmusic = loadSound("assets/bgm/over.mp3")
 
 }
