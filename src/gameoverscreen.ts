@@ -17,6 +17,7 @@ class GameOver {
     color: string,
     gameengine: GameEngine
   ) {
+    console.log(game);
     this.x = x;
     this.y = y;
     this.width = width;
@@ -27,6 +28,7 @@ class GameOver {
   }
 
   public update() {
+    this.game.changeCurrentScene("end");
     if (keyIsDown(32)) {
       game.startNewGame();
     }
@@ -52,7 +54,7 @@ class GameOver {
 
     // MENU TEXT
     // This variable taked the score from gameengine, so it can be displayed here
-    let score = this.gameengine.scoreForBoard();
+    let score = this.game.readCurrentPlayerScore();
     fill("#D9D9D9");
     textSize(26);
     textAlign(CENTER);

@@ -11,8 +11,10 @@ class GameEngine {
   private isScoreBlinking: boolean;
   private gameOver: GameOver;
   private dead: boolean;
+  private game: Game;
 
   constructor() {
+    this.game = game;
     this.background = new Background();
     this.gameEntities = [];
     this.spawnTimout = 2000;
@@ -50,7 +52,10 @@ class GameEngine {
       return;
     }
     if (this.dead) {
-      this.gameOver.update();
+      game.changeCurrentPlayerScore(this.score);
+      this.game.changeCurrentScene("end");
+
+      // this.gameOver.update();
       return;
     }
 
@@ -76,9 +81,9 @@ class GameEngine {
       this.pauseMenu.draw();
     }
 
-    if (this.dead) {
-      this.gameOver.draw();
-    }
+    // if (this.dead) {
+    //   this.gameOver.draw();
+    // }
   }
 
   public togglePause() {

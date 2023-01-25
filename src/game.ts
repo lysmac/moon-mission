@@ -2,16 +2,22 @@
 interface IStartGame {
   startNewGame(): void;
   resumeGame(): void;
+  readAllPlayerScores(): void;
+  changeCurrentScene(scene: string): void;
+  readCurrentPlayerScore(): void;
+  changeCurrentPlayerScore(input:number):;
 }
 
 class Game implements IStartGame {
   private gameEngine: GameEngine;
   private gameMenu: GameMenu;
   private pauseMenu: PauseMenu;
-  // private gameOver: GameOver;
+  private gameOver: GameOver;
   // private playerScore: Score;
-
-  private currentScene: "start" | "play" | "pause" | "end";
+  private allPlayerScores: number[] = [1, 2, 3, 4, 5];
+  private currentPlayerScore: number;
+  private currentScene: string;
+  // private currentScene: "start" | "play" | "pause" | "end";
 
   constructor() {
     this.gameMenu = new GameMenu(
@@ -30,21 +36,25 @@ class Game implements IStartGame {
       300,
       "rgba(255, 0, 0, 0.4)"
     );
-    // this.gameOver = new GameOver(
-    //   this,
-    //   100,
-    //   300,
-    //   400,
-    //   300,
-    //   "rgba(255, 0, 0, 0.4)"
-    // );
     this.gameEngine = new GameEngine();
-    this.currentScene = "play";
+    this.gameOver = new GameOver(
+      this,
+      100,
+      300,
+      400,
+      300,
+      "rgba(255, 0, 0, 0.4)",
+      this.gameEngine
+    );
+    this.currentScene = "start";
+    this.currentPlayerScore = 0;
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
 
   public update(): void {
+    console.log(this.currentScene);
+    console.log(this.currentPlayerScore)
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
@@ -55,9 +65,9 @@ class Game implements IStartGame {
       case "pause":
         this.pauseMenu.update();
         break;
-      // case "end":
-      //   this.gameOver.update();
-      //   break;
+      case "end":
+        this.gameOver.update();
+        break;
     }
   }
 
@@ -72,9 +82,9 @@ class Game implements IStartGame {
       case "pause":
         this.pauseMenu.draw();
         break;
-      // case "end":
-      //   this.gameOver.draw();
-      //   break;
+      case "end":
+        this.gameOver.draw();
+        break;
     }
   }
 
@@ -86,4 +96,26 @@ class Game implements IStartGame {
   }
 
   public resumeGame(): void {}
+
+  public readAllPlayerScores(): void {
+    if (this.allPlayerScores === undefined) {
+      console.log("allPlayerScores is not defined yet");
+    }
+    console.log("reach");
+    console.log(this.allPlayerScores);
+  }
+
+  public pushToAllPlayerScores(): void {}
+
+  public changeCurrentScene(scene: string): void {
+    this.currentScene = scene;
+  }
+
+  public readCurrentPlayerScore(): number {
+    return this.currentPlayerScore;
+  }
+
+  public changeCurrentPlayerScore(input:number) {
+    this.currentPlayerScore = input;
+  }
 }
