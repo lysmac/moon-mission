@@ -68,18 +68,10 @@ class GameEngine {
   public draw() {
     this.background.draw();
 
-    this.displayScore();
-
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
-    // if (this.isPaused && !this.dead) {
-    //   this.pauseMenu.draw();
-    // }
-
-    // if (this.dead) {
-    //   this.gameOver.draw();
-    // }
+    this.displayScore();
   }
 
   public pauseGame() {
@@ -104,13 +96,15 @@ class GameEngine {
   }
 
   private displayScore() {
+    textFont("secular one");
     textSize(24);
     if (this.isScoreBlinking) {
       fill(255, 255, 0);
     } else {
       fill(255);
     }
-    text(`Score: ${this.score}`, 20, 40);
+    text("Score:", 60, 40);
+    text(this.score, 60, 70);
   }
 
   public scoreForBoard() {

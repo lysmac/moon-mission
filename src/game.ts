@@ -46,6 +46,8 @@ class Game implements IStartGame {
       300,
       "rgba(255, 0, 0, 0.4)"
     );
+    // "start" | "play" | "pause" | "end"
+    // Can't pause when starting from play. But Everything works with "start"
     this.currentScene = "start";
     this.currentPlayerScore = 0;
   }
