@@ -27,6 +27,11 @@ class PauseMenu {
   public update() {
     this.unpauseGame();
 
+    if (keyIsDown(77)) {
+      console.log("pressed m");
+      this.game.changeCurrentScene("start");
+    }
+
     if (keyIsDown(32)) {
       game.startNewGame();
     }

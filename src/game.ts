@@ -80,9 +80,11 @@ class Game implements IStartGame {
         this.gameEngine.draw();
         break;
       case "pause":
+        this.gameEngine.draw();
         this.pauseMenu.draw();
         break;
       case "end":
+        this.gameEngine.draw();
         this.gameOver.draw();
         break;
     }

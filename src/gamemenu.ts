@@ -5,7 +5,7 @@ class GameMenu {
   width: number = 100;
   height: number = 100;
   game: IStartGame;
-  background: Background; 
+  background: Background;
 
   constructor(
     game: IStartGame,
@@ -33,10 +33,10 @@ class GameMenu {
 
     this.background.update();
   }
-  
+
   public draw() {
     this.background.draw();
-    
+
     //BACKGROUND SQUARE MENU
     fill(this.color);
     stroke("#D9D9D9");
@@ -55,28 +55,38 @@ class GameMenu {
     // MENU TEXT
     fill("#D9D9D9");
     textSize(21);
-    text("PRESS", this.x +65, this.y+70);
+    text("PRESS", this.x + 65, this.y + 70);
     fill("#FDCA51");
-    text("SPACE", this.x + textWidth("PRESS ")+72, this.y + 70);
+    text("SPACE", this.x + textWidth("PRESS ") + 72, this.y + 70);
     fill("#D9D9D9");
-    text(" TO START NEW GAME", this.x +textWidth("PRESS SPACE")+145, this.y + 70);
+    text(
+      " TO START NEW GAME",
+      this.x + textWidth("PRESS SPACE") + 145,
+      this.y + 70
+    );
 
     fill("#D9D9D9");
     textSize(21);
-    text("HOW TO PLAY", this.x +200, this.y+140);
-    
+    text("HOW TO PLAY", this.x + 200, this.y + 140);
+
     //SPACESHIP
     angleMode(DEGREES);
     rotate(25);
-    image(raket3, 330, 350, 80, 250, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
-    
+    image(
+      raket3,
+      330,
+      350,
+      80,
+      250,
+      0,
+      0,
+      raket3.width,
+      raket3.height,
+      CONTAIN,
+      LEFT
+    );
   }
-
-
-
-
-  }
-
+}
 
 // font-family: 'Kanit', sans-serif;
 // font-family: 'Secular One', sans-serif;
