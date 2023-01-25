@@ -1,6 +1,6 @@
 class PauseMenu {
-  position: p5.Vector;
-  size: p5.Vector;
+  private position: p5.Vector;
+  private size: p5.Vector;
   game: IStartGame;
 
   constructor(

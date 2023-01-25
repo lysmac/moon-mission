@@ -1,7 +1,7 @@
 class GameMenu {
-  position: p5.Vector;
-  size: p5.Vector;
-  game: IStartGame;
+  private position: p5.Vector;
+  private size: p5.Vector;
+  private game: IStartGame;
   background: Background;
 
   constructor(
@@ -11,11 +11,8 @@ class GameMenu {
     
   ) {
     this.game = game;
-    //this.position = position;
-   
     this.position = createVector(100,300);
     this.size = createVector(400,300);
-    
     this.background = new Background(true);
   }
 

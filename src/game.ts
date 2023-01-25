@@ -32,14 +32,14 @@ class Game implements IStartGame {
     );
     this.gameOver = new GameOver(
       this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
+      // 100,
+      // 300,
+      // 400,
+      // 300,
+      // "rgba(255, 0, 0, 0.4)"
     );
     this.gameEngine = new GameEngine();
-    this.currentScene = "pause";
+    this.currentScene = "start";
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
