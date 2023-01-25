@@ -1,5 +1,4 @@
-
-/// <reference path="./Gameentities/gameentity.ts"/> 
+/// <reference path="./Gameentities/gameentity.ts"/>
 
 class GameEngine {
   private background: Background;
@@ -21,13 +20,13 @@ class GameEngine {
     this.wasEscapeKeyDown = false;
     this.dead = false;
     this.gameOver = new GameOver(
-      this,
       game,
       100,
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.3)"
+      "rgba(255, 0, 0, 0.3)",
+      this
     );
 
     this.pauseMenu = new PauseMenu(
@@ -60,7 +59,7 @@ class GameEngine {
     this.background.update();
     this.moveEntities();
     this.spawnAsteroid();
-    this.spawnAlien(); 
+    this.spawnAlien();
 
     this.displaySpaceship();
   }
@@ -89,7 +88,7 @@ class GameEngine {
       // Show pause menu and pause game
       this.isPaused = !this.isPaused;
     }
-    
+
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 
@@ -112,7 +111,7 @@ class GameEngine {
   public scoreForBoard() {
     if (this.dead) {
       let score = this.score;
-      text(score, 280, 430);
+      text(`Your score was ${score}`, 290, 430);
       console.log(score);
     }
   }

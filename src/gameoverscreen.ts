@@ -11,13 +11,13 @@ class GameOver {
   gameengine: GameEngine;
 
   constructor(
-    gameengine: GameEngine,
     game: IStartGame,
     x: number,
     y: number,
     width: number,
     height: number,
-    color: string
+    color: string,
+    gameengine: GameEngine
   ) {
     this.x = x;
     this.y = y;
