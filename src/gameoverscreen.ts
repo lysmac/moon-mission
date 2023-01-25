@@ -49,14 +49,14 @@ class GameOver {
     textSize(70);
     textAlign(CENTER);
     text("GAME OVER", this.x + this.width / 2, this.y - 60);
-    this.gameengine.scoreForBoard();
 
     // MENU TEXT
-
+    // This variable taked the score from gameengine, so it can be displayed here
+    let score = this.gameengine.scoreForBoard();
     fill("#D9D9D9");
     textSize(26);
     textAlign(CENTER);
-    text("YOUR SCORE:", this.x + this.width / 2, this.y + 60);
+    text(`YOUR SCORE: ${score}`, this.x + this.width / 2, this.y + 60);
 
     fill("#D9D9D9");
     textSize(21);

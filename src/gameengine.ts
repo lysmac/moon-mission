@@ -110,9 +110,9 @@ class GameEngine {
 
   public scoreForBoard() {
     if (this.dead) {
-      let score = this.score;
-      text(`Your score was ${score}`, 290, 430);
-      console.log(score);
+      return this.score;
+    } else {
+      return;
     }
   }
 
