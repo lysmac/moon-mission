@@ -8,7 +8,7 @@ class Game implements IStartGame {
   private gameEngine: GameEngine;
   private gameMenu: GameMenu;
   private pauseMenu: PauseMenu;
-  private gameOver: GameOver;
+  // private gameOver: GameOver;
   // private playerScore: Score;
 
   private currentScene: "start" | "play" | "pause" | "end";
@@ -30,14 +30,14 @@ class Game implements IStartGame {
       300,
       "rgba(255, 0, 0, 0.4)"
     );
-    this.gameOver = new GameOver(
-      this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
-    );
+    // this.gameOver = new GameOver(
+    //   this,
+    //   100,
+    //   300,
+    //   400,
+    //   300,
+    //   "rgba(255, 0, 0, 0.4)"
+    // );
     this.gameEngine = new GameEngine();
     this.currentScene = "play";
   }
@@ -55,9 +55,9 @@ class Game implements IStartGame {
       case "pause":
         this.pauseMenu.update();
         break;
-      case "end":
-        this.gameOver.update();
-        break;
+      // case "end":
+      //   this.gameOver.update();
+      //   break;
     }
   }
 
@@ -72,9 +72,9 @@ class Game implements IStartGame {
       case "pause":
         this.pauseMenu.draw();
         break;
-      case "end":
-        this.gameOver.draw();
-        break;
+      // case "end":
+      //   this.gameOver.draw();
+      //   break;
     }
   }
 
