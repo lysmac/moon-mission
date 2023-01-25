@@ -1,30 +1,21 @@
 class GameMenu {
-  // x: number = 0;
-  // y: number = 0;
   position: p5.Vector;
-  color: string;
-  width: number;
-  height: number;
+  size: p5.Vector;
   game: IStartGame;
   background: Background;
 
   constructor(
-    position: p5.Vector,
+    //position: p5.Vector,
+    //size: p5.Vector,
     game: IStartGame,
-    // x: number,
-    // y: number,
-    width: number,
-    height: number,
-    color: string
+    
   ) {
     this.game = game;
     //this.position = position;
-    // this.x = x;
-    // this.y = y;
-    this.position = createVector(100,300)
-    this.width = width;
-    this.height = height;
-    this.color = color;
+   
+    this.position = createVector(100,300);
+    this.size = createVector(400,300);
+    
     this.background = new Background(true);
   }
 
@@ -43,7 +34,7 @@ class GameMenu {
     //BACKGROUND SQUARE MENU
     fill("rgba(255, 0, 0, 0.4)");
     stroke("#D9D9D9");
-    rect(this.position.x, this.position.y, 400, 300, 20);
+    rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
     noStroke();
 
     //TITLE
@@ -52,7 +43,7 @@ class GameMenu {
     textAlign(CENTER);
 
     textFont("sofia sans");
-    text("MOON MISSION", this.position.x + this.width / 2, this.y - 90);
+    text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
     fill("#D9D9D9");
 
     // MENU TEXT

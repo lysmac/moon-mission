@@ -16,19 +16,19 @@ class Game implements IStartGame {
   constructor() {
     this.gameMenu = new GameMenu(
       this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
+      // 100,
+      // 300,
+      // 400,
+      // 300,
+      // "rgba(255, 0, 0, 0.4)"
     );
     this.pauseMenu = new PauseMenu(
       this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
+      // 100,
+      // 300,
+      // 400,
+      // 300,
+      // "rgba(255, 0, 0, 0.4)"
     );
     this.gameOver = new GameOver(
       this,
@@ -39,7 +39,7 @@ class Game implements IStartGame {
       "rgba(255, 0, 0, 0.4)"
     );
     this.gameEngine = new GameEngine();
-    this.currentScene = "start";
+    this.currentScene = "pause";
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?

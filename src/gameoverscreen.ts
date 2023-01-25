@@ -1,10 +1,10 @@
 class GameOver {
+
   x: number = 0;
   y: number = 0;
   color: string;
   width: number = 100;
   height: number = 100;
-
   game: IStartGame;
 
   constructor(
