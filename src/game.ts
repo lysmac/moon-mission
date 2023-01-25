@@ -5,7 +5,7 @@ interface IStartGame {
   readAllPlayerScores(): void;
   changeCurrentScene(scene: string): void;
   readCurrentPlayerScore(): void;
-  changeCurrentPlayerScore(input:number):;
+  changeCurrentPlayerScore(input: number): void;
 }
 
 class Game implements IStartGame {
@@ -54,7 +54,7 @@ class Game implements IStartGame {
 
   public update(): void {
     console.log(this.currentScene);
-    console.log(this.currentPlayerScore)
+
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
@@ -115,7 +115,7 @@ class Game implements IStartGame {
     return this.currentPlayerScore;
   }
 
-  public changeCurrentPlayerScore(input:number) {
+  public changeCurrentPlayerScore(input: number) {
     this.currentPlayerScore = input;
   }
 }

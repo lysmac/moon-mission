@@ -9,7 +9,7 @@ class GameEngine {
   private pauseMenu: PauseMenu;
   private score: number;
   private isScoreBlinking: boolean;
-  private gameOver: GameOver;
+  // private gameOver: GameOver;
   private dead: boolean;
   private game: Game;
 
@@ -21,15 +21,15 @@ class GameEngine {
     this.isPaused = false;
     this.wasEscapeKeyDown = false;
     this.dead = false;
-    this.gameOver = new GameOver(
-      game,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.3)",
-      this
-    );
+    // this.gameOver = new GameOver(
+    //   game,
+    //   100,
+    //   300,
+    //   400,
+    //   300,
+    //   "rgba(255, 0, 0, 0.3)",
+    //   this
+    // );
 
     this.pauseMenu = new PauseMenu(
       game,
@@ -45,12 +45,8 @@ class GameEngine {
   }
 
   public update() {
-    this.togglePause();
-    // if (this.isPaused) return;
-    if (this.isPaused) {
-      this.pauseMenu.update();
-      return;
-    }
+    this.pauseGame();
+
     if (this.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
@@ -77,20 +73,24 @@ class GameEngine {
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
-    if (this.isPaused && !this.dead) {
-      this.pauseMenu.draw();
-    }
+    // if (this.isPaused && !this.dead) {
+    //   this.pauseMenu.draw();
+    // }
 
     // if (this.dead) {
     //   this.gameOver.draw();
     // }
   }
 
-  public togglePause() {
+  public pauseGame() {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
     // const espaceWasReleased = this.wasEscapeKeyDown && !keyIsDown(ESCAPE);
+
     if (espaceWasPressed) {
       // Show pause menu and pause game
+
+      this.game.changeCurrentScene("pause");
+
       this.isPaused = !this.isPaused;
     }
 
