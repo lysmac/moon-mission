@@ -2,7 +2,7 @@
 interface IStartGame {
   startNewGame(): void;
   resumeGame(): void;
-  readAllPlayerScores(): void;
+  readAllPlayerScores(): number[];
   changeCurrentScene(scene: string): void;
   readCurrentPlayerScore(): number;
   changeCurrentPlayerScore(input: number): void;
