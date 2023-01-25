@@ -44,12 +44,13 @@ class GameOver {
    // let restartY = this.y + 130;
 
     // TITLE
-    fill("#c90a0a");
+    fill(frameCount % 60 < 30 ? "#c90a0a" : "#D9D9D900");
     textSize(70);
     textAlign(CENTER);
     text("GAME OVER", this.x + this.width / 2, this.y - 60);
 
     // MENU TEXT
+    
     fill("#D9D9D9");
     textSize(26);
     textAlign(CENTER);
