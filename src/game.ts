@@ -10,7 +10,7 @@ class Game implements IStartGame {
   private pauseMenu: PauseMenu
   private gameOver: GameOver
   private menumusic: p5.SoundFile
-  // private gameplaymusic: p5.SoundFile
+  private gameplaymusic: p5.SoundFile
   // private endmusic: p5.SoundFile
   private bgmIsPlaying: boolean
   // private playerScore: Score;
@@ -24,6 +24,7 @@ class Game implements IStartGame {
     this.gameEngine = new GameEngine()
     this.currentScene = "start"
     this.menumusic = menumusic
+    this.gameplaymusic = gameplaymusic
     this.bgmIsPlaying = false
   }
   // new GameMenu(this)
@@ -34,11 +35,14 @@ class Game implements IStartGame {
       case "start":
         this.gameMenu.update()
         this.playMusic()
-        // console.log(this.playMusic)
+        
         break
       case "play":
         this.gameEngine.update()
         this.stopMusic()
+        // this.playMusic()
+        
+        
         break
       case "pause":
         this.pauseMenu.update()
@@ -76,19 +80,22 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   public playMusic(): void {
-    if (this.bgmIsPlaying) {
-      console.log(this.bgmIsPlaying)
-      return
-    } else {
-      console.log(this.bgmIsPlaying)
-      this.menumusic.play()
+    if(this.currentScene == "start" && !this.bgmIsPlaying) {
       this.bgmIsPlaying = true
+      this.menumusic.play()
+    } else if (this.currentScene == "play" && this.bgmIsPlaying) {
+      this.bgmIsPlaying = false
+      this.gameplaymusic.play()
     }
   }
   public stopMusic(): void {
-    if (this.bgmIsPlaying) {
+    if (this.currentScene == "play" && this.bgmIsPlaying) 
+    console.log(bgmIsPlaying){
       this.bgmIsPlaying = false
       this.menumusic.stop()
+    } else if (this.currentScene == "start" && this.bgmIsPlaying) {
+      this.bgmIsPlaying = true
+      this.gameplaymusic.stop()
     }
   }
 }

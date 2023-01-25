@@ -6,7 +6,7 @@ let raket3: p5.Image
 let raket4: p5.Image
 let raket5: p5.Image
 let menumusic: p5.SoundFile
-// let gameplaymusic: p5.SoundFile
+let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -28,8 +28,7 @@ function preload() {
   
   //Music
   menumusic = loadSound("assets/bgm/menu.mp3")
-
-  // gameplaymusic = loadSound("assets/bgm/play.mp3")
+  gameplaymusic = loadSound("assets/bgm/play.mp3")
   // endmusic = loadSound("assets/bgm/over.mp3")
 
 }
