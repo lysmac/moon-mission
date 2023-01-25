@@ -4,9 +4,7 @@ class GameOver {
   color: string;
   width: number = 100;
   height: number = 100;
-
   game: IStartGame;
-  gameengine: GameEngine;
 
   constructor(
     game: IStartGame,
@@ -14,8 +12,7 @@ class GameOver {
     y: number,
     width: number,
     height: number,
-    color: string,
-    gameengine: GameEngine
+    color: string
   ) {
     console.log(game);
     this.x = x;
@@ -24,11 +21,13 @@ class GameOver {
     this.height = height;
     this.color = color;
     this.game = game;
-    this.gameengine = gameengine;
   }
 
   public update() {
     this.game.changeCurrentScene("end");
+    let score = this.game.readCurrentPlayerScore();
+    this.game.pushToAllPlayerScores(score);
+
     if (keyIsDown(32)) {
       game.startNewGame();
     }
@@ -55,10 +54,18 @@ class GameOver {
     // MENU TEXT
     // This variable taked the score from gameengine, so it can be displayed here
     let score = this.game.readCurrentPlayerScore();
+    let highscore = this.getHighestScore();
+
     fill("#D9D9D9");
     textSize(26);
     textAlign(CENTER);
     text(`YOUR SCORE: ${score}`, this.x + this.width / 2, this.y + 60);
+
+    text(
+      `CURRENT HIGH SCORE: ${highscore}`,
+      this.x + this.width / 2,
+      this.y + 90
+    );
 
     fill("#D9D9D9");
     textSize(21);
@@ -76,5 +83,12 @@ class GameOver {
     // textFont("secular one");
     // textSize(this.textSize);
     // text(this.textPlay, this.x + this.width / 2, restartY + 30);
+  }
+
+  public getHighestScore() {
+    let highscores = this.game.readAllPlayerScores();
+
+    let highestNumber = Math.max(...highscores);
+    return highestNumber;
   }
 }

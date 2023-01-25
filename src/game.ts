@@ -4,8 +4,9 @@ interface IStartGame {
   resumeGame(): void;
   readAllPlayerScores(): void;
   changeCurrentScene(scene: string): void;
-  readCurrentPlayerScore(): void;
+  readCurrentPlayerScore(): number;
   changeCurrentPlayerScore(input: number): void;
+  pushToAllPlayerScores(playerScore: number): void;
 }
 
 class Game implements IStartGame {
@@ -43,8 +44,7 @@ class Game implements IStartGame {
       300,
       400,
       300,
-      "rgba(255, 0, 0, 0.4)",
-      this.gameEngine
+      "rgba(255, 0, 0, 0.4)"
     );
     this.currentScene = "start";
     this.currentPlayerScore = 0;
@@ -99,15 +99,13 @@ class Game implements IStartGame {
 
   public resumeGame(): void {}
 
-  public readAllPlayerScores(): void {
-    if (this.allPlayerScores === undefined) {
-      console.log("allPlayerScores is not defined yet");
-    }
-    console.log("reach");
-    console.log(this.allPlayerScores);
+  public readAllPlayerScores() {
+    return this.allPlayerScores;
   }
 
-  public pushToAllPlayerScores(): void {}
+  public pushToAllPlayerScores(playerScore: number) {
+    this.allPlayerScores.push(playerScore);
+  }
 
   public changeCurrentScene(scene: string): void {
     this.currentScene = scene;
