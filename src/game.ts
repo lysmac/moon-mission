@@ -11,9 +11,6 @@ class Game implements IStartGame {
   private gameOver: GameOver
   private menumusic: p5.SoundFile
   private gameplaymusic: p5.SoundFile
-  // private endmusic: p5.SoundFile
-  private bgmIsPlaying: boolean
-  // private playerScore: Score;
 
   private currentScene: "start" | "play" | "pause" | "end"
 
@@ -25,7 +22,6 @@ class Game implements IStartGame {
     this.currentScene = "start"
     this.menumusic = menumusic
     this.gameplaymusic = gameplaymusic
-    this.bgmIsPlaying = false
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -35,20 +31,19 @@ class Game implements IStartGame {
       case "start":
         this.gameMenu.update()
         this.playMusic()
-        
+
         break
       case "play":
         this.gameEngine.update()
         this.stopMusic()
         this.playMusic()
-        
-        
         break
       case "pause":
         this.pauseMenu.update()
         break
       case "end":
         this.gameOver.update()
+        this.stopMusic()
         break
     }
   }
@@ -80,22 +75,23 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   public playMusic(): void {
-    if(this.currentScene === "start" && !this.bgmIsPlaying) {
-      this.bgmIsPlaying = true
-      this.menumusic.play()
-    } else if (this.currentScene === "play" && !this.bgmIsPlaying) {
-      this.bgmIsPlaying = true
-      this.gameplaymusic.play()
+    if (this.currentScene === "start") {
+      if (!this.menumusic.isPlaying()) {
+        this.menumusic.play()
+      }
+    } else if (this.currentScene === "play") {
+      if (!this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.play()
+      }
     }
   }
   public stopMusic(): void {
-    if (this.currentScene !== "start" && this.bgmIsPlaying && this.menumusic.isPlaying()) {
-      this.bgmIsPlaying = false
+    if (this.currentScene !== "start" && this.menumusic.isPlaying()) {
       this.menumusic.stop()
-    }
-     else  if (this.currentScene !== "play" && this.bgmIsPlaying && this.gameplaymusic.isPlaying()) {
-      this.bgmIsPlaying = false
+    } if (this.currentScene !== "play" && this.gameplaymusic.isPlaying()) {
       this.gameplaymusic.stop()
+    } 
+
     }
   }
 }
