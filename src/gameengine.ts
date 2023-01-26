@@ -1,4 +1,3 @@
-
 /// <reference path="./Gameentities/gameentity.ts"/> 
 
 class GameEngine {
@@ -12,9 +11,11 @@ class GameEngine {
   private isScoreBlinking: boolean;
   private gameOver: GameOver;
   private dead: boolean;
+  private oxygenDisplay: OxygenDisplay;
 
   constructor() {
     this.background = new Background();
+    this.oxygenDisplay = new OxygenDisplay();
     this.gameEntities = [];
     this.spawnTimout = 2000;
     this.isPaused = false;
@@ -53,19 +54,26 @@ class GameEngine {
       this.gameOver.update();
       return;
     }
+    if (this.oxygenDisplay.oxygenLevel <= 0) {
+      this.dead = true;
+      this.gameOver.update();
+      return;
+    }
 
     this.checkCollision();
     this.incrementScore();
     this.background.update();
     this.moveEntities();
     this.spawnAsteroid();
-    this.spawnAlien(); 
+    this.spawnAlien();
+    this.spawnOxygenTank();
 
     this.displaySpaceship();
   }
 
   public draw() {
     this.background.draw();
+    this.oxygenDisplay.draw();
 
     this.displayScore();
 
@@ -120,6 +128,7 @@ class GameEngine {
 
   private checkCollision() {
     const spaceship = this.gameEntities.find((e) => e instanceof SpaceShip);
+    const oxygenTank = this.gameEntities.find((e) => e instanceof OxygenTank);
     if (!spaceship) return;
 
     for (let i = 0; i < this.gameEntities.length; i++) {
@@ -132,8 +141,13 @@ class GameEngine {
         spaceship.position.y < entity.position.y + entity.size.y &&
         spaceship.size.y + spaceship.position.y > entity.position.y
       ) {
-        // this.isPaused = true;
-        this.dead = true;
+
+        if (entity !== oxygenTank) {
+          this.dead = true;
+        } else {
+          this.gameEntities.splice(i, 1);
+          this.oxygenDisplay.oxygenLevel += 10;
+        }
       }
     }
   }
@@ -148,6 +162,7 @@ class GameEngine {
       this.spawnTimout = random(1000, 5000);
     }
   }
+
   private spawnAlien() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
@@ -155,6 +170,17 @@ class GameEngine {
       const y = random(-height, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new Alien(position));
+      this.spawnTimout = random(1000, 8000);
+    }
+  }
+
+  private spawnOxygenTank() {
+    this.spawnTimout -= deltaTime;
+    if (this.spawnTimout < 0) {
+      const x = random(-width, width);
+      const y = random(-height, -500);
+      const position = createVector(x, y);
+      this.gameEntities.push(new OxygenTank(position));
       this.spawnTimout = random(1000, 8000);
     }
   }
