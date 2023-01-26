@@ -55,11 +55,21 @@ class GameMenu {
     fill("#D9D9D9");
     textSize(21);
     text("HOW TO PLAY", this.position.x +200, this.position.y+140);
+
+    image(interactionKeys,180,470, 300,70);
+    fill("#D9D9D9");
+    textSize(15);
+    text("PAUSE", this.position.x +100, this.position.y+260);
+    text("SHOOT", this.position.x +200, this.position.y+260);
+    text("MOVE", this.position.x +330, this.position.y+260);
+
+  
     
     //SPACESHIP
     angleMode(DEGREES);
     rotate(25);
-    image(raket3, 330, 350, 80, 250, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
+    image(raket3, 310, 350, 80, 250, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
+    
     
   }
 

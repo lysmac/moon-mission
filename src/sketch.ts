@@ -8,6 +8,7 @@ let alien: p5.Image
 let raket3: p5.Image
 let raket4: p5.Image
 let raket5: p5.Image
+let interactionKeys: p5.Image
 let menumusic: p5.SoundFile
 let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -32,6 +33,7 @@ function preload() {
   raket3 = loadImage("assets/Raket3.png")
   raket4 = loadImage("assets/Raket4.png")
   raket5 = loadImage("assets/Raket5.png")
+  interactionKeys = loadImage ("assets/InteractionKeys.png")
   
 
 }
