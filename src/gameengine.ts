@@ -4,39 +4,35 @@ class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
   private spawnTimout: number;
-  private isPaused: boolean;
-  private wasEscapeKeyDown: boolean;
-  private pauseMenu: PauseMenu;
   private score: number;
   private isScoreBlinking: boolean;
-  private gameOver: GameOver;
   private dead: boolean;
+  private game: Game;
 
   constructor() {
+    this.game = game;
     this.background = new Background();
     this.gameEntities = [];
     this.spawnTimout = 2000;
-    this.isPaused = false;
-    this.wasEscapeKeyDown = false;
     this.dead = false;
-    this.gameOver = new GameOver(
-      game,
-      this
-    );
-    this.pauseMenu = new PauseMenu(game);
+    // this.gameOver = new GameOver(
+    //   game,
+    //   100,
+    //   300,
+    //   400,
+    //   300,
+    //   "rgba(255, 0, 0, 0.3)",
+    //   this
+    // );
+
     this.score = 0;
     this.isScoreBlinking = false;
   }
 
   public update() {
-    this.togglePause();
-    // if (this.isPaused) return;
-    if (this.isPaused) {
-      this.pauseMenu.update();
-      return;
-    }
     if (this.dead) {
-      this.gameOver.update();
+      game.changeCurrentPlayerScore(this.score);
+      this.game.changeCurrentScene("end");
       return;
     }
 
@@ -53,29 +49,10 @@ class GameEngine {
   public draw() {
     this.background.draw();
 
-    this.displayScore();
-
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
-    if (this.isPaused && !this.dead) {
-      this.pauseMenu.draw();
-    }
-
-    if (this.dead) {
-      this.gameOver.draw();
-    }
-  }
-
-  public togglePause() {
-    const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
-    // const espaceWasReleased = this.wasEscapeKeyDown && !keyIsDown(ESCAPE);
-    if (espaceWasPressed) {
-      // Show pause menu and pause game
-      this.isPaused = !this.isPaused;
-    }
-
-    this.wasEscapeKeyDown = keyIsDown(ESCAPE);
+    this.displayScore();
   }
 
   private moveEntities() {
@@ -85,13 +62,15 @@ class GameEngine {
   }
 
   private displayScore() {
+    textFont("secular one");
     textSize(24);
     if (this.isScoreBlinking) {
       fill(255, 255, 0);
     } else {
       fill(255);
     }
-    text(`Score: ${this.score}`, 20, 40);
+    text("Score:", 60, 40);
+    text(this.score, 60, 70);
   }
 
   public scoreForBoard() {

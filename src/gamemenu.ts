@@ -5,12 +5,13 @@ class GameMenu {
   background: Background;
 
   constructor(
+
     game: IStartGame,
     
   ) {
     this.game = game;
-    this.position = createVector(100,300);
-    this.size = createVector(400,300);
+    this.position = createVector(100, 300);
+    this.size = createVector(400, 300);
     this.background = new Background(true);
   }
 
@@ -22,10 +23,10 @@ class GameMenu {
 
     this.background.update();
   }
-  
+
   public draw() {
     this.background.draw();
-    
+
     //BACKGROUND SQUARE MENU
     fill("rgba(255, 0, 0, 0.4)");
     stroke("#D9D9D9");
@@ -38,22 +39,35 @@ class GameMenu {
     textAlign(CENTER);
     image(header,0,0);
 
+
     //textFont("sofia sans");
     // text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
     // fill("#D9D9D9");
+
 
     // MENU TEXT
     textFont("secular one");
     fill("#D9D9D9");
     textSize(21);
-    text("PRESS", this.position.x +65, this.position.y+70);
+    text("PRESS", this.position.x + 65, this.position.y + 70);
     fill("#FDCA51");
-    text("SPACE", this.position.x + textWidth("PRESS ")+69, this.position.y + 70);
+
+    text(
+      "SPACE",
+      this.position.x + textWidth("PRESS ") + 69,
+      this.position.y + 70
+    );
+
     fill("#D9D9D9");
-    text(" TO START NEW GAME", this.position.x +textWidth("PRESS SPACE")+145, this.position.y + 70);
+    text(
+      " TO START NEW GAME",
+      this.position.x + textWidth("PRESS SPACE") + 145,
+      this.position.y + 70
+    );
 
     fill("#D9D9D9");
     textSize(21);
+
     text("HOW TO PLAY", this.position.x +200, this.position.y+150);
 
     // IMAGE OF KEYS
@@ -72,13 +86,9 @@ class GameMenu {
     image(raket3, 310, 350, 80, 250, 0, 0, raket3.width, raket3.height, CONTAIN, LEFT);
     
     
-  }
-
-
-
 
   }
-
+}
 
 // font-family: 'Kanit', sans-serif;
 // font-family: 'Secular One', sans-serif;
