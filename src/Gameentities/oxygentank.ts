@@ -1,9 +1,7 @@
 class OxygenTank extends GameEntity {
-  constructor() {
-    super()
+  constructor(position: p5.Vector) {
+
+    const size = createVector(20, 55);
+    super(position, size, oxygenTank); 
   }
-
-  public update() {}
-
-  public draw() {}
 }
