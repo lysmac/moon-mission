@@ -5,8 +5,6 @@ class GameMenu {
   background: Background;
 
   constructor(
-    //position: p5.Vector,
-    //size: p5.Vector,
     game: IStartGame,
     
   ) {
@@ -38,24 +36,27 @@ class GameMenu {
     fill("#FDCA51");
     textSize(70);
     textAlign(CENTER);
+    image(header,0,0);
 
-    textFont("sofia sans");
-    text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
-    fill("#D9D9D9");
+    //textFont("sofia sans");
+    // text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
+    // fill("#D9D9D9");
 
     // MENU TEXT
+    textFont("secular one");
     fill("#D9D9D9");
     textSize(21);
     text("PRESS", this.position.x +65, this.position.y+70);
     fill("#FDCA51");
-    text("SPACE", this.position.x + textWidth("PRESS ")+72, this.position.y + 70);
+    text("SPACE", this.position.x + textWidth("PRESS ")+69, this.position.y + 70);
     fill("#D9D9D9");
     text(" TO START NEW GAME", this.position.x +textWidth("PRESS SPACE")+145, this.position.y + 70);
 
     fill("#D9D9D9");
     textSize(21);
-    text("HOW TO PLAY", this.position.x +200, this.position.y+140);
+    text("HOW TO PLAY", this.position.x +200, this.position.y+150);
 
+    // IMAGE OF KEYS
     image(interactionKeys,180,470, 300,70);
     fill("#D9D9D9");
     textSize(15);
