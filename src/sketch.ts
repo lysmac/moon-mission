@@ -2,8 +2,8 @@
 
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let asteroid: p5.Image;
 
+let asteroid: p5.Image;
 let alien: p5.Image;
 
 let raket3: p5.Image;
