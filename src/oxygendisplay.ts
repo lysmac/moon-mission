@@ -5,6 +5,7 @@ class OxygenDisplay {
   public maxOxygenLevel: number;
   private color: string;
   private intervalId: any;
+  private isPaused: boolean;
 
   constructor() {
     this.position = createVector(50, 100);
@@ -12,8 +13,12 @@ class OxygenDisplay {
     this.oxygenLevel = 100;
     this.maxOxygenLevel = 100;
     this.color = 'green';
+    this.isPaused = false;
 
     this.intervalId = setInterval(() => {
+      if ( this.isPaused) {
+        return
+      }
       this.update();
     }, 1000);
   }
@@ -39,4 +44,13 @@ class OxygenDisplay {
     textSize(15);
     text(`Oxygen: ${this.oxygenLevel}`, this.position.x, this.position.y - 10);
   }
+
+  public pause() {
+    this.isPaused = true;
+  }
+
+  public resume() {
+    this.isPaused = false;
+  }
+  
 }
