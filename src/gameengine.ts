@@ -21,23 +21,9 @@ class GameEngine {
     this.dead = false;
     this.gameOver = new GameOver(
       game,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.3)",
       this
     );
-
-    this.pauseMenu = new PauseMenu(
-      game,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.3)"
-    );
-
+    this.pauseMenu = new PauseMenu(game);
     this.score = 0;
     this.isScoreBlinking = false;
   }

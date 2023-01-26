@@ -5,10 +5,11 @@ class GameOver {
   gameengine: GameEngine;
 
   constructor(
-  game: IStartGame,
-  gameengine: GameEngine
+    game: IStartGame,
+    gameengine: GameEngine
   ) {
-    this.position = createVector(100,300);
+   
+    this.position= createVector(100,300);
     this.size = createVector(400,200);
     this.game = game;
     this.gameengine = gameengine;
@@ -22,9 +23,9 @@ class GameOver {
 
   public draw() {
     //BACKGROUND SQUARE MENU
-    fill("rgba(255, 0, 0, 0.4)");
+    fill("rgba(255, 0, 0, 0.3)");
     stroke("#D9D9D9");
-    rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
+    rect(this.position.x, this.position.y, 400, 200, 20);
     noStroke();
 
     textFont("sofia sans");
@@ -33,10 +34,10 @@ class GameOver {
     // let restartY = this.y + 130;
 
     // TITLE
-    fill(frameCount % 60 < 30 ? "#c90a0a" : "#D9D9D900");
+    fill(frameCount % 60 < 30 ?  "#D9D9D900": "#c90a0a");
     textSize(70);
     textAlign(CENTER);
-    text("GAME OVER", this.position.x + this.size.x/ 2, this.position.y - 60);
+    text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60);
 
     // MENU TEXT
     // This variable taked the score from gameengine, so it can be displayed here
