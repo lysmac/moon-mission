@@ -3,25 +3,24 @@ class PauseMenu {
   private size: p5.Vector;
   game: IStartGame;
 
-  constructor(
-    game: IStartGame,
-  
-  ) {
-
-    this.position= createVector(100,300);
-    this.size = createVector(400,240);
+  constructor(game: IStartGame) {
+    this.position = createVector(100, 300);
+    this.size = createVector(400, 240);
     this.game = game;
   }
 
   public update() {
-    // console.log(game);
+    if (keyIsDown(77)) {
+      console.log("pressed m");
+      this.game.changeCurrentScene("start");
+    }
+
     if (keyIsDown(32)) {
       game.startNewGame();
     }
   }
 
   public draw() {
-
     //BACKGROUND SQUARE MENU
     fill("rgba(255, 0, 0, 0.4)");
     stroke("#D9D9D9");
@@ -37,24 +36,43 @@ class PauseMenu {
     textAlign(CENTER);
 
     textFont("sofia sans");
-    text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
+    text(
+      "MOON MISSION",
+      this.position.x + this.size.x / 2,
+      this.position.y - 90
+    );
     fill("#D9D9D9");
 
     // MENU TEXT
     textFont("secular one");
     textSize(21);
-    text("PRESS", this.position.x +123, this.position.y+90);
+    text("PRESS", this.position.x + 123, this.position.y + 90);
     fill("#FDCA51");
-    text("ESC", this.position.x + textWidth("PRESS ")+113, this.position.y + 90);
+    text(
+      "ESC",
+      this.position.x + textWidth("PRESS ") + 113,
+      this.position.y + 90
+    );
     fill("#D9D9D9");
-    text("TO RESUME", this.position.x +textWidth("PRESS SPACE")+132, this.position.y + 90);
+    text(
+      "TO RESUME",
+      this.position.x + textWidth("PRESS SPACE") + 132,
+      this.position.y + 90
+    );
 
-    text("PRESS", this.position.x +60, this.position.y+160);
+    text("PRESS", this.position.x + 60, this.position.y + 160);
     fill("#FDCA51");
-    text("SPACE", this.position.x + textWidth("PRESS ")+63, this.position.y + 160);
+    text(
+      "SPACE",
+      this.position.x + textWidth("PRESS ") + 63,
+      this.position.y + 160
+    );
     fill("#D9D9D9");
-    text(" TO START NEW GAME", this.position.x +textWidth("PRESS SPACE")+140, this.position.y + 160);
-    
+    text(
+      " TO START NEW GAME",
+      this.position.x + textWidth("PRESS SPACE") + 140,
+      this.position.y + 160
+    );
 
     // text("PRESS ESC TO RESUME", this.x + this.width / 2, resumeY + 30);
     // text("PRESS SPACE TO START NEW GAME", this.x + this.width / 2, restartY + 30);
