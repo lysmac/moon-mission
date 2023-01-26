@@ -61,12 +61,12 @@ class SpaceShip extends GameEntity {
   public update() {
     if(this.dead){
         this.timer++;
-        if (this.timer % this.deadDelay === 0) {
+        if (this.timer % this.delay === 0) {
           this.currentImageIndex = (this.currentImageIndex + 1) % this.deadImages.length;
         }
-        if(this.currentImageIndex === this.deadImages.length-1){
-          this.dead = true;
-        }
+        //if(this.currentImageIndex === this.deadImages.length-1){
+        //  this.dead = true;
+       // }
     }
     else{
         this.moveSpaceship();

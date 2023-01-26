@@ -110,6 +110,7 @@ class GameEngine {
       ) {
           //this.dead = true;
         spaceship.handleCollision();
+        this.dead = true;
       }
     }
   }
