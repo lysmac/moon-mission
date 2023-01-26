@@ -15,11 +15,15 @@ class Game implements IStartGame {
   private currentScene: "start" | "play" | "pause" | "end"
 
   constructor() {
-    this.gameMenu = new GameMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.4)")
-    this.pauseMenu = new PauseMenu(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.4)")
-    this.gameOver = new GameOver(this, 100, 300, 400, 300, "rgba(255, 0, 0, 0.4)")
-    this.gameEngine = new GameEngine()
-    this.currentScene = "start"
+
+    this.gameMenu = new GameMenu(this);
+    this.pauseMenu = new PauseMenu(this );
+    this.gameOver = new GameOver(
+       this, 
+       this.gameEngine = new GameEngine
+    );
+    this.gameEngine = new GameEngine();
+    this.currentScene = "start";
     this.menumusic = menumusic
     this.gameplaymusic = gameplaymusic
   }

@@ -1,5 +1,4 @@
-
-/// <reference path="./Gameentities/gameentity.ts"/> 
+/// <reference path="./Gameentities/gameentity.ts"/>
 
 class GameEngine {
   private background: Background;
@@ -22,22 +21,9 @@ class GameEngine {
     this.dead = false;
     this.gameOver = new GameOver(
       game,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.3)"
+      this
     );
-
-    this.pauseMenu = new PauseMenu(
-      game,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.3)"
-    );
-
+    this.pauseMenu = new PauseMenu(game);
     this.score = 0;
     this.isScoreBlinking = false;
   }
@@ -59,7 +45,7 @@ class GameEngine {
     this.background.update();
     this.moveEntities();
     this.spawnAsteroid();
-    this.spawnAlien(); 
+    this.spawnAlien();
 
     this.displaySpaceship();
   }
@@ -88,7 +74,7 @@ class GameEngine {
       // Show pause menu and pause game
       this.isPaused = !this.isPaused;
     }
-    
+
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 
@@ -108,7 +94,18 @@ class GameEngine {
     text(`Score: ${this.score}`, 20, 40);
   }
 
+  public scoreForBoard() {
+    if (this.dead) {
+      return this.score;
+    } else {
+      return;
+    }
+  }
+
   private incrementScore() {
+    if (this.dead) {
+      return;
+    }
     this.score += 1;
     if (this.score % 500 === 0 && !this.isScoreBlinking) {
       this.isScoreBlinking = true;
