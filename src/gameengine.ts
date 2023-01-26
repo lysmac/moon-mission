@@ -59,16 +59,16 @@ class GameEngine {
       this.gameOver.update();
       return;
     }
-
+    
+    this.background.update();
     this.checkCollision();
     this.incrementScore();
-    this.background.update();
+    this.displaySpaceship();
     this.moveEntities();
+
     this.spawnAsteroid();
     this.spawnAlien();
     this.spawnOxygenTank();
-
-    this.displaySpaceship();
   }
 
   public draw() {
@@ -141,12 +141,15 @@ class GameEngine {
         spaceship.position.y < entity.position.y + entity.size.y &&
         spaceship.size.y + spaceship.position.y > entity.position.y
       ) {
-
         if (entity !== oxygenTank) {
           this.dead = true;
         } else {
           this.gameEntities.splice(i, 1);
-          this.oxygenDisplay.oxygenLevel += 10;
+          if (this.oxygenDisplay.oxygenLevel > 90) {
+            this.oxygenDisplay.oxygenLevel += this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel
+          } else {
+            this.oxygenDisplay.oxygenLevel += 10;
+          }
         }
       }
     }
