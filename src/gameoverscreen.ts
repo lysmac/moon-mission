@@ -3,7 +3,7 @@ class GameOver {
   size: p5.Vector;
   game: IStartGame;
 
-  constructor(game: IStartGame, gameengine: GameEngine) {
+  constructor(game: IStartGame) {
     this.position = createVector(100, 300);
     this.size = createVector(400, 200);
     this.game = game;
@@ -53,8 +53,8 @@ class GameOver {
 
     text(
       `CURRENT HIGH SCORE: ${highscore}`,
-      this.x + this.width / 2,
-      this.y + 90
+      this.position.x + this.size.x / 2,
+      this.position.y + 90
     );
 
     fill("#D9D9D9");

@@ -14,39 +14,21 @@ class Game implements IStartGame {
   private gameMenu: GameMenu;
   private pauseMenu: PauseMenu;
   private gameOver: GameOver;
-  // private playerScore: Score;
+  private menumusic: p5.SoundFile;
+  private gameplaymusic: p5.SoundFile;
   private allPlayerScores: number[] = [1, 2, 3, 4, 5];
   private currentPlayerScore: number;
   private currentScene: string;
-  // private currentScene: "start" | "play" | "pause" | "end";
+  // private currentScene: "start" | "play" | "pause" | "end"
   private wasEscapeKeyDown: boolean;
 
   constructor() {
-    this.gameMenu = new GameMenu(
-      this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
-    );
-    this.pauseMenu = new PauseMenu(
-      this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
-    );
+    this.gameMenu = new GameMenu(this);
+    this.pauseMenu = new PauseMenu(this);
+    this.gameOver = new GameOver(this);
     this.gameEngine = new GameEngine();
-    this.gameOver = new GameOver(
-      this,
-      100,
-      300,
-      400,
-      300,
-      "rgba(255, 0, 0, 0.4)"
-    );
+    this.menumusic = menumusic;
+    this.gameplaymusic = gameplaymusic;
     // "start" | "play" | "pause" | "end"
     // Can't pause when starting from play. But Everything works with "start"
     this.currentScene = "start";
@@ -64,15 +46,20 @@ class Game implements IStartGame {
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
+        this.playMusic();
+
         break;
       case "play":
         this.gameEngine.update();
+        this.stopMusic();
+        this.playMusic();
         break;
       case "pause":
         this.pauseMenu.update();
         break;
       case "end":
         this.gameOver.update();
+        this.stopMusic();
         break;
     }
   }
@@ -104,6 +91,26 @@ class Game implements IStartGame {
   }
 
   public resumeGame(): void {}
+
+  public playMusic(): void {
+    if (this.currentScene === "start") {
+      if (!this.menumusic.isPlaying()) {
+        this.menumusic.play();
+      }
+    } else if (this.currentScene === "play") {
+      if (!this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.play();
+      }
+    }
+  }
+  public stopMusic(): void {
+    if (this.currentScene !== "start" && this.menumusic.isPlaying()) {
+      this.menumusic.stop();
+    }
+    if (this.currentScene !== "play" && this.gameplaymusic.isPlaying()) {
+      this.gameplaymusic.stop();
+    }
+  }
 
   public readAllPlayerScores() {
     return this.allPlayerScores;
