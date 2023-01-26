@@ -14,6 +14,10 @@ let gameplaymusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
 
+let deadraket1: p5.Image
+let deadraket2: p5.Image
+let deadraket3: p5.Image
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -32,7 +36,9 @@ function preload() {
   raket3 = loadImage("assets/Raket3.png")
   raket4 = loadImage("assets/Raket4.png")
   raket5 = loadImage("assets/Raket5.png")
-  
+  deadraket1 = loadImage("assets/deadraket1.png")
+  deadraket2 = loadImage("assets/deadraket2.png")
+  deadraket3 = loadImage("assets/deadraket3.png")
 
 }
 
