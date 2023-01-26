@@ -2,7 +2,7 @@ class OxygenDisplay {
   private position: p5.Vector;
   private size: p5.Vector;
   public oxygenLevel: number;
-  private maxOxygenLevel: number;
+  public maxOxygenLevel: number;
   private color: string;
   private intervalId: any;
 
@@ -19,7 +19,7 @@ class OxygenDisplay {
   }
 
   public update() {
-    this.oxygenLevel -= 10;
+    this.oxygenLevel -= 2;
     if (this.oxygenLevel < this.maxOxygenLevel / 2) {
       this.color = 'yellow';
     }
