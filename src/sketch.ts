@@ -1,3 +1,5 @@
+
+
 //---- GLOBAL VARIABLES ----//
 
 let game: Game
@@ -42,7 +44,6 @@ function preload() {
  */
 function setup() {
   createCanvas(600, 800)
-  //background(255, 204, 0);
   frameRate(60)
   game = new Game()
 }
@@ -63,3 +64,5 @@ function draw() {
 // function windowResized() {
 //   resizeCanvas(windowWidth, windowHeight);
 // }
+
+
