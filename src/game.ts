@@ -19,6 +19,7 @@ class Game implements IStartGame {
   private currentPlayerScore: number;
   private currentScene: string;
   // private currentScene: "start" | "play" | "pause" | "end";
+  private wasEscapeKeyDown: boolean;
 
   constructor() {
     this.gameMenu = new GameMenu(
@@ -50,12 +51,15 @@ class Game implements IStartGame {
     // Can't pause when starting from play. But Everything works with "start"
     this.currentScene = "start";
     this.currentPlayerScore = 0;
+    this.wasEscapeKeyDown = false;
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
 
   public update(): void {
     console.log(this.currentScene);
+
+    this.togglePause();
 
     switch (this.currentScene) {
       case "start":
@@ -119,5 +123,16 @@ class Game implements IStartGame {
 
   public changeCurrentPlayerScore(input: number) {
     this.currentPlayerScore = input;
+  }
+
+  public togglePause() {
+    const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
+    if (espaceWasPressed && this.currentScene === "play") {
+      this.currentScene = "pause";
+    } else if (espaceWasPressed && this.currentScene === "pause") {
+      this.currentScene = "play";
+    }
+
+    this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }

@@ -5,7 +5,6 @@ class PauseMenu {
   width: number = 100;
   height: number = 100;
   game: IStartGame;
-  private wasEscapeKeyDown: boolean;
 
   constructor(
     game: IStartGame,
@@ -21,12 +20,9 @@ class PauseMenu {
     this.height = height;
     this.color = color;
     this.game = game;
-    this.wasEscapeKeyDown = false;
   }
 
   public update() {
-    this.unpauseGame();
-
     if (keyIsDown(77)) {
       console.log("pressed m");
       this.game.changeCurrentScene("start");
@@ -74,32 +70,5 @@ class PauseMenu {
       this.x + textWidth("PRESS SPACE") + 140,
       this.y + 160
     );
-
-    // text("PRESS ESC TO RESUME", this.x + this.width / 2, resumeY + 30);
-    // text("PRESS SPACE TO START NEW GAME", this.x + this.width / 2, restartY + 30);
-
-    // fill(this.color);
-    // rect(this.x, this.y, this.width, this.height, 20);
-    // noStroke();
-
-    // textSize(this.textSize);
-    // textAlign(CENTER - textWidth(this.text));
-    // fill(this.textColor);
-    // textFont("times new roman");
-    // text(this.text, this.x + 140, this.y + 30);
-    // textAlign(CENTER - textWidth(this.textPlay));
-    // text(this.textPlay, this.x + 160, this.y + 60);
-    // textAlign(CENTER - textWidth(this.textHowToPlay));
-    // text(this.textHowToPlay, this.x + 130, this.y + 90);
-  }
-  public unpauseGame() {
-    const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(RETURN);
-    // const espaceWasReleased = this.wasEscapeKeyDown && !keyIsDown(ESCAPE);
-    if (espaceWasPressed) {
-      // Show pause menu and pause game
-      this.game.changeCurrentScene("play");
-    }
-
-    // this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
