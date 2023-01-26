@@ -48,10 +48,14 @@ class GameEngine {
     // if (this.isPaused) return;
     if (this.isPaused) {
       this.pauseMenu.update();
+      this.oxygenDisplay.pause();
       return;
+    } else {
+      this.oxygenDisplay.resume();
     }
     if (this.dead) {
       this.gameOver.update();
+      this.oxygenDisplay.pause();
       return;
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
@@ -128,7 +132,7 @@ class GameEngine {
 
   private checkCollision() {
     const spaceship = this.gameEntities.find((e) => e instanceof SpaceShip);
-    const oxygenTank = this.gameEntities.find((e) => e instanceof OxygenTank);
+    const clonedGameEntities = [...this.gameEntities];
     if (!spaceship) return;
 
     for (let i = 0; i < this.gameEntities.length; i++) {
@@ -142,12 +146,12 @@ class GameEngine {
         spaceship.size.y + spaceship.position.y > entity.position.y
         ) {
 
-        if (entity !== oxygenTank) {
+        if (!(entity instanceof OxygenTank)) {
           this.dead = true;
           return
         } 
         else {
-          this.gameEntities.splice(i, 1);
+          clonedGameEntities.splice(i, 1);
           if (this.oxygenDisplay.oxygenLevel > 90) {
             this.oxygenDisplay.oxygenLevel += this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel
           } 
@@ -157,6 +161,7 @@ class GameEngine {
         }
       }
     }
+    this.gameEntities = clonedGameEntities
   }
 
   private spawnAsteroid() {
