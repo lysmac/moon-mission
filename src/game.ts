@@ -7,6 +7,8 @@ interface IStartGame {
   readCurrentPlayerScore(): number;
   changeCurrentPlayerScore(input: number): void;
   pushToAllPlayerScores(playerScore: number): void;
+  scoreCheckSet(anything: boolean): any;
+  scoreCheckGet(): boolean;
 }
 
 class Game implements IStartGame {
@@ -14,18 +16,21 @@ class Game implements IStartGame {
   private gameMenu: GameMenu;
   private pauseMenu: PauseMenu;
   private gameOver: GameOver;
+  private scoreboard: ScoreBoard;
   private menumusic: p5.SoundFile;
   private gameplaymusic: p5.SoundFile;
-  private allPlayerScores: number[] = [1, 2, 3, 4, 5];
+  private allPlayerScores: number[] = [100, 101, 102, 103, 104];
   private currentPlayerScore: number;
   private currentScene: string;
   // private currentScene: "start" | "play" | "pause" | "end"
   private wasEscapeKeyDown: boolean;
+  public addedScoreToList: boolean;
 
   constructor() {
     this.gameMenu = new GameMenu(this);
     this.pauseMenu = new PauseMenu(this);
     this.gameOver = new GameOver(this);
+    this.scoreboard = new ScoreBoard(this);
     this.gameEngine = new GameEngine();
     this.menumusic = menumusic;
     this.gameplaymusic = gameplaymusic;
@@ -34,20 +39,29 @@ class Game implements IStartGame {
     this.currentScene = "start";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
+    this.addedScoreToList = false;
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
 
   public update(): void {
-    console.log(this.currentScene);
+    // console.log(this.currentScene);
+    console.log(this.allPlayerScores);
 
     this.togglePause();
 
     switch (this.currentScene) {
       case "start":
+        if (keyIsDown(72)) {
+          console.log("pressed h");
+          this.changeCurrentScene("score");
+        }
         this.gameMenu.update();
         this.playMusic();
-
+        break;
+      case "score":
+        this.scoreboard.update();
+        this.playMusic();
         break;
       case "play":
         this.gameEngine.update();
@@ -69,6 +83,9 @@ class Game implements IStartGame {
       case "start":
         this.gameMenu.draw();
         break;
+      case "score":
+        this.scoreboard.draw();
+        break;
       case "play":
         this.gameEngine.draw();
         break;
@@ -85,8 +102,10 @@ class Game implements IStartGame {
 
   public startNewGame(): void {
     // Denna behövs bara när man börjar på currentScene "Pause"
-    this.currentScene = "play";
+    // this.addedScoreToList = false;
+    this.scoreCheckSet(false);
 
+    this.currentScene = "play";
     this.gameEngine = new GameEngine();
   }
 
@@ -141,5 +160,12 @@ class Game implements IStartGame {
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
+  }
+
+  public scoreCheckSet(anything: boolean): any {
+    this.addedScoreToList = anything;
+  }
+  public scoreCheckGet() {
+    return this.addedScoreToList;
   }
 }

@@ -15,15 +15,6 @@ class GameEngine {
     this.gameEntities = [];
     this.spawnTimout = 2000;
     this.dead = false;
-    // this.gameOver = new GameOver(
-    //   game,
-    //   100,
-    //   300,
-    //   400,
-    //   300,
-    //   "rgba(255, 0, 0, 0.3)",
-    //   this
-    // );
 
     this.score = 0;
     this.isScoreBlinking = false;
