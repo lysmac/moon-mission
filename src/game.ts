@@ -1,19 +1,21 @@
 // Is this right or should it be in a separate file?
 interface IStartGame {
-  startNewGame(): void;
-  resumeGame(): void;
+  startNewGame(): void
+  resumeGame(): void
 }
 
 class Game implements IStartGame {
-  private gameEngine: GameEngine;
-  private gameMenu: GameMenu;
-  private pauseMenu: PauseMenu;
-  private gameOver: GameOver;
-  // private playerScore: Score;
+  private gameEngine: GameEngine
+  private gameMenu: GameMenu
+  private pauseMenu: PauseMenu
+  private gameOver: GameOver
+  private menumusic: p5.SoundFile
+  private gameplaymusic: p5.SoundFile
 
-  private currentScene: "start" | "play" | "pause" | "end";
+  private currentScene: "start" | "play" | "pause" | "end"
 
   constructor() {
+
     this.gameMenu = new GameMenu(this);
     this.pauseMenu = new PauseMenu(this );
     this.gameOver = new GameOver(
@@ -22,6 +24,8 @@ class Game implements IStartGame {
     );
     this.gameEngine = new GameEngine();
     this.currentScene = "start";
+    this.menumusic = menumusic
+    this.gameplaymusic = gameplaymusic
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -29,43 +33,69 @@ class Game implements IStartGame {
   public update(): void {
     switch (this.currentScene) {
       case "start":
-        this.gameMenu.update();
-        break;
+        this.gameMenu.update()
+        this.playMusic()
+
+        break
       case "play":
-        this.gameEngine.update();
-        break;
+        this.gameEngine.update()
+        this.stopMusic()
+        this.playMusic()
+        break
       case "pause":
-        this.pauseMenu.update();
-        break;
+        this.pauseMenu.update()
+        break
       case "end":
-        this.gameOver.update();
-        break;
+        this.gameOver.update()
+        this.stopMusic()
+        break
     }
   }
 
   public draw(): void {
     switch (this.currentScene) {
       case "start":
-        this.gameMenu.draw();
-        break;
+        this.gameMenu.draw()
+        break
       case "play":
-        this.gameEngine.draw();
-        break;
+        this.gameEngine.draw()
+        break
       case "pause":
-        this.pauseMenu.draw();
-        break;
+        this.pauseMenu.draw()
+        break
       case "end":
-        this.gameOver.draw();
-        break;
+        this.gameOver.draw()
+        break
     }
   }
 
   public startNewGame(): void {
     // Denna behövs bara när man börjar på currentScene "Pause"
-    this.currentScene = "play";
+    this.currentScene = "play"
 
-    this.gameEngine = new GameEngine();
+    this.gameEngine = new GameEngine()
   }
 
   public resumeGame(): void {}
+
+  public playMusic(): void {
+    if (this.currentScene === "start") {
+      if (!this.menumusic.isPlaying()) {
+        this.menumusic.play()
+      }
+    } else if (this.currentScene === "play") {
+      if (!this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.play()
+      }
+    }
+  }
+  public stopMusic(): void {
+    if (this.currentScene !== "start" && this.menumusic.isPlaying()) {
+      this.menumusic.stop()
+    } if (this.currentScene !== "play" && this.gameplaymusic.isPlaying()) {
+      this.gameplaymusic.stop()
+    } 
+
+    }
+  }
 }
