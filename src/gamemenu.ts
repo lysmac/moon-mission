@@ -1,27 +1,17 @@
 class GameMenu {
-  x: number = 0;
-  y: number = 0;
-  color: string;
-  width: number = 100;
-  height: number = 100;
-  game: IStartGame;
+  private position: p5.Vector;
+  private size: p5.Vector;
+  private game: IStartGame;
   background: Background;
 
   constructor(
-    game: IStartGame,
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    color: string
+    //position: p5.Vector,
+    //size: p5.Vector,
+    game: IStartGame
   ) {
     this.game = game;
-    this.x = x;
-    this.y = y;
-    // this.position = createVector(0, 0)
-    this.width = width;
-    this.height = height;
-    this.color = color;
+    this.position = createVector(100, 300);
+    this.size = createVector(400, 300);
     this.background = new Background(true);
   }
 
@@ -38,9 +28,9 @@ class GameMenu {
     this.background.draw();
 
     //BACKGROUND SQUARE MENU
-    fill(this.color);
+    fill("rgba(255, 0, 0, 0.4)");
     stroke("#D9D9D9");
-    rect(this.x, this.y, this.width, this.height, 20);
+    rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
     noStroke();
 
     //TITLE
@@ -49,25 +39,33 @@ class GameMenu {
     textAlign(CENTER);
 
     textFont("sofia sans");
-    text("MOON MISSION", this.x + this.width / 2, this.y - 90);
+    text(
+      "MOON MISSION",
+      this.position.x + this.size.x / 2,
+      this.position.y - 90
+    );
     fill("#D9D9D9");
 
     // MENU TEXT
     fill("#D9D9D9");
     textSize(21);
-    text("PRESS", this.x + 65, this.y + 70);
+    text("PRESS", this.position.x + 65, this.position.y + 70);
     fill("#FDCA51");
-    text("SPACE", this.x + textWidth("PRESS ") + 72, this.y + 70);
+    text(
+      "SPACE",
+      this.position.x + textWidth("PRESS ") + 72,
+      this.position.y + 70
+    );
     fill("#D9D9D9");
     text(
       " TO START NEW GAME",
-      this.x + textWidth("PRESS SPACE") + 145,
-      this.y + 70
+      this.position.x + textWidth("PRESS SPACE") + 145,
+      this.position.y + 70
     );
 
     fill("#D9D9D9");
     textSize(21);
-    text("HOW TO PLAY", this.x + 200, this.y + 140);
+    text("HOW TO PLAY", this.position.x + 200, this.position.y + 140);
 
     //SPACESHIP
     angleMode(DEGREES);

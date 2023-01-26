@@ -1,17 +1,18 @@
 
 
 //---- GLOBAL VARIABLES ----//
-let game: Game;
-let asteroid: p5.Image;
 
-let alien: p5.Image;
-
-let raket3: p5.Image;
-let raket4: p5.Image;
-let raket5: p5.Image;
-
-
-// let sound: p5.SoundFile
+let game: Game
+let asteroid: p5.Image
+let alien: p5.Image
+let raket3: p5.Image
+let raket4: p5.Image
+let raket5: p5.Image
+let menumusic: p5.SoundFile
+let gameplaymusic: p5.SoundFile
+// let endmusic: p5.SoundFile
+// let gameplaymusic: p5.SoundFile
+// let endmusic: p5.SoundFile
 
 /**
  * Built in preload function in P5
@@ -21,12 +22,17 @@ let raket5: p5.Image;
 function preload() {
   // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
   // Här a´skall alla filer i form av bilder och ljud laddas in.
-
-  alien = loadImage('/assets/Alien.png');
-  asteroid = loadImage('/assets/Astroid.png')
-  raket3 = loadImage('assets/Raket3.png');
-  raket4 = loadImage('assets/Raket4.png');
-  raket5 = loadImage('assets/Raket5.png');
+  
+  // Music
+  menumusic = loadSound("assets/bgm/menu.mp3")
+  gameplaymusic = loadSound("assets/bgm/play.mp3")
+  
+  alien = loadImage("/assets/Alien.png")
+  asteroid = loadImage("/assets/Astroid.png")
+  raket3 = loadImage("assets/Raket3.png")
+  raket4 = loadImage("assets/Raket4.png")
+  raket5 = loadImage("assets/Raket5.png")
+  
 
 }
 
@@ -37,10 +43,9 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-  createCanvas(600, 800);
-  //background(255, 204, 0);
-  frameRate(60);
-  game = new Game();
+  createCanvas(600, 800)
+  frameRate(60)
+  game = new Game()
 }
 
 /**
@@ -49,8 +54,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  game.update();
-  game.draw();
+  game.update()
+  game.draw()
 }
 
 /**
@@ -59,3 +64,5 @@ function draw() {
 // function windowResized() {
 //   resizeCanvas(windowWidth, windowHeight);
 // }
+
+
