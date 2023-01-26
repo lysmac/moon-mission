@@ -108,8 +108,8 @@ class GameEngine {
         spaceship.position.y < entity.position.y + entity.size.y &&
         spaceship.size.y + spaceship.position.y > entity.position.y
       ) {
-        // this.isPaused = true;
-        this.dead = true;
+          //this.dead = true;
+        spaceship.handleCollision();
       }
     }
   }
