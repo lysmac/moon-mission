@@ -4,14 +4,14 @@ class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
   private spawnTimout: number;
-  private isPaused: boolean;
   private wasEscapeKeyDown: boolean;
   private pauseMenu: PauseMenu;
   private score: number;
   private isScoreBlinking: boolean;
   private gameOver: GameOver;
-  private dead: boolean;
   private oxygenDisplay: OxygenDisplay;
+  private isPaused: boolean;
+  private dead: boolean;
 
   constructor() {
     this.background = new Background();
@@ -140,14 +140,18 @@ class GameEngine {
         spaceship.position.x + spaceship.size.x > entity.position.x &&
         spaceship.position.y < entity.position.y + entity.size.y &&
         spaceship.size.y + spaceship.position.y > entity.position.y
-      ) {
+        ) {
+
         if (entity !== oxygenTank) {
           this.dead = true;
-        } else {
+          return
+        } 
+        else {
           this.gameEntities.splice(i, 1);
           if (this.oxygenDisplay.oxygenLevel > 90) {
             this.oxygenDisplay.oxygenLevel += this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel
-          } else {
+          } 
+          else {
             this.oxygenDisplay.oxygenLevel += 10;
           }
         }
@@ -158,30 +162,30 @@ class GameEngine {
   private spawnAsteroid() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const x = random(-width, width);
+      const x = random(0, width);
       const y = random(-height, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new Astroid(position));
-      this.spawnTimout = random(1000, 5000);
+      this.spawnTimout = random(3000, 8000);
     }
   }
 
   private spawnAlien() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const x = random(-width, width);
+      const x = random(0, width);
       const y = random(-height, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new Alien(position));
-      this.spawnTimout = random(1000, 8000);
+      this.spawnTimout = random(1000, 5000);
     }
   }
 
   private spawnOxygenTank() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const x = random(-width, width);
-      const y = random(-height, -500);
+      const x = random(0, width);
+      const y = random(0, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new OxygenTank(position));
       this.spawnTimout = random(1000, 8000);
