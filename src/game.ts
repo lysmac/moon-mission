@@ -7,7 +7,7 @@ interface IStartGame {
   readCurrentPlayerScore(): number;
   changeCurrentPlayerScore(input: number): void;
   pushToAllPlayerScores(playerScore: number): void;
-  scoreCheckSet(anything: boolean): any;
+  scoreCheckSet(anything: boolean): void;
   scoreCheckGet(): boolean;
 }
 
@@ -162,7 +162,7 @@ class Game implements IStartGame {
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 
-  public scoreCheckSet(anything: boolean): any {
+  public scoreCheckSet(anything: boolean): void {
     this.addedScoreToList = anything;
   }
   public scoreCheckGet() {
