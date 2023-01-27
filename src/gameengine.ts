@@ -1,17 +1,23 @@
-/// <reference path="./Gameentities/gameentity.ts"/>
+/// <reference path="./Gameentities/gameentity.ts"/> 
 
 class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
   private spawnTimout: number;
+  private wasEscapeKeyDown: boolean;
+  private pauseMenu: PauseMenu;
   private score: number;
   private isScoreBlinking: boolean;
+  private gameOver: GameOver;
+  private oxygenDisplay: OxygenDisplay;
+  private isPaused: boolean;
   private dead: boolean;
   private game: Game;
 
   constructor() {
     this.game = game;
     this.background = new Background();
+    this.oxygenDisplay = new OxygenDisplay();
     this.gameEntities = [];
     this.spawnTimout = 2000;
     this.dead = false;
@@ -30,24 +36,42 @@ class GameEngine {
   }
 
   public update() {
+    // this.togglePause();
+    // if (this.isPaused) return;
+    // if (this.isPaused) {
+    //  this.pauseMenu.update();
+    //  this.oxygenDisplay.pause();
+    //  return;
+    // } else {
+    //  this.oxygenDisplay.resume();
+    // }
     if (this.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
+      this.oxygenDisplay.pause();
       return;
     }
-
+    if (this.oxygenDisplay.oxygenLevel <= 0) {
+      this.dead = true;
+      this.gameOver.update();
+      return;
+    }
+    
+    this.background.update();
     this.checkCollision();
     this.incrementScore();
-    this.background.update();
+    this.displaySpaceship();
     this.moveEntities();
     this.spawnAsteroid();
     this.spawnAlien();
-
-    this.displaySpaceship();
+    this.spawnAsteroid();
+    this.spawnAlien();
+    this.spawnOxygenTank();
   }
 
   public draw() {
     this.background.draw();
+    this.oxygenDisplay.draw();
 
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
@@ -96,6 +120,7 @@ class GameEngine {
 
   private checkCollision() {
     const spaceship = this.gameEntities.find((e) => e instanceof SpaceShip);
+    const clonedGameEntities = [...this.gameEntities];
     if (!spaceship) return;
 
     for (let i = 0; i < this.gameEntities.length; i++) {
@@ -107,30 +132,55 @@ class GameEngine {
         spaceship.position.x + spaceship.size.x > entity.position.x &&
         spaceship.position.y < entity.position.y + entity.size.y &&
         spaceship.size.y + spaceship.position.y > entity.position.y
-      ) {
-        // this.isPaused = true;
-        this.dead = true;
+        ) {
+
+        if (!(entity instanceof OxygenTank)) {
+          this.dead = true;
+          return
+        } 
+        else {
+          clonedGameEntities.splice(i, 1);
+          if (this.oxygenDisplay.oxygenLevel > 90) {
+            this.oxygenDisplay.oxygenLevel += this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel
+          } 
+          else {
+            this.oxygenDisplay.oxygenLevel += 10;
+          }
+        }
       }
     }
+    this.gameEntities = clonedGameEntities
   }
 
   private spawnAsteroid() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const x = random(-width, width);
+      const x = random(0, width);
       const y = random(-height, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new Astroid(position));
-      this.spawnTimout = random(1000, 5000);
+      this.spawnTimout = random(3000, 8000);
     }
   }
+
   private spawnAlien() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
-      const x = random(-width, width);
+      const x = random(0, width);
       const y = random(-height, -500);
       const position = createVector(x, y);
       this.gameEntities.push(new Alien(position));
+      this.spawnTimout = random(1000, 5000);
+    }
+  }
+
+  private spawnOxygenTank() {
+    this.spawnTimout -= deltaTime;
+    if (this.spawnTimout < 0) {
+      const x = random(0, width);
+      const y = random(0, -500);
+      const position = createVector(x, y);
+      this.gameEntities.push(new OxygenTank(position));
       this.spawnTimout = random(1000, 8000);
     }
   }
