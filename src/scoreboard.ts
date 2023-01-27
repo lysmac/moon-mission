@@ -46,23 +46,29 @@ class ScoreBoard {
       this.position.y - 90
     );
 
-    // Sub header
+    // SCOREBOARD - SUBTITLE
     textSize(55);
     textAlign(CENTER);
     text("SCOREBOARD", this.position.x + this.size.x / 2, this.position.y - 10);
 
-    // List of scores
+    // SCORE LIST
     let highscores = this.getTopThreeScores();
 
     fill("#D9D9D9");
-    textSize(21);
+    textSize(30);
     for (let i = 0; i < 5; i++) {
       text(
         i + 1 + ". " + highscores[i],
         this.position.x + 200,
-        this.position.y + 140 + i * 30
+        this.position.y + 80 + i * 40
       );
     }
+    textSize(25);
+    text(
+      "PRESS M TO RETURN TO MENU",
+      this.position.x + this.size.x / 2,
+      this.position.y + 280
+    );
   }
 
   public getTopThreeScores() {
