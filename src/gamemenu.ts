@@ -11,7 +11,7 @@ class GameMenu {
   ) {
     this.game = game;
     this.position = createVector(100, 300);
-    this.size = createVector(400, 300);
+    this.size = createVector(400, 370);
     this.background = new Background(true);
   }
 
@@ -77,6 +77,8 @@ class GameMenu {
     text("PAUSE", this.position.x +100, this.position.y+260);
     text("SHOOT", this.position.x +200, this.position.y+260);
     text("MOVE", this.position.x +330, this.position.y+260);
+    textSize(13);
+    text("PRESS S TO TOGGLE MUSIC", this.position.x +200, this.position.y+320);
 
   
     

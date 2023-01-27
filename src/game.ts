@@ -55,6 +55,7 @@ class Game implements IStartGame {
         this.gameEngine.update();
         this.stopMusic();
         this.playMusic();
+        
         break;
       case "pause":
         this.pauseMenu.update();
@@ -67,7 +68,7 @@ class Game implements IStartGame {
   }
 
   public draw(): void {
-    
+    this.toggleMusic();
     switch (this.currentScene) {
       case "start":
         this.gameMenu.draw();
@@ -118,15 +119,27 @@ class Game implements IStartGame {
   }
 
   public toggleMusic(): void {
+    // check if s key is pressed
     if (keyIsDown(83) && !this.wasSKeyDown) {
-      if (this.menumusic.isPlaying()) {
+      // check if current scene is start and menu music is playing
+      if (this.currentScene === "start" && this.menumusic.isPlaying()) {
         this.menumusic.pause();
-      } else {
+      } 
+      // check if current scene is start and menu music is not playing
+      else if (this.currentScene === "start" && !this.menumusic.isPlaying()) { 
         this.menumusic.play();
+      } 
+      // check if current scene is play and gameplay music is playing
+      else if (this.currentScene === "play" && this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.pause();
+      } 
+      // check if current scene is play and gameplay music is not playing
+      else if (this.currentScene === "play" && !this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.play();
       }
     }
     this.wasSKeyDown = keyIsDown(83);
-}
+  }
 
   public readAllPlayerScores() {
     return this.allPlayerScores;
@@ -152,12 +165,14 @@ class Game implements IStartGame {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
     if (espaceWasPressed && this.currentScene === "play") {
       this.currentScene = "pause";
+      this.gameplaymusic.pause();
     } else if (espaceWasPressed && this.currentScene === "pause") {
       this.currentScene = "play";
+      this.gameplaymusic.play();
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
 
-// Method that starts the music and mutes it when m is pressed
+// method that toogles the music on and off
