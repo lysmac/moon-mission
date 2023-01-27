@@ -42,21 +42,44 @@ class GameOver {
     let score = this.game.readCurrentPlayerScore();
     let highscore = this.getHighestScore();
 
-    fill("#D9D9D9");
-    textSize(26);
-    textAlign(CENTER);
-    text(
-      `YOUR SCORE: ${score}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 60
-    );
+    if (score >= highscore) {
+      textSize(55);
+      textAlign(CENTER);
+      fill("#FDCA51");
+      text(
+        "HIGH SCORE!",
+        this.position.x + this.size.x / 2,
+        this.position.y - 10
+      );
 
-    text(
-      `CURRENT HIGH SCORE: ${highscore}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 90
-    );
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOU SET A NEW HIGH SCORE! `,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+      textSize(40);
+      fill("#FDCA51");
 
+      text(score, this.position.x + this.size.x / 2, this.position.y + 100);
+    } else {
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOUR SCORE: ${score}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+
+      text(
+        `CURRENT HIGH SCORE: ${highscore}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 90
+      );
+    }
     fill("#D9D9D9");
     textSize(21);
     text("PRESS", this.position.x + 65, this.position.y + 140);
@@ -79,9 +102,8 @@ class GameOver {
     // text(this.textPlay, this.x + this.width / 2, restartY + 30);
   }
 
-  public getHighestScore() {
+  private getHighestScore() {
     let highscores = this.game.readAllPlayerScores();
-
     let highestNumber = Math.max(...highscores);
     return highestNumber;
   }
