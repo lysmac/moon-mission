@@ -22,15 +22,6 @@ class GameEngine {
   }
 
   public update() {
-    // this.togglePause();
-    // if (this.isPaused) return;
-    // if (this.isPaused) {
-    //  this.pauseMenu.update();
-    //  this.oxygenDisplay.pause();
-    //  return;
-    // } else {
-    //  this.oxygenDisplay.resume();
-    // }
     if (this.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
