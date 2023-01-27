@@ -4,15 +4,11 @@ class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
   private spawnTimout: number;
-  private wasEscapeKeyDown: boolean;
-  private pauseMenu: PauseMenu;
   private score: number;
   private isScoreBlinking: boolean;
-  private gameOver: GameOver;
-  private oxygenDisplay: OxygenDisplay;
-  private isPaused: boolean;
   private dead: boolean;
   private game: Game;
+  public oxygenDisplay: OxygenDisplay;
 
   constructor() {
     this.game = game;
@@ -21,30 +17,11 @@ class GameEngine {
     this.gameEntities = [];
     this.spawnTimout = 2000;
     this.dead = false;
-    // this.gameOver = new GameOver(
-    //   game,
-    //   100,
-    //   300,
-    //   400,
-    //   300,
-    //   "rgba(255, 0, 0, 0.3)",
-    //   this
-    // );
-
     this.score = 0;
     this.isScoreBlinking = false;
   }
 
   public update() {
-    // this.togglePause();
-    // if (this.isPaused) return;
-    // if (this.isPaused) {
-    //  this.pauseMenu.update();
-    //  this.oxygenDisplay.pause();
-    //  return;
-    // } else {
-    //  this.oxygenDisplay.resume();
-    // }
     if (this.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
@@ -53,7 +30,6 @@ class GameEngine {
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       this.dead = true;
-      this.gameOver.update();
       return;
     }
     
