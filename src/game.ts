@@ -1,4 +1,3 @@
-// Is this right or should it be in a separate file?
 interface IStartGame {
   startNewGame(): void;
   resumeGame(): void;
@@ -22,7 +21,6 @@ class Game implements IStartGame {
   private allPlayerScores: number[] = [100, 101, 102, 103, 104];
   private currentPlayerScore: number;
   private currentScene: string;
-  // private currentScene: "start" | "play" | "pause" | "end"
   private wasEscapeKeyDown: boolean;
   public addedScoreToList: boolean;
 
@@ -34,15 +32,11 @@ class Game implements IStartGame {
     this.gameEngine = new GameEngine();
     this.menumusic = menumusic;
     this.gameplaymusic = gameplaymusic;
-    // "start" | "play" | "pause" | "end"
-    // Can't pause when starting from play. But Everything works with "start"
-    this.currentScene = "score";
+    this.currentScene = "start";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
     this.addedScoreToList = false;
   }
-  // new GameMenu(this)
-  // Stod i klassschemat, vet inte exakt hur den ska användas?
 
   public update(): void {
     // console.log(this.currentScene);
@@ -155,8 +149,10 @@ class Game implements IStartGame {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
     if (espaceWasPressed && this.currentScene === "play") {
       this.currentScene = "pause";
+      this.gameEngine.oxygenDisplay.pause();
     } else if (espaceWasPressed && this.currentScene === "pause") {
       this.currentScene = "play";
+      this.gameEngine.oxygenDisplay.resume();
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);

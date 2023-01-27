@@ -3,9 +3,14 @@ class PauseMenu {
   private size: p5.Vector;
   game: IStartGame;
 
-  constructor(game: IStartGame) {
-    this.position = createVector(100, 300);
-    this.size = createVector(400, 240);
+  constructor(
+    game: IStartGame,
+  
+  ) {
+
+    this.position= createVector(100,300);
+    this.size = createVector(400,200);
+
     this.game = game;
   }
 
@@ -30,18 +35,16 @@ class PauseMenu {
     //let resumeY = this.y + 60;
     //let restartY = this.y + 130;
 
-    // Title
+    // HEADER AND TITLE
     fill("#FDCA51");
-    textSize(70);
+    textSize(30);
     textAlign(CENTER);
-
     textFont("sofia sans");
-    text(
-      "MOON MISSION",
-      this.position.x + this.size.x / 2,
-      this.position.y - 90
-    );
+
+    text("PAUSED", this.position.x + this.size.x/ 2, this.position.y +40);
+
     fill("#D9D9D9");
+    image(header,0,0);
 
     // MENU TEXT
     textFont("secular one");
