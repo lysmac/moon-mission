@@ -17,8 +17,9 @@ class ScoreBoard {
 
   public update() {
     // 32 is keycode for space
-    if (keyIsDown(32)) {
-      this.game.startNewGame();
+    if (keyIsDown(77)) {
+      console.log("pressed m");
+      this.game.changeCurrentScene("start");
     }
 
     this.background.update();

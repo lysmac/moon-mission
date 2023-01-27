@@ -36,7 +36,7 @@ class Game implements IStartGame {
     this.gameplaymusic = gameplaymusic;
     // "start" | "play" | "pause" | "end"
     // Can't pause when starting from play. But Everything works with "start"
-    this.currentScene = "start";
+    this.currentScene = "score";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
     this.addedScoreToList = false;
