@@ -21,6 +21,7 @@ class Game implements IStartGame {
   private currentScene: string;
   // private currentScene: "start" | "play" | "pause" | "end"
   private wasEscapeKeyDown: boolean;
+  private wasSKeyDown: boolean;
 
   constructor() {
     this.gameMenu = new GameMenu(this);
@@ -34,6 +35,7 @@ class Game implements IStartGame {
     this.currentScene = "start";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
+    this.wasSKeyDown = false;
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -42,11 +44,11 @@ class Game implements IStartGame {
     console.log(this.currentScene);
 
     this.togglePause();
-
+    this.toggleMusic();
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
-        this.playMusic();
+        // this.playMusic();
 
         break;
       case "play":
@@ -65,6 +67,7 @@ class Game implements IStartGame {
   }
 
   public draw(): void {
+    
     switch (this.currentScene) {
       case "start":
         this.gameMenu.draw();
@@ -81,6 +84,7 @@ class Game implements IStartGame {
         this.gameOver.draw();
         break;
     }
+    
   }
 
   public startNewGame(): void {
@@ -93,6 +97,7 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   public playMusic(): void {
+    
     if (this.currentScene === "start") {
       if (!this.menumusic.isPlaying()) {
         this.menumusic.play();
@@ -111,6 +116,17 @@ class Game implements IStartGame {
       this.gameplaymusic.stop();
     }
   }
+
+  public toggleMusic(): void {
+    if (keyIsDown(83) && !this.wasSKeyDown) {
+      if (this.menumusic.isPlaying()) {
+        this.menumusic.pause();
+      } else {
+        this.menumusic.play();
+      }
+    }
+    this.wasSKeyDown = keyIsDown(83);
+}
 
   public readAllPlayerScores() {
     return this.allPlayerScores;
@@ -143,3 +159,5 @@ class Game implements IStartGame {
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
+
+// Method that starts the music and mutes it when m is pressed
