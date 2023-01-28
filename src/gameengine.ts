@@ -8,12 +8,14 @@ class GameEngine {
   private isScoreBlinking: boolean;
   private dead: boolean;
   private game: Game;
-  public oxygenDisplay: OxygenDisplay;
+  private oxygenDisplay: OxygenDisplay;
+  private spaceship: SpaceShip;
 
   constructor() {
     this.game = game;
     this.background = new Background();
     this.oxygenDisplay = new OxygenDisplay();
+    this.spaceship = new SpaceShip();
     this.gameEntities = [];
     this.spawnTimout = 2000;
     this.dead = false;
@@ -34,9 +36,10 @@ class GameEngine {
     }
     
     this.background.update();
+    this.spaceship.update();
     this.checkCollision();
+    this.checkHitEnemy();
     this.incrementScore();
-    this.displaySpaceship();
     this.moveEntities();
     this.spawnAsteroid();
     this.spawnAlien();
@@ -48,6 +51,7 @@ class GameEngine {
   public draw() {
     this.background.draw();
     this.oxygenDisplay.draw();
+    this.spaceship.draw();
 
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
@@ -95,19 +99,15 @@ class GameEngine {
   }
 
   private checkCollision() {
-    const spaceship = this.gameEntities.find((e) => e instanceof SpaceShip);
     const clonedGameEntities = [...this.gameEntities];
-    if (!spaceship) return;
-
     for (let i = 0; i < this.gameEntities.length; i++) {
       const entity = this.gameEntities[i];
-      if (entity === spaceship) continue;
 
       if (
-        spaceship.position.x < entity.position.x + entity.size.x &&
-        spaceship.position.x + spaceship.size.x > entity.position.x &&
-        spaceship.position.y < entity.position.y + entity.size.y &&
-        spaceship.size.y + spaceship.position.y > entity.position.y
+        this.spaceship.position.x < entity.position.x + entity.size.x &&
+        this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
+        this.spaceship.position.y < entity.position.y + entity.size.y &&
+        this.spaceship.size.y + this.spaceship.position.y > entity.position.y
         ) {
 
         if (!(entity instanceof OxygenTank)) {
@@ -126,6 +126,38 @@ class GameEngine {
       }
     }
     this.gameEntities = clonedGameEntities
+  }
+
+  //this function is not working as intended--
+  private checkHitEnemy() {
+    const laserBullet = this.spaceship.laserBeams.find((e) => e instanceof LaserBeam);
+    const clonedGameEntities = [...this.gameEntities];
+    const clonedLaserBeams = [...this.spaceship.laserBeams];
+    if(!laserBullet) return;
+
+    for( let j = 0; j < this.spaceship.laserBeams.length; j++ ) {
+
+      for (let i = 0; i < this.gameEntities.length; i++) {
+        const entity = this.gameEntities[i];
+        // if ( entity === oxygenTank) continue;
+        
+        if (
+          laserBullet.position.x < entity.position.x + entity.size.x &&
+          laserBullet.position.x + laserBullet.size.x > entity.position.x &&
+          laserBullet.position.y < entity.position.y + entity.size.y &&
+          laserBullet.size.y + laserBullet.position.y > entity.position.y
+          ) {
+            if (!(entity instanceof OxygenTank)) {
+              // debugger
+              clonedGameEntities.splice(i, 1);
+              clonedLaserBeams.splice(j, 1);
+              return
+            } 
+          }
+      }
+    }
+    this.gameEntities = clonedGameEntities
+    this.spaceship.laserBeams = clonedLaserBeams
   }
 
   private spawnAsteroid() {
@@ -159,15 +191,5 @@ class GameEngine {
       this.gameEntities.push(new OxygenTank(position));
       this.spawnTimout = random(1000, 8000);
     }
-  }
-
-  private displaySpaceship() {
-    for (let i = 0; i < this.gameEntities.length; i++) {
-      if (this.gameEntities[i] instanceof SpaceShip) {
-        return;
-      }
-    }
-    const position = createVector(width / 2 - 25, height - 210);
-    this.gameEntities.push(new SpaceShip(position));
   }
 }
