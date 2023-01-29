@@ -1,15 +1,16 @@
-/// <reference path="./Gameentities/gameentity.ts"/> 
+/// <reference path="./Gameentities/gameentity.ts"/>
 
 class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
+  private clonedGameEntitiy: GameEntity[] = [];
   private spawnTimout: number;
   private score: number;
   private isScoreBlinking: boolean;
   private dead: boolean;
   private game: Game;
-  private oxygenDisplay: OxygenDisplay;
   private spaceship: SpaceShip;
+  public oxygenDisplay: OxygenDisplay;
 
   constructor() {
     this.game = game;
@@ -34,18 +35,21 @@ class GameEngine {
       this.dead = true;
       return;
     }
-    
+
     this.background.update();
     this.spaceship.update();
-    this.checkCollision();
-    this.checkHitEnemy();
     this.incrementScore();
-    this.moveEntities();
-    this.spawnAsteroid();
     this.spawnAlien();
     this.spawnAsteroid();
-    this.spawnAlien();
     this.spawnOxygenTank();
+    this.clonedGameEntitiy = [...this.gameEntities];
+
+    for (let i = 0; i < this.gameEntities.length; i++) {
+      this.checkCollision(this.gameEntities[i], i);
+      this.checkHitEnemy(this.gameEntities[i], i);
+      this.moveEntities(this.gameEntities[i]);
+    }
+    this.gameEntities = this.clonedGameEntitiy;
   }
 
   public draw() {
@@ -54,15 +58,14 @@ class GameEngine {
     this.spaceship.draw();
 
     for (const gameEntity of this.gameEntities) {
+      debugger;
       gameEntity.draw();
     }
     this.displayScore();
   }
 
-  private moveEntities() {
-    for (const gameEntity of this.gameEntities) {
-      gameEntity.update();
-    }
+  private moveEntities(entity: GameEntity) {
+    entity.update();
   }
 
   private displayScore() {
@@ -98,73 +101,54 @@ class GameEngine {
     }
   }
 
-  private checkCollision() {
-    const clonedGameEntities = [...this.gameEntities];
-    for (let i = 0; i < this.gameEntities.length; i++) {
-      const entity = this.gameEntities[i];
-
-      if (
-        this.spaceship.position.x < entity.position.x + entity.size.x &&
-        this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
-        this.spaceship.position.y < entity.position.y + entity.size.y &&
-        this.spaceship.size.y + this.spaceship.position.y > entity.position.y
-        ) {
-
-        if (!(entity instanceof OxygenTank)) {
-          this.dead = true;
-          return
-        } 
-        else {
-          clonedGameEntities.splice(i, 1);
-          if (this.oxygenDisplay.oxygenLevel > 90) {
-            this.oxygenDisplay.oxygenLevel += this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel
-          } 
-          else {
-            this.oxygenDisplay.oxygenLevel += 10;
-          }
+  private checkCollision(entity: GameEntity, index: number) {
+    if (
+      this.spaceship.position.x < entity.position.x + entity.size.x &&
+      this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
+      this.spaceship.position.y < entity.position.y + entity.size.y &&
+      this.spaceship.size.y + this.spaceship.position.y > entity.position.y
+    ) {
+      if (!(entity instanceof OxygenTank)) {
+        this.dead = true;
+        return;
+      } else {
+        this.clonedGameEntitiy.splice(index, 1);
+        if (this.oxygenDisplay.oxygenLevel > 90) {
+          this.oxygenDisplay.oxygenLevel +=
+            this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel;
+        } else {
+          this.oxygenDisplay.oxygenLevel += 10;
         }
       }
     }
-    this.gameEntities = clonedGameEntities
   }
 
-  //this function is not working as intended--
-  private checkHitEnemy() {
-    const laserBullet = this.spaceship.laserBeams.find((e) => e instanceof LaserBeam);
-    const clonedGameEntities = [...this.gameEntities];
-    const clonedLaserBeams = [...this.spaceship.laserBeams];
-    if(!laserBullet) return;
+  private checkHitEnemy(entity: GameEntity, index: number) {
+    if (!this.spaceship.laserBeams) return;
+    if (entity instanceof OxygenTank) return;
+    // const clonedLaserBeam = [...this.spaceship.laserBeams];
 
-    for( let j = 0; j < this.spaceship.laserBeams.length; j++ ) {
-
-      for (let i = 0; i < this.gameEntities.length; i++) {
-        const entity = this.gameEntities[i];
-        // if ( entity === oxygenTank) continue;
-        
-        if (
-          laserBullet.position.x < entity.position.x + entity.size.x &&
-          laserBullet.position.x + laserBullet.size.x > entity.position.x &&
-          laserBullet.position.y < entity.position.y + entity.size.y &&
-          laserBullet.size.y + laserBullet.position.y > entity.position.y
-          ) {
-            if (!(entity instanceof OxygenTank)) {
-              // debugger
-              clonedGameEntities.splice(i, 1);
-              clonedLaserBeams.splice(j, 1);
-              return
-            } 
-          }
+    for (let i = 0; i < this.spaceship.laserBeams.length; i++) {
+      const laserBullet = this.spaceship.laserBeams[i];
+      if (
+        laserBullet.position.x < entity.position.x + entity.size.x &&
+        laserBullet.position.x + laserBullet.size.x > entity.position.x &&
+        laserBullet.position.y < entity.position.y + entity.size.y &&
+        laserBullet.size.y + laserBullet.position.y > entity.position.y
+      ) {
+        this.clonedGameEntitiy.splice(index, 1);
+        this.spaceship.laserBeams.splice(i, 1);
+        return;
       }
     }
-    this.gameEntities = clonedGameEntities
-    this.spaceship.laserBeams = clonedLaserBeams
+    // this.spaceship.laserBeams = clonedLaserBeam;
   }
 
   private spawnAsteroid() {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
       const x = random(0, width);
-      const y = random(-height, -500);
+      const y = random(-20, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new Astroid(position));
       this.spawnTimout = random(3000, 8000);
@@ -175,7 +159,7 @@ class GameEngine {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
       const x = random(0, width);
-      const y = random(-height, -500);
+      const y = random(-20, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new Alien(position));
       this.spawnTimout = random(1000, 5000);
@@ -186,7 +170,7 @@ class GameEngine {
     this.spawnTimout -= deltaTime;
     if (this.spawnTimout < 0) {
       const x = random(0, width);
-      const y = random(0, -500);
+      const y = random(0, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new OxygenTank(position));
       this.spawnTimout = random(1000, 8000);
