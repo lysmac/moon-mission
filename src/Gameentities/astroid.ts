@@ -1,11 +1,10 @@
 /// <reference path="enemy.ts" />
 
-class Astroid extends Enemy {
+class Astroid extends GameEntity {
 
   constructor(position: p5.Vector) {
     const size = createVector(125, 125);
-    let hp = 6
+    const hp = 1;
     super(position, size, asteroid, hp); 
   }
-  
 }
