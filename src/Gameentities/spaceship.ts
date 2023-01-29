@@ -3,12 +3,13 @@ class SpaceShip extends GameEntity {
   private currentImageIndex: number;
   private timer: number;
   private delay: number;
-  private laserBeams: LaserBeam[];
   private laserBeamDelay: number;
   private laserBeamTimer: number;
+  public laserBeams: LaserBeam[];
 
-  constructor(position: p5.Vector) {
+  constructor() {
     const size = createVector(50, 200);
+    const position = createVector(width / 2 - 25, height - 210);
     super(position, size, raket3);
     this.images = [raket3, raket4, raket5];
     this.currentImageIndex = 0;

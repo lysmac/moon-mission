@@ -33,15 +33,12 @@ class Game implements IStartGame {
   }
 
   public update(): void {
-    console.log(this.currentScene);
-
     this.togglePause();
 
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
         this.playMusic();
-
         break;
       case "play":
         this.gameEngine.update();
@@ -134,7 +131,7 @@ class Game implements IStartGame {
       this.currentScene = "play";
       this.gameEngine.oxygenDisplay.resume();
     }
-
+    
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
