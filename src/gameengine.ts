@@ -164,10 +164,9 @@ class GameEngine {
         const lootDropPosition = createVector(
           entity.position.x + entity.size.x / 2, 
           entity.position.y + entity.size.y / 2);
-          console.log(lootRNG)
         
         if (lootRNG < 7) {
-          this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition))
+          this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
         }
       }
     }
