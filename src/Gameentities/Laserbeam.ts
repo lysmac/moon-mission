@@ -10,11 +10,11 @@ class LaserBeam {
     this.size = createVector(5, 30);
     this.color = color(124,252,0);
   }
-  
+
   public update() {
     this.position.y -= this.speed;
   }
-  
+
   public draw() {
     fill(this.color);
     rect(this.position.x, this.position.y, this.size.x, this.size.y);
