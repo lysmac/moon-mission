@@ -159,6 +159,16 @@ class GameEngine {
         }
         this.clonedGameEntitiy.splice(index, 1);
         this.spaceship.laserBeams.splice(i, 1);
+
+        const lootRNG = Math.floor(random(1, 100));
+        const lootDropPosition = createVector(
+          entity.position.x + entity.size.x / 2, 
+          entity.position.y + entity.size.y / 2);
+          console.log(lootRNG)
+        
+        if (lootRNG < 7) {
+          this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition))
+        }
       }
     }
   }
