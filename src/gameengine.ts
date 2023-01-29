@@ -12,6 +12,7 @@ class GameEngine {
   private dead: boolean;
   private game: Game;
   private spaceship: SpaceShip;
+  private enemyDeathSound: p5.SoundFile
   public oxygenDisplay: OxygenDisplay;
 
   constructor() {
@@ -26,6 +27,7 @@ class GameEngine {
     this.dead = false;
     this.score = 0;
     this.isScoreBlinking = false;
+    this.enemyDeathSound = enemyDeathSound;
   }
 
   public update() {
@@ -158,6 +160,7 @@ class GameEngine {
           return;
         }
         this.clonedGameEntitiy.splice(index, 1);
+        this.enemyDeathSound.play();
         this.spaceship.laserBeams.splice(i, 1);
 
         const lootRNG = Math.floor(random(1, 100));
