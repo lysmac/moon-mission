@@ -1,11 +1,11 @@
 /// <reference path="enemy.ts" />
 
-class Alien extends Enemy {
+class Alien extends GameEntity {
   private velocity: p5.Vector;
 
   constructor(position: p5.Vector) {
     const size = createVector(130, 100);
-    let hp = 4
+    const hp = 2;
     super(position, size, alien, hp);
     this.velocity = createVector(0.5, 1);
   }
