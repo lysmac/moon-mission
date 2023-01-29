@@ -13,6 +13,7 @@ class GameEngine {
   private game: Game;
   private spaceship: SpaceShip;
   private enemyDeathSound: p5.SoundFile
+  private shipCrashSound: p5.SoundFile
   public oxygenDisplay: OxygenDisplay;
 
   constructor() {
@@ -28,6 +29,7 @@ class GameEngine {
     this.score = 0;
     this.isScoreBlinking = false;
     this.enemyDeathSound = enemyDeathSound;
+    this.shipCrashSound = shipCrashSound;
   }
 
   public update() {
@@ -115,6 +117,7 @@ class GameEngine {
     ) {
       if (!(entity instanceof OxygenTank)) {
         this.dead = true;
+        this.shipCrashSound.play();
         return;
       } else {
         this.clonedGameEntitiy.splice(index, 1);
