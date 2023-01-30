@@ -4,7 +4,9 @@
 
 let game: Game
 let asteroid: p5.Image
+let asteroidHit: p5.Image
 let alien: p5.Image
+let alienHit: p5.Image
 let raket3: p5.Image
 let raket4: p5.Image
 let raket5: p5.Image
@@ -13,6 +15,9 @@ let interactionKeys: p5.Image
 let header: p5.Image
 let menumusic: p5.SoundFile
 let gameplaymusic: p5.SoundFile
+let laserSoundeffect: p5.SoundFile
+let enemyDeathSound: p5.SoundFile
+let shipCrashSound: p5.SoundFile
 // let endmusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -29,9 +34,15 @@ function preload() {
   // Music
   menumusic = loadSound("assets/bgm/menu.mp3")
   gameplaymusic = loadSound("assets/bgm/play.mp3")
+  laserSoundeffect = loadSound("assets/soundeffects/laserBullet.mp3")
+  enemyDeathSound = loadSound("assets/soundeffects/enemyDeathSound.mp3")
+  shipCrashSound = loadSound("assets/soundeffects/shipCrash.mp3")
+
   
   alien = loadImage("/assets/Alien.png")
+  alienHit = loadImage("/assets/Alien-Hit.png")
   asteroid = loadImage("/assets/Astroid.png")
+  asteroidHit = loadImage("/assets/Astroid-Hit.png")
   raket3 = loadImage("assets/Raket3.png")
   raket4 = loadImage("assets/Raket4.png")
   raket5 = loadImage("assets/Raket5.png")
