@@ -1,56 +1,67 @@
-// Is this right or should it be in a separate file?
 interface IStartGame {
-  startNewGame(): void
-  resumeGame(): void
-  readAllPlayerScores(): number[]
-  changeCurrentScene(scene: string): void
-  readCurrentPlayerScore(): number
-  changeCurrentPlayerScore(input: number): void
-  pushToAllPlayerScores(playerScore: number): void
+
+  startNewGame(): void;
+  resumeGame(): void;
+  readAllPlayerScores(): number[];
+  changeCurrentScene(scene: string): void;
+  readCurrentPlayerScore(): number;
+  changeCurrentPlayerScore(input: number): void;
+  pushToAllPlayerScores(playerScore: number): void;
+  scoreCheckSet(anything: boolean): void;
+  scoreCheckGet(): boolean;
 }
 
 class Game implements IStartGame {
-  private gameEngine: GameEngine
-  private gameMenu: GameMenu
-  private pauseMenu: PauseMenu
-  private gameOver: GameOver
-  private menumusic: p5.SoundFile
-  private gameplaymusic: p5.SoundFile
-  private allPlayerScores: number[] = [1, 2, 3, 4, 5]
-  private currentPlayerScore: number
-  private currentScene: string
-  // private currentScene: "start" | "play" | "pause" | "end"
-  private wasEscapeKeyDown: boolean
-  private wasSKeyDown: boolean
+  private gameEngine: GameEngine;
+  private gameMenu: GameMenu;
+  private pauseMenu: PauseMenu;
+  private gameOver: GameOver;
+  private scoreboard: ScoreBoard;
+  private menumusic: p5.SoundFile;
+  private gameplaymusic: p5.SoundFile;
+  private allPlayerScores: number[] = [0, 0, 0, 0, 0];
+  private currentPlayerScore: number;
+  private currentScene: string;
+  private wasEscapeKeyDown: boolean;
+  private wasSKeyDown: boolean;
+  public addedScoreToList: boolean;
 
   constructor() {
-    this.gameMenu = new GameMenu(this)
-    this.pauseMenu = new PauseMenu(this)
-    this.gameOver = new GameOver(this)
-    this.gameEngine = new GameEngine()
-    this.menumusic = menumusic
-    this.gameplaymusic = gameplaymusic
-    // "start" | "play" | "pause" | "end"
-    // Can't pause when starting from play. But Everything works with "start"
-    this.currentScene = "start"
-    this.currentPlayerScore = 0
-    this.wasEscapeKeyDown = false
+    this.gameMenu = new GameMenu(this);
+    this.pauseMenu = new PauseMenu(this);
+    this.gameOver = new GameOver(this);
+    this.scoreboard = new ScoreBoard(this);
+    this.gameEngine = new GameEngine();
+    this.menumusic = menumusic;
+    this.gameplaymusic = gameplaymusic;
+    this.currentScene = "start";
+    this.currentPlayerScore = 0;
+    this.wasEscapeKeyDown = false;
     this.wasSKeyDown = false
+    this.addedScoreToList = false;
+
   }
-  // new GameMenu(this)
-  // Stod i klassschemat, vet inte exakt hur den ska användas?
 
   public update(): void {
-    console.log(this.currentScene)
 
     this.togglePause()
     this.toggleMusic()
     switch (this.currentScene) {
       case "start":
-        this.gameMenu.update()
-        // this.playMusic(); 
+        
 
-        break
+        if (keyIsDown(72)) {
+          console.log("pressed h");
+          this.changeCurrentScene("score");
+        }
+        this.gameMenu.update();
+        this.playMusic();
+        break;
+      case "score":
+        this.scoreboard.update();
+        this.playMusic();
+        break;
+
       case "play":
         this.gameEngine.update()
         this.playMusic();
@@ -72,8 +83,13 @@ class Game implements IStartGame {
     this.toggleMusic()
     switch (this.currentScene) {
       case "start":
-        this.gameMenu.draw()
-        break
+
+        this.gameMenu.draw();
+        break;
+      case "score":
+        this.scoreboard.draw();
+        break;
+
       case "play":
         this.gameEngine.draw()
         break
@@ -90,9 +106,11 @@ class Game implements IStartGame {
 
   public startNewGame(): void {
     // Denna behövs bara när man börjar på currentScene "Pause"
-    this.currentScene = "play"
+    // this.addedScoreToList = false;
+    this.scoreCheckSet(false);
 
-    this.gameEngine = new GameEngine()
+    this.currentScene = "play";
+    this.gameEngine = new GameEngine();
   }
 
   public resumeGame(): void {}
@@ -169,15 +187,26 @@ class Game implements IStartGame {
   public togglePause() {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE)
     if (espaceWasPressed && this.currentScene === "play") {
+
       this.currentScene = "pause"
       this.gameplaymusic.pause()
+      this.gameEngine.oxygenDisplay.pause();
     } else if (espaceWasPressed && this.currentScene === "pause") {
       this.currentScene = "play"
       this.gameplaymusic.play()
+      this.gameEngine.oxygenDisplay.resume();
+
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE)
   }
+
+  public scoreCheckSet(anything: boolean): void {
+    this.addedScoreToList = anything;
+  }
+  public scoreCheckGet() {
+    return this.addedScoreToList;
+  }
 }
 
-// method that toogles the music on and off
+

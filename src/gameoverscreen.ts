@@ -10,9 +10,17 @@ class GameOver {
   }
 
   public update() {
-    this.game.changeCurrentScene("end");
-    let score = this.game.readCurrentPlayerScore();
-    this.game.pushToAllPlayerScores(score);
+    // this.game.changeCurrentScene("end");
+    // let score = this.game.readCurrentPlayerScore();
+    // this.game.pushToAllPlayerScores(score);
+    let isScorePushedOnce = this.game.scoreCheckGet();
+
+    console.log(!isScorePushedOnce);
+    if (!this.game.scoreCheckGet()) {
+      let score = this.game.readCurrentPlayerScore();
+      this.game.pushToAllPlayerScores(score);
+      this.game.scoreCheckSet(true);
+    }
 
     if (keyIsDown(32)) {
       game.startNewGame();
@@ -25,11 +33,7 @@ class GameOver {
     stroke("#D9D9D9");
     rect(this.position.x, this.position.y, 400, 200, 20);
     noStroke();
-
     textFont("sofia sans");
-
-    // let resumeY = this.y + 60;
-    // let restartY = this.y + 130;
 
     // TITLE
     fill(frameCount % 60 < 30 ? "#D9D9D900" : "#c90a0a");
@@ -38,25 +42,48 @@ class GameOver {
     text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60);
 
     // MENU TEXT
-    // This variable taked the score from gameengine, so it can be displayed here
+    // This variable takes the score from gameengine, so it can be displayed here
     let score = this.game.readCurrentPlayerScore();
     let highscore = this.getHighestScore();
 
-    fill("#D9D9D9");
-    textSize(26);
-    textAlign(CENTER);
-    text(
-      `YOUR SCORE: ${score}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 60
-    );
+    if (score >= highscore) {
+      textSize(55);
+      textAlign(CENTER);
+      fill("#FDCA51");
+      text(
+        "HIGH SCORE!",
+        this.position.x + this.size.x / 2,
+        this.position.y - 10
+      );
 
-    text(
-      `CURRENT HIGH SCORE: ${highscore}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 90
-    );
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOU SET A NEW HIGH SCORE! `,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+      textSize(40);
+      fill("#FDCA51");
 
+      text(score, this.position.x + this.size.x / 2, this.position.y + 100);
+    } else {
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOUR SCORE: ${score}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+
+      text(
+        `CURRENT HIGH SCORE: ${highscore}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 90
+      );
+    }
     fill("#D9D9D9");
     textSize(21);
     text("PRESS", this.position.x + 65, this.position.y + 140);
@@ -73,15 +100,10 @@ class GameOver {
       this.position.x + textWidth("PRESS SPACE") + 145,
       this.position.y + 140
     );
-
-    // textFont("secular one");
-    // textSize(this.textSize);
-    // text(this.textPlay, this.x + this.width / 2, restartY + 30);
   }
 
-  public getHighestScore() {
+  private getHighestScore() {
     let highscores = this.game.readAllPlayerScores();
-
     let highestNumber = Math.max(...highscores);
     return highestNumber;
   }
