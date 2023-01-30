@@ -10,6 +10,9 @@ let alienHit: p5.Image
 let raket3: p5.Image
 let raket4: p5.Image
 let raket5: p5.Image
+let deadraket1: p5.Image
+let deadraket2: p5.Image
+let deadraket3: p5.Image
 let oxygenTank: p5.Image;
 let interactionKeys: p5.Image
 let header: p5.Image
@@ -46,6 +49,9 @@ function preload() {
   raket3 = loadImage("assets/Raket3.png")
   raket4 = loadImage("assets/Raket4.png")
   raket5 = loadImage("assets/Raket5.png")
+  deadraket1 = loadImage("assets/deadraket1.png")
+  deadraket2 = loadImage("assets/deadraket2.png")
+  deadraket3 = loadImage("assets/deadraket3.png")
   oxygenTank = loadImage('assets/OxygenTank.png')
   interactionKeys = loadImage ("assets/InteractionKeys.png")
   header = loadImage("assets/HeaderMoonMission.png")
