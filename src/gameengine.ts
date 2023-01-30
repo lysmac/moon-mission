@@ -12,6 +12,8 @@ class GameEngine {
   private dead: boolean;
   private game: Game;
   private spaceship: SpaceShip;
+  private enemyDeathSound: p5.SoundFile
+  private shipCrashSound: p5.SoundFile
   public oxygenDisplay: OxygenDisplay;
 
   constructor() {
@@ -26,6 +28,8 @@ class GameEngine {
     this.dead = false;
     this.score = 0;
     this.isScoreBlinking = false;
+    this.enemyDeathSound = enemyDeathSound;
+    this.shipCrashSound = shipCrashSound;
   }
 
   public update() {
@@ -113,6 +117,7 @@ class GameEngine {
     ) {
       if (!(entity instanceof OxygenTank)) {
         this.dead = true;
+        this.shipCrashSound.play();
         return;
       } else {
         this.clonedGameEntitiy.splice(index, 1);
@@ -158,7 +163,17 @@ class GameEngine {
           return;
         }
         this.clonedGameEntitiy.splice(index, 1);
+        this.enemyDeathSound.play();
         this.spaceship.laserBeams.splice(i, 1);
+
+        const lootRNG = Math.floor(random(1, 100));
+        const lootDropPosition = createVector(
+          entity.position.x + entity.size.x / 2, 
+          entity.position.y + entity.size.y / 2);
+        
+        if (lootRNG < 7) {
+          this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
+        }
       }
     }
 

@@ -15,6 +15,9 @@ let interactionKeys: p5.Image
 let header: p5.Image
 let menumusic: p5.SoundFile
 let gameplaymusic: p5.SoundFile
+let laserSoundeffect: p5.SoundFile
+let enemyDeathSound: p5.SoundFile
+let shipCrashSound: p5.SoundFile
 // let endmusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -31,6 +34,10 @@ function preload() {
   // Music
   menumusic = loadSound("assets/bgm/menu.mp3")
   gameplaymusic = loadSound("assets/bgm/play.mp3")
+  laserSoundeffect = loadSound("assets/soundeffects/laserBullet.mp3")
+  enemyDeathSound = loadSound("assets/soundeffects/enemyDeathSound.mp3")
+  shipCrashSound = loadSound("assets/soundeffects/shipCrash.mp3")
+
   
   alien = loadImage("/assets/Alien.png")
   alienHit = loadImage("/assets/Alien-Hit.png")

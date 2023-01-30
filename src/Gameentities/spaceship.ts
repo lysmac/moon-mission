@@ -5,6 +5,7 @@ class SpaceShip extends GameEntity {
   private delay: number;
   private laserBeamDelay: number;
   private laserBeamTimer: number;
+  private laserSoundeffect: p5.SoundFile;
   public laserBeams: LaserBeam[];
 
   constructor() {
@@ -18,16 +19,17 @@ class SpaceShip extends GameEntity {
     this.laserBeams = [];
     this.laserBeamDelay = 20;
     this.laserBeamTimer = 0;
+    this.laserSoundeffect = laserSoundeffect
   }
 
   private moveSpaceship() {
     if (keyIsDown(UP_ARROW) && this.position.y > 0) {
       this.position.y -= 10;
     }
-    if (keyIsDown(LEFT_ARROW) && this.position.x > 0) {
+    if (keyIsDown(LEFT_ARROW) && this.position.x > 0 - this.size.x / 2) {
       this.position.x -= 10;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x) {
+    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x / 2) {
       this.position.x += 10;
     }
     if (keyIsDown(DOWN_ARROW) && this.position.y < height - this.size.y) {
@@ -39,6 +41,7 @@ class SpaceShip extends GameEntity {
     if (keyIsDown(32) && this.laserBeamTimer % this.laserBeamDelay === 0) {
       const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
       this.laserBeams.push(laserBeam);
+      this.laserSoundeffect.play();
       this.laserBeamTimer = 0;
     }
     this.laserBeamTimer++;
