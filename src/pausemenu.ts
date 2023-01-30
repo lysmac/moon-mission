@@ -3,13 +3,9 @@ class PauseMenu {
   private size: p5.Vector;
   game: IStartGame;
 
-  constructor(
-    game: IStartGame,
-  
-  ) {
-
-    this.position= createVector(100,300);
-    this.size = createVector(400,200);
+  constructor(game: IStartGame) {
+    this.position = createVector(100, 300);
+    this.size = createVector(400, 200);
 
     this.game = game;
   }
@@ -41,10 +37,12 @@ class PauseMenu {
     textAlign(CENTER);
     textFont("sofia sans");
 
-    text("PAUSED", this.position.x + this.size.x/ 2, this.position.y +40);
+    text("PAUSED", this.position.x + this.size.x / 2, this.position.y + 40);
 
     fill("#D9D9D9");
-    image(header,0,0);
+    tint(255, 100);
+    image(header, 0, 0);
+    tint(255, 255);
 
     // MENU TEXT
     textFont("secular one");
