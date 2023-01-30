@@ -136,8 +136,10 @@ class Game implements IStartGame {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE);
     if (espaceWasPressed && this.currentScene === "play") {
       this.currentScene = "pause";
+      this.gameplaymusic.pause();
     } else if (espaceWasPressed && this.currentScene === "pause") {
       this.currentScene = "play";
+      this.gameplaymusic.play();
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
