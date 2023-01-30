@@ -2,6 +2,7 @@ class SpaceShip extends GameEntity {
   private images: p5.Image[];
   private deadImages: p5.Image[];
   private currentImageIndex: number;
+  private currentDeadImageIndex: number;
   private timer: number;
   private delay: number;
   private laserBeamDelay: number;
@@ -17,6 +18,7 @@ class SpaceShip extends GameEntity {
     this.images = [raket3, raket4, raket5];
     this.deadImages = [deadraket1, deadraket2, deadraket3];
     this.currentImageIndex = 0;
+    this.currentDeadImageIndex = 0;
     this.timer = 0;
     this.delay = 20;
     this.laserBeams = [];
@@ -55,7 +57,7 @@ class SpaceShip extends GameEntity {
     if (!this.dead) {
       let i = 0;
       const loop = setInterval(() => {
-        this.currentImageIndex = i;
+        this.currentDeadImageIndex = i;
         i++;
         if (i === this.deadImages.length) {
           clearInterval(loop);
@@ -68,13 +70,8 @@ class SpaceShip extends GameEntity {
     }
   }
 
+  /*
   public update() {
-    if(this.dead){
-      this.timer++;
-      if (this.timer % this.delay === 0) {
-        this.currentImageIndex = (this.currentImageIndex + 1) % this.deadImages.length;
-      }
-    else {
     this.moveSpaceship();
     this.shootLaserBeam();
     this.timer++;
@@ -85,17 +82,46 @@ class SpaceShip extends GameEntity {
       laserBeam.update();
     }
   }
+  */
 
+  public update() {
+    this.moveSpaceship();
+    this.shootLaserBeam();
+    
+    if (this.dead) {
+    this.timer++;
+    if (this.timer % this.delay === 0) {
+    this.currentDeadImageIndex = (this.currentDeadImageIndex + 1) % this.deadImages.length;
+    }
+    } else {
+    this.timer++;
+    if (this.timer % this.delay === 0) {
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }
+    }
+    
+    for (const laserBeam of this.laserBeams) {
+    laserBeam.update();
+    }
+    }
 
-  public draw() {
-    if(this.dead){
-      image(this.deadImages[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
-  }
-  else{
+/*
+  public draw() { 
     image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
     for (const laserBeam of this.laserBeams) {
       laserBeam.draw();
     }
   }
+  */
+  public draw() { 
+    if (this.dead) {
+        image(this.deadImages[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
+    } else {
+        image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
+    }
+    for (const laserBeam of this.laserBeams) {
+      laserBeam.draw();
+    }
 }
+
 }

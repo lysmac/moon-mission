@@ -107,7 +107,7 @@ class GameEngine {
       }, 500);
     }
   }
-
+/*
   private checkCollision(entity: GameEntity, index: number) {
     if (
       this.spaceship.position.x < entity.position.x + entity.size.x &&
@@ -130,7 +130,7 @@ class GameEngine {
       }
     }
   }
-  
+  */
  /*
   private checkCollision(entity: GameEntity, index: number) {
     if (
@@ -155,7 +155,33 @@ class GameEngine {
       }
     }
   }
-  */
+*/
+
+private checkCollision(entity: GameEntity, index: number) {
+  if (
+    this.spaceship.position.x < entity.position.x + entity.size.x &&
+    this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
+    this.spaceship.position.y < entity.position.y + entity.size.y &&
+    this.spaceship.size.y + this.spaceship.position.y > entity.position.y
+  ) {
+    if (!(entity instanceof OxygenTank)) {
+      this.dead = true;
+      this.spaceship.handleCollision(this.game);
+      this.shipCrashSound.play();
+      this.timer = 0;
+      return;
+    } else {
+      this.clonedGameEntitiy.splice(index, 1);
+      if (this.oxygenDisplay.oxygenLevel > 90) {
+        this.oxygenDisplay.oxygenLevel +=
+          this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel;
+      } else {
+        this.oxygenDisplay.oxygenLevel += 10;
+      }
+    }
+  }
+}
+
 
 
   private checkHitEnemy(entity: GameEntity, index: number) {
