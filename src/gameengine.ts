@@ -161,6 +161,7 @@ class GameEngine {
         this.spaceship.laserBeams.splice(i, 1);
       }
     }
+
   }
 
   private spawnAsteroid() {

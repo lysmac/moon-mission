@@ -10,8 +10,18 @@ class GameOver {
   }
 
   public update() {
-    let score = this.game.readCurrentPlayerScore();
-    this.game.pushToAllPlayerScores(score);
+    // this.game.changeCurrentScene("end");
+    // let score = this.game.readCurrentPlayerScore();
+    // this.game.pushToAllPlayerScores(score);
+    let isScorePushedOnce = this.game.scoreCheckGet();
+
+    console.log(!isScorePushedOnce);
+    if (!this.game.scoreCheckGet()) {
+      let score = this.game.readCurrentPlayerScore();
+      this.game.pushToAllPlayerScores(score);
+      this.game.scoreCheckSet(true);
+    }
+
 
     if (keyIsDown(32)) {
       game.startNewGame();
