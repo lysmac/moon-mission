@@ -24,7 +24,7 @@ class OxygenDisplay {
   }
 
   public update() {
-    this.oxygenLevel -= 10;
+    this.oxygenLevel -= 2;
     if (this.oxygenLevel < this.maxOxygenLevel / 2) {
       this.color = 'yellow';
     }

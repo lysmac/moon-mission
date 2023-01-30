@@ -3,7 +3,7 @@ abstract class GameEntity {
   public size: p5.Vector;
   public hp: number
   public image: p5.Image;
-  protected speed: p5.Vector;
+  public speed: p5.Vector;
 
   constructor(position: p5.Vector, size: p5.Vector, image: p5.Image, hp: number) {
     this.position = position;

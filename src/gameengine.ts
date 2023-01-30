@@ -7,6 +7,7 @@ class GameEngine {
   private asteroidSpawnTimout: number;
   private alienSpawnTimout: number;
   private oxygenSpawnTimout: number;
+  private speedBoostSpawnTimout: number;
   private score: number;
   private isScoreBlinking: boolean;
   private dead: boolean;
@@ -25,6 +26,7 @@ class GameEngine {
     this.asteroidSpawnTimout = 1000;
     this.alienSpawnTimout = 5000;
     this.oxygenSpawnTimout = 10000;
+    this.speedBoostSpawnTimout = 500;
     this.dead = false;
     this.score = 0;
     this.isScoreBlinking = false;
@@ -50,6 +52,7 @@ class GameEngine {
     this.spawnAlien();
     this.spawnAsteroid();
     this.spawnOxygenTank();
+    this.spawnSpeedboost();
     this.clonedGameEntitiy = [...this.gameEntities];
 
     for (let i = 0; i < this.gameEntities.length; i++) {
@@ -115,11 +118,12 @@ class GameEngine {
       this.spaceship.position.y < entity.position.y + entity.size.y &&
       this.spaceship.size.y + this.spaceship.position.y > entity.position.y
     ) {
-      if (!(entity instanceof OxygenTank)) {
+      if (!(entity instanceof OxygenTank) || !(entity instanceof SpeedBoost)) {
         this.dead = true;
         this.shipCrashSound.play();
         return;
-      } else {
+      } 
+      if (entity instanceof OxygenTank) {
         this.clonedGameEntitiy.splice(index, 1);
         if (this.oxygenDisplay.oxygenLevel > 90) {
           this.oxygenDisplay.oxygenLevel +=
@@ -127,6 +131,18 @@ class GameEngine {
         } else {
           this.oxygenDisplay.oxygenLevel += 10;
         }
+      }
+      if (entity instanceof SpeedBoost) {
+        //loop through sbraket1,2,3
+        //if spaceship collides the enemy is removed from array
+        //spaceship go fast, speed and score increment faster/bigger numbers
+        //timeout 5 seconds
+        //immortality!!!!
+        setTimeout(() => {
+          this.clonedGameEntitiy.splice(index, 1);
+          this.dead = false;
+
+        }, 5000);
       }
     }
   }
@@ -209,6 +225,17 @@ class GameEngine {
       const position = createVector(x, y);
       this.gameEntities.push(new OxygenTank(position));
       this.oxygenSpawnTimout = random(1000, 20000);
+    }
+  }
+  
+  private spawnSpeedboost() {
+    this.speedBoostSpawnTimout -= deltaTime;
+    if (this.speedBoostSpawnTimout < 0) {
+      const x = random(0, width);
+      const y = random(-100, -height);
+      const position = createVector(x, y);
+      this.gameEntities.push(new SpeedBoost(position));
+      this.speedBoostSpawnTimout = random(1000, 2000);
     }
   }
 }
