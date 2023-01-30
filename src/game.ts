@@ -41,6 +41,7 @@ class Game implements IStartGame {
   }
 
   public update(): void {
+    this.getScoresFromLS();
     this.togglePause();
 
     switch (this.currentScene) {
@@ -206,18 +207,6 @@ class Game implements IStartGame {
   }
   public scoreCheckGet() {
     return this.addedScoreToList;
-  }
-
-  private getScoresFromLS() {
-    const scores = localStorage.getItem("playerScores");
-    const scoresParsed = JSON.parse(scores!);
-
-    if (scoresParsed === null) {
-      return;
-    } else {
-      this.allPlayerScores = scoresParsed;
-      return;
-    }
   }
 
   private getScoresFromLS() {
