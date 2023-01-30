@@ -3,19 +3,26 @@
 class GameEngine {
   private background: Background;
   private gameEntities: GameEntity[];
-  private spawnTimout: number;
+  private clonedGameEntitiy: GameEntity[] = [];
+  private asteroidSpawnTimout: number;
+  private alienSpawnTimout: number;
+  private oxygenSpawnTimout: number;
   private score: number;
   private isScoreBlinking: boolean;
   private dead: boolean;
   private game: Game;
+  private spaceship: SpaceShip;
   public oxygenDisplay: OxygenDisplay;
 
   constructor() {
     this.game = game;
     this.background = new Background();
     this.oxygenDisplay = new OxygenDisplay();
+    this.spaceship = new SpaceShip();
     this.gameEntities = [];
-    this.spawnTimout = 2000;
+    this.asteroidSpawnTimout = 1000;
+    this.alienSpawnTimout = 5000;
+    this.oxygenSpawnTimout = 10000;
     this.dead = false;
     this.score = 0;
     this.isScoreBlinking = false;
@@ -34,20 +41,25 @@ class GameEngine {
     }
 
     this.background.update();
-    this.checkCollision();
+    this.spaceship.update();
     this.incrementScore();
-    this.displaySpaceship();
-    this.moveEntities();
-    this.spawnAsteroid();
     this.spawnAlien();
     this.spawnAsteroid();
-    this.spawnAlien();
     this.spawnOxygenTank();
+    this.clonedGameEntitiy = [...this.gameEntities];
+
+    for (let i = 0; i < this.gameEntities.length; i++) {
+      this.checkCollision(this.gameEntities[i], i);
+      this.checkHitEnemy(this.gameEntities[i], i);
+      this.moveEntities(this.gameEntities[i]);
+    }
+    this.gameEntities = this.clonedGameEntitiy;
   }
 
   public draw() {
     this.background.draw();
     this.oxygenDisplay.draw();
+    this.spaceship.draw();
 
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
@@ -55,10 +67,8 @@ class GameEngine {
     this.displayScore();
   }
 
-  private moveEntities() {
-    for (const gameEntity of this.gameEntities) {
-      gameEntity.update();
-    }
+  private moveEntities(entity: GameEntity) {
+    entity.update();
   }
 
   private displayScore() {
@@ -94,79 +104,96 @@ class GameEngine {
     }
   }
 
-  private checkCollision() {
-    const spaceship = this.gameEntities.find((e) => e instanceof SpaceShip);
-    const clonedGameEntities = [...this.gameEntities];
-    if (!spaceship) return;
-
-    for (let i = 0; i < this.gameEntities.length; i++) {
-      const entity = this.gameEntities[i];
-      if (entity === spaceship) continue;
-
-      if (
-        spaceship.position.x < entity.position.x + entity.size.x &&
-        spaceship.position.x + spaceship.size.x > entity.position.x &&
-        spaceship.position.y < entity.position.y + entity.size.y &&
-        spaceship.size.y + spaceship.position.y > entity.position.y
-      ) {
-        if (!(entity instanceof OxygenTank)) {
-          this.dead = true;
-          return;
+  private checkCollision(entity: GameEntity, index: number) {
+    if (
+      this.spaceship.position.x < entity.position.x + entity.size.x &&
+      this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
+      this.spaceship.position.y < entity.position.y + entity.size.y &&
+      this.spaceship.size.y + this.spaceship.position.y > entity.position.y
+    ) {
+      if (!(entity instanceof OxygenTank)) {
+        this.dead = true;
+        return;
+      } else {
+        this.clonedGameEntitiy.splice(index, 1);
+        if (this.oxygenDisplay.oxygenLevel > 90) {
+          this.oxygenDisplay.oxygenLevel +=
+            this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel;
         } else {
-          clonedGameEntities.splice(i, 1);
-          if (this.oxygenDisplay.oxygenLevel > 90) {
-            this.oxygenDisplay.oxygenLevel +=
-              this.oxygenDisplay.maxOxygenLevel -
-              this.oxygenDisplay.oxygenLevel;
-          } else {
-            this.oxygenDisplay.oxygenLevel += 10;
-          }
+          this.oxygenDisplay.oxygenLevel += 10;
         }
       }
     }
-    this.gameEntities = clonedGameEntities;
+  }
+
+  private checkHitEnemy(entity: GameEntity, index: number) {
+    if (!this.spaceship.laserBeams) return;
+    if (entity instanceof OxygenTank) return;
+
+    for (let i = 0; i < this.spaceship.laserBeams.length; i++) {
+      const laserBullet = this.spaceship.laserBeams[i];
+      if (
+        laserBullet.position.x < entity.position.x + entity.size.x &&
+        laserBullet.position.x + laserBullet.size.x > entity.position.x &&
+        laserBullet.position.y < entity.position.y + entity.size.y &&
+        laserBullet.size.y + laserBullet.position.y > entity.position.y
+      ) {
+        if (!(entity.hp <= 0)) {
+          entity.hp -= 1
+          this.spaceship.laserBeams.splice(i, 1);
+
+          if (entity instanceof Astroid) {
+            entity.image = asteroidHit;
+            setTimeout (() => {
+              entity.image = asteroid
+            }, 150);
+          }
+
+          if (entity instanceof Alien) {
+            entity.image = alienHit;
+            setTimeout (() => {
+              entity.image = alien
+            }, 150);
+          }
+          return;
+        }
+        this.clonedGameEntitiy.splice(index, 1);
+        this.spaceship.laserBeams.splice(i, 1);
+      }
+    }
+
   }
 
   private spawnAsteroid() {
-    this.spawnTimout -= deltaTime;
-    if (this.spawnTimout < 0) {
+    this.asteroidSpawnTimout -= deltaTime;
+    if (this.asteroidSpawnTimout < 0) {
       const x = random(0, width);
-      const y = random(-height, -500);
+      const y = random(-100, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new Astroid(position));
-      this.spawnTimout = random(3000, 8000);
+      this.asteroidSpawnTimout = random(1000, 2000);
     }
   }
 
   private spawnAlien() {
-    this.spawnTimout -= deltaTime;
-    if (this.spawnTimout < 0) {
+    this.alienSpawnTimout -= deltaTime;
+    if (this.alienSpawnTimout < 0) {
       const x = random(0, width);
-      const y = random(-height, -500);
+      const y = random(-100, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new Alien(position));
-      this.spawnTimout = random(1000, 5000);
+      this.alienSpawnTimout = random(1000, 5000);
     }
   }
 
   private spawnOxygenTank() {
-    this.spawnTimout -= deltaTime;
-    if (this.spawnTimout < 0) {
+    this.oxygenSpawnTimout -= deltaTime;
+    if (this.oxygenSpawnTimout < 0) {
       const x = random(0, width);
-      const y = random(0, -500);
+      const y = random(-100, -height);
       const position = createVector(x, y);
       this.gameEntities.push(new OxygenTank(position));
-      this.spawnTimout = random(1000, 8000);
+      this.oxygenSpawnTimout = random(1000, 20000);
     }
-  }
-
-  private displaySpaceship() {
-    for (let i = 0; i < this.gameEntities.length; i++) {
-      if (this.gameEntities[i] instanceof SpaceShip) {
-        return;
-      }
-    }
-    const position = createVector(width / 2 - 25, height - 210);
-    this.gameEntities.push(new SpaceShip(position));
   }
 }

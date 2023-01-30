@@ -39,9 +39,6 @@ class Game implements IStartGame {
   }
 
   public update(): void {
-    // console.log(this.currentScene);
-    console.log(this.allPlayerScores);
-
     this.togglePause();
 
     switch (this.currentScene) {
@@ -154,7 +151,7 @@ class Game implements IStartGame {
       this.currentScene = "play";
       this.gameEngine.oxygenDisplay.resume();
     }
-
+    
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 

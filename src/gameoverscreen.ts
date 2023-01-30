@@ -22,6 +22,7 @@ class GameOver {
       this.game.scoreCheckSet(true);
     }
 
+
     if (keyIsDown(32)) {
       game.startNewGame();
     }
@@ -33,11 +34,7 @@ class GameOver {
     stroke("#D9D9D9");
     rect(this.position.x, this.position.y, 400, 200, 20);
     noStroke();
-
     textFont("sofia sans");
-
-    // let resumeY = this.y + 60;
-    // let restartY = this.y + 130;
 
     // TITLE
     fill(frameCount % 60 < 30 ? "#D9D9D900" : "#c90a0a");
