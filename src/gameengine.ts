@@ -118,7 +118,7 @@ class GameEngine {
       this.spaceship.position.y < entity.position.y + entity.size.y &&
       this.spaceship.size.y + this.spaceship.position.y > entity.position.y
     ) {
-      if (!(entity instanceof OxygenTank || SpeedBoost)) {
+      if (!(entity instanceof OxygenTank ) && !(entity instanceof SpeedBoost)) {
         this.dead = true;
         this.shipCrashSound.play();
         return;
