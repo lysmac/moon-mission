@@ -24,7 +24,7 @@ class OxygenDisplay {
   }
 
   public update() {
-    this.oxygenLevel -= 2;
+    this.oxygenLevel -= 10;
     if (this.oxygenLevel < this.maxOxygenLevel / 2) {
       this.color = 'yellow';
     }
@@ -43,6 +43,7 @@ class OxygenDisplay {
     rect(this.position.x, this.position.y + (this.size.y-barHeight), this.size.x, barHeight);
     textSize(15);
     text(`Oxygen: ${this.oxygenLevel}`, this.position.x, this.position.y - 10);
+    this.flashScreen();
   }
 
   public pause() {
@@ -52,5 +53,21 @@ class OxygenDisplay {
   public resume() {
     this.isPaused = false;
   }
+
+  public flashScreen() {
+    if (this.color === 'red') {
+      let opacity = 50 + 50 * sin(frameCount * 5);
+      let startColor = color(255, 0, 0, opacity);
+      let endColor = color(255, 0, 0, 0);
+      let rectHeight = 80 / 10;
   
+      for (let i = 0; i < 10; i++) {
+        let color = lerpColor(startColor, endColor, i / 10);
+        noStroke();
+        fill(color);
+        rect(0, i * rectHeight, width, rectHeight);
+        rect(0, height - (i + 1) * rectHeight, width, rectHeight);
+      }
+    }
+  }
 }
