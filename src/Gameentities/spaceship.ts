@@ -22,6 +22,7 @@ class SpaceShip extends GameEntity {
     this.laserBeamDelay = 20;
     this.laserBeamTimer = 0;
     this.laserSoundeffect = laserSoundeffect
+    this.dead = false;
   }
 
   private moveSpaceship() {
@@ -67,6 +68,12 @@ class SpaceShip extends GameEntity {
   }
 
   public update() {
+    if(this.dead){
+      this.timer++;
+      if (this.timer % this.delay === 0) {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.deadImages.length;
+      }
+    else {
     this.moveSpaceship();
     this.shootLaserBeam();
     this.timer++;
@@ -78,7 +85,12 @@ class SpaceShip extends GameEntity {
     }
   }
 
+
   public draw() {
+    if(this.dead){
+      image(this.deadImages[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
+  }
+  else{
     image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
     for (const laserBeam of this.laserBeams) {
       laserBeam.draw();
