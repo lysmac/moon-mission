@@ -22,7 +22,6 @@ class GameOver {
       this.game.scoreCheckSet(true);
     }
 
-
     if (keyIsDown(32)) {
       game.startNewGame();
     }
@@ -43,25 +42,48 @@ class GameOver {
     text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60);
 
     // MENU TEXT
-    // This variable taked the score from gameengine, so it can be displayed here
+    // This variable takes the score from gameengine, so it can be displayed here
     let score = this.game.readCurrentPlayerScore();
     let highscore = this.getHighestScore();
 
-    fill("#D9D9D9");
-    textSize(26);
-    textAlign(CENTER);
-    text(
-      `YOUR SCORE: ${score}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 60
-    );
+    if (score >= highscore) {
+      textSize(55);
+      textAlign(CENTER);
+      fill("#FDCA51");
+      text(
+        "HIGH SCORE!",
+        this.position.x + this.size.x / 2,
+        this.position.y - 10
+      );
 
-    text(
-      `CURRENT HIGH SCORE: ${highscore}`,
-      this.position.x + this.size.x / 2,
-      this.position.y + 90
-    );
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOU SET A NEW HIGH SCORE! `,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+      textSize(40);
+      fill("#FDCA51");
 
+      text(score, this.position.x + this.size.x / 2, this.position.y + 100);
+    } else {
+      fill("#D9D9D9");
+      textSize(26);
+      textAlign(CENTER);
+      text(
+        `YOUR SCORE: ${score}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 60
+      );
+
+      text(
+        `CURRENT HIGH SCORE: ${highscore}`,
+        this.position.x + this.size.x / 2,
+        this.position.y + 90
+      );
+    }
     fill("#D9D9D9");
     textSize(21);
     text("PRESS", this.position.x + 65, this.position.y + 140);
@@ -80,9 +102,8 @@ class GameOver {
     );
   }
 
-  public getHighestScore() {
+  private getHighestScore() {
     let highscores = this.game.readAllPlayerScores();
-
     let highestNumber = Math.max(...highscores);
     return highestNumber;
   }

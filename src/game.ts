@@ -18,7 +18,7 @@ class Game implements IStartGame {
   private scoreboard: ScoreBoard;
   private menumusic: p5.SoundFile;
   private gameplaymusic: p5.SoundFile;
-  private allPlayerScores: number[] = [100, 101, 102, 103, 104];
+  private allPlayerScores: number[] = [0, 0, 0, 0, 0];
   private currentPlayerScore: number;
   private currentScene: string;
   private wasEscapeKeyDown: boolean;
@@ -151,7 +151,7 @@ class Game implements IStartGame {
       this.currentScene = "play";
       this.gameEngine.oxygenDisplay.resume();
     }
-    
+
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 
