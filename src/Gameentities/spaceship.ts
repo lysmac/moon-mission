@@ -63,7 +63,7 @@ class SpaceShip extends GameEntity {
           clearInterval(loop);
           setTimeout(() => {
             game.changeCurrentScene("end");
-          }, 2000);
+          }, 600);
         }
       }, 200);
       this.dead = true;
