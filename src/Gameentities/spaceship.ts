@@ -1,5 +1,6 @@
 class SpaceShip extends GameEntity {
   private images: p5.Image[];
+  private deadImages: p5.Image[];
   private currentImageIndex: number;
   private timer: number;
   private delay: number;
@@ -13,6 +14,7 @@ class SpaceShip extends GameEntity {
     const position = createVector(width / 2 - 25, height - 210);
     super(position, size, raket3);
     this.images = [raket3, raket4, raket5];
+    this.deadImages = [deadraket1, deadraket2, deadraket3];
     this.currentImageIndex = 0;
     this.timer = 0;
     this.delay = 20;
@@ -45,6 +47,23 @@ class SpaceShip extends GameEntity {
       this.laserBeamTimer = 0;
     }
     this.laserBeamTimer++;
+  }
+
+  public handleCollision(game: any) {
+    if (!this.dead) {
+      let i = 0;
+      const loop = setInterval(() => {
+        this.currentImageIndex = i;
+        i++;
+        if (i === this.deadImages.length) {
+          clearInterval(loop);
+          setTimeout(() => {
+            game.changeCurrentScene("end");
+          }, 200);
+        }
+      }, 200);
+      this.dead = true;
+    }
   }
 
   public update() {
