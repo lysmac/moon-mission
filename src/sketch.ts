@@ -18,6 +18,10 @@ let gameplaymusic: p5.SoundFile
 let laserSoundeffect: p5.SoundFile
 let enemyDeathSound: p5.SoundFile
 let shipCrashSound: p5.SoundFile
+let speedboost: p5.Image
+let sbraket1: p5.Image
+let sbraket2: p5.Image
+let sbraket3: p5.Image
 // let endmusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -49,6 +53,10 @@ function preload() {
   oxygenTank = loadImage('assets/OxygenTank.png')
   interactionKeys = loadImage ("assets/InteractionKeys.png")
   header = loadImage("assets/HeaderMoonMission.png")
+  sbraket1 = loadImage("assets/sbraket1.png")
+  sbraket2 = loadImage("assets/sbraket2.png")
+  sbraket3 = loadImage("assets/sbraket3.png")
+  speedboost = loadImage("assets/speedboost.png")
   
 }
 
