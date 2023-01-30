@@ -53,36 +53,26 @@ class SpaceShip extends GameEntity {
     this.laserBeamTimer++;
   }
 
-  public handleCollision(game: any) {
-    if (!this.dead) {
-      let i = 0;
-      const loop = setInterval(() => {
-        this.currentDeadImageIndex = i;
-        i++;
-        if (i === this.deadImages.length) {
-          clearInterval(loop);
-          setTimeout(() => {
-            game.changeCurrentScene("end");
-          }, 600);
-        }
-      }, 200);
-      this.dead = true;
-    }
+public handleCollision(game: any) {
+  if (!this.dead) {
+    let i = 0;
+    const loop = setInterval(() => {
+      this.currentDeadImageIndex = i;
+      i++;
+      if (i === this.deadImages.length - 1) {
+        this.currentDeadImageIndex = this.deadImages.length - 2;
+        clearInterval(loop);
+        setTimeout(() => {
+          game.changeCurrentScene("end");
+        }, 200);
+      }
+    }, 200);
+    this.dead = true;
   }
+}
 
-  /*
-  public update() {
-    this.moveSpaceship();
-    this.shootLaserBeam();
-    this.timer++;
-    if (this.timer % this.delay === 0) {
-      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-    }
-    for (const laserBeam of this.laserBeams) {
-      laserBeam.update();
-    }
-  }
-  */
+
+
 
   public update() {
     this.moveSpaceship();
@@ -105,14 +95,7 @@ class SpaceShip extends GameEntity {
     }
     }
 
-/*
-  public draw() { 
-    image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
-    for (const laserBeam of this.laserBeams) {
-      laserBeam.draw();
-    }
-  }
-  */
+
   public draw() { 
     if (this.dead) {
         image(this.deadImages[this.currentDeadImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
