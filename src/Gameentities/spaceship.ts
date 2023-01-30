@@ -8,6 +8,7 @@ class SpaceShip extends GameEntity {
   private laserBeamTimer: number;
   private laserSoundeffect: p5.SoundFile;
   public laserBeams: LaserBeam[];
+  private dead: boolean;
 
   constructor() {
     const size = createVector(50, 200);
@@ -96,4 +97,5 @@ class SpaceShip extends GameEntity {
       laserBeam.draw();
     }
   }
+}
 }
