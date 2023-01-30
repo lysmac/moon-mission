@@ -19,10 +19,8 @@ class GameOver {
     if (!this.game.scoreCheckGet()) {
       let score = this.game.readCurrentPlayerScore();
       this.game.pushToAllPlayerScores(score);
-
       const allScores = this.game.readAllPlayerScores();
-
-      localStorage.setItem("PlayerScores", JSON.stringify(allScores));
+      localStorage.setItem("playerScores", JSON.stringify(allScores));
 
       this.game.scoreCheckSet(true);
     }

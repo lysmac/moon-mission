@@ -56,12 +56,10 @@ class ScoreBoard {
 
     fill("#D9D9D9");
     textSize(30);
-    for (let i = 0; i < 5; i++) {
-      // Om vi vill ha scores 0 i listan istället så tar vi bort denna
-      if (highscores[i] === 0) {
-        return;
-      }
-
+    if (highscores.length === 0) {
+      text("NO SCORES YET", this.position.x + 200, this.position.y + 80);
+    }
+    for (let i = 0; i < highscores.length; i++) {
       text(
         i + 1 + ". " + highscores[i],
         this.position.x + 200,
@@ -79,6 +77,6 @@ class ScoreBoard {
   private getTopFiveScores() {
     let highscores = this.game.readAllPlayerScores();
     highscores.sort((a, b) => b - a); // sort in descending order
-    return highscores.slice(0, 5); // return the first 5 elements
+    return highscores.length >= 5 ? highscores.slice(0, 5) : highscores;
   }
 }
