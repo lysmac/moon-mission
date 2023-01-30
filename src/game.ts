@@ -48,11 +48,12 @@ class Game implements IStartGame {
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update()
-        // this.playMusic();
+        // this.playMusic(); 
 
         break
       case "play":
         this.gameEngine.update()
+        this.playMusic();
         this.stopMusic();
          
 
@@ -128,10 +129,12 @@ class Game implements IStartGame {
       }
       // check if current scene is start and menu music is not playing
       else if (this.currentScene === "start" && !this.menumusic.isPlaying()) {
+        outputVolume(0.1);
         this.menumusic.play()
       }
       // check if current scene is play and gameplay music is playing
       else if (this.currentScene === "play" && this.gameplaymusic.isPlaying()) {
+        outputVolume(0.1);
         this.gameplaymusic.pause()
       }
       // check if current scene is play and gameplay music is not playing
@@ -140,7 +143,7 @@ class Game implements IStartGame {
       }
     }
     this.wasSKeyDown = keyIsDown(83)
-    console.log(this.wasSKeyDown)
+   
   }
 
   public readAllPlayerScores() {
