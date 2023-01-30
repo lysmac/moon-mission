@@ -22,7 +22,6 @@ class GameOver {
       this.game.scoreCheckSet(true);
     }
 
-
     if (keyIsDown(32)) {
       game.startNewGame();
     }
@@ -43,7 +42,7 @@ class GameOver {
     text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60);
 
     // MENU TEXT
-    // This variable taked the score from gameengine, so it can be displayed here
+    // This variable takes the score from gameengine, so it can be displayed here
     let score = this.game.readCurrentPlayerScore();
     let highscore = this.getHighestScore();
 

@@ -52,11 +52,16 @@ class ScoreBoard {
     text("SCOREBOARD", this.position.x + this.size.x / 2, this.position.y - 10);
 
     // SCORE LIST
-    let highscores = this.getTopThreeScores();
+    let highscores = this.getTopFiveScores();
 
     fill("#D9D9D9");
     textSize(30);
     for (let i = 0; i < 5; i++) {
+      // Om vi vill ha scores 0 i listan istället så tar vi bort denna
+      if (highscores[i] === 0) {
+        return;
+      }
+
       text(
         i + 1 + ". " + highscores[i],
         this.position.x + 200,
@@ -71,7 +76,7 @@ class ScoreBoard {
     );
   }
 
-  public getTopThreeScores() {
+  public getTopFiveScores() {
     let highscores = this.game.readAllPlayerScores();
     highscores.sort((a, b) => b - a); // sort in descending order
     return highscores.slice(0, 5); // return the first 5 elements
