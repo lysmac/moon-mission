@@ -76,7 +76,7 @@ class ScoreBoard {
     );
   }
 
-  public getTopFiveScores() {
+  private getTopFiveScores() {
     let highscores = this.game.readAllPlayerScores();
     highscores.sort((a, b) => b - a); // sort in descending order
     return highscores.slice(0, 5); // return the first 5 elements
