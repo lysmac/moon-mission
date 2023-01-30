@@ -21,6 +21,7 @@ class Game implements IStartGame {
   private currentScene: string;
   // private currentScene: "start" | "play" | "pause" | "end"
   private wasEscapeKeyDown: boolean;
+  private wasSKeyDown: boolean;
 
   constructor() {
     this.gameMenu = new GameMenu(this);
@@ -34,6 +35,7 @@ class Game implements IStartGame {
     this.currentScene = "start";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
+    this.wasSKeyDown = false;
   }
   // new GameMenu(this)
   // Stod i klassschemat, vet inte exakt hur den ska användas?
@@ -42,17 +44,18 @@ class Game implements IStartGame {
     console.log(this.currentScene);
 
     this.togglePause();
-
+    this.toggleMusic();
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update();
-        this.playMusic();
+        // this.playMusic();
 
         break;
       case "play":
         this.gameEngine.update();
         this.stopMusic();
         this.playMusic();
+        
         break;
       case "pause":
         this.pauseMenu.update();
@@ -65,6 +68,7 @@ class Game implements IStartGame {
   }
 
   public draw(): void {
+    this.toggleMusic();
     switch (this.currentScene) {
       case "start":
         this.gameMenu.draw();
@@ -81,6 +85,7 @@ class Game implements IStartGame {
         this.gameOver.draw();
         break;
     }
+    
   }
 
   public startNewGame(): void {
@@ -93,6 +98,7 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   public playMusic(): void {
+    
     if (this.currentScene === "start") {
       if (!this.menumusic.isPlaying()) {
         this.menumusic.play();
@@ -110,6 +116,29 @@ class Game implements IStartGame {
     if (this.currentScene !== "play" && this.gameplaymusic.isPlaying()) {
       this.gameplaymusic.stop();
     }
+  }
+
+  public toggleMusic(): void {
+    // check if s key is pressed
+    if (keyIsDown(83) && !this.wasSKeyDown) {
+      // check if current scene is start and menu music is playing
+      if (this.currentScene === "start" && this.menumusic.isPlaying()) {
+        this.menumusic.pause();
+      } 
+      // check if current scene is start and menu music is not playing
+      else if (this.currentScene === "start" && !this.menumusic.isPlaying()) { 
+        this.menumusic.play();
+      } 
+      // check if current scene is play and gameplay music is playing
+      else if (this.currentScene === "play" && this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.pause();
+      } 
+      // check if current scene is play and gameplay music is not playing
+      else if (this.currentScene === "play" && !this.gameplaymusic.isPlaying()) {
+        this.gameplaymusic.play();
+      }
+    }
+    this.wasSKeyDown = keyIsDown(83);
   }
 
   public readAllPlayerScores() {
@@ -145,3 +174,5 @@ class Game implements IStartGame {
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
   }
 }
+
+// method that toogles the music on and off
