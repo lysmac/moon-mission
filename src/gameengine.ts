@@ -165,10 +165,9 @@ private checkCollision(entity: GameEntity, index: number) {
     this.spaceship.size.y + this.spaceship.position.y > entity.position.y
   ) {
     if (!(entity instanceof OxygenTank)) {
-      this.dead = true;
-      this.spaceship.handleCollision(this.game);
+      this.spaceship.handleCollision(this.game); 
       this.shipCrashSound.play();
-      this.timer = 0;
+      // this.timer = 0;
       return;
     } else {
       this.clonedGameEntitiy.splice(index, 1);

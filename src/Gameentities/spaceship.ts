@@ -63,7 +63,7 @@ class SpaceShip extends GameEntity {
           clearInterval(loop);
           setTimeout(() => {
             game.changeCurrentScene("end");
-          }, 200);
+          }, 2000);
         }
       }, 200);
       this.dead = true;
@@ -115,7 +115,7 @@ class SpaceShip extends GameEntity {
   */
   public draw() { 
     if (this.dead) {
-        image(this.deadImages[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
+        image(this.deadImages[this.currentDeadImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
     } else {
         image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
     }
