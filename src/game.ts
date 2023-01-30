@@ -54,7 +54,7 @@ class Game implements IStartGame {
         break
       case "score":
         this.scoreboard.update()
-        this.playMusic()
+        // this.playMusic()
         break
 
       case "play":
@@ -136,11 +136,11 @@ class Game implements IStartGame {
     // check if s key is pressed
     if (keyIsDown(83) && !this.wasSKeyDown) {
       // check if current scene is start and menu music is playing
-      if (this.currentScene === "start" && this.menumusic.isPlaying()) {
+      if ((this.currentScene === "start" || this.currentScene === "score") && this.menumusic.isPlaying()) {
         this.menumusic.pause()
       }
       // check if current scene is start and menu music is not playing
-      else if (this.currentScene === "start" && !this.menumusic.isPlaying()) {
+      else if ((this.currentScene === "start" || this.currentScene === "score") && !this.menumusic.isPlaying()) {
         outputVolume(0.1)
         this.menumusic.play()
       }
