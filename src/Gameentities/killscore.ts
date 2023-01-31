@@ -1,7 +1,4 @@
-// Skall score ärva från GameEntity? Kommer vi åt score från GameEntity 
-// till scoreBoard? ScoreBoard är ihop med Game.
-
-class Score extends GameEntity {
+class KillScore extends GameEntity {
   private speed: number;
   private score: string;
   private color: p5.Color;

@@ -252,7 +252,7 @@ class GameEngine {
         entity.position.x + entity.size.x / 2, 
         entity.position.y + entity.size.y / 2);
       
-      const scoreEntity = new Score(scorePosition, scoreVisual)
+      const scoreEntity = new KillScore(scorePosition, scoreVisual)
       this.clonedGameEntitiy.push(scoreEntity);
     }
   }
