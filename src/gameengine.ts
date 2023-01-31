@@ -53,10 +53,13 @@ class GameEngine {
     this.background.update();
     this.spaceship.update();
     this.incrementScore();
-    this.spawnAlien();
-    this.spawnAsteroid();
-    this.spawnOxygenTank();
-    this.spawnSpeedboost();
+
+    setTimeout(() => {
+      this.spawnAlien();
+      this.spawnAsteroid();
+      this.spawnOxygenTank();
+      this.spawnSpeedboost();
+    }, 5000)
     this.clonedGameEntitiy = [...this.gameEntities];
 
     for (let i = 0; i < this.gameEntities.length; i++) {
