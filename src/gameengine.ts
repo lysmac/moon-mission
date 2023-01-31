@@ -18,12 +18,14 @@ class GameEngine {
   private speedBoostEndTime: number;
   private isSpeedBoostActive: boolean;
   public oxygenDisplay: OxygenDisplay;
+  private ammunitionDisplay: AmmunitionDisplay;
 
   constructor() {
     this.game = game;
     this.background = new Background();
     this.oxygenDisplay = new OxygenDisplay();
     this.spaceship = new SpaceShip();
+    this.ammunitionDisplay = new AmmunitionDisplay();
     this.gameEntities = [];
     this.asteroidSpawnTimout = 1000;
     this.alienSpawnTimout = 5000;
@@ -49,11 +51,13 @@ class GameEngine {
       this.dead = true;
       return;
     }
-
+    
     this.background.update();
     this.spaceship.update();
+    this.ammunitionDisplay.update();
     this.incrementScore();
-
+    this.checkLaserFired();
+    
     setTimeout(() => {
       this.spawnAlien();
       this.spawnAsteroid();
@@ -61,7 +65,7 @@ class GameEngine {
       this.spawnSpeedboost();
     }, 5000)
     this.clonedGameEntitiy = [...this.gameEntities];
-
+    
     for (let i = 0; i < this.gameEntities.length; i++) {
       this.checkCollision(this.gameEntities[i], i);
       this.checkHitEnemy(this.gameEntities[i], i);
@@ -73,8 +77,9 @@ class GameEngine {
   public draw() {
     this.background.draw();
     this.oxygenDisplay.draw();
+    this.ammunitionDisplay.draw();
     this.spaceship.draw();
-
+    
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
@@ -182,6 +187,21 @@ class GameEngine {
       this.isSpeedBoostActive = false;
 
     }, 5000);
+  }
+
+  private checkLaserFired() {
+    if (this.ammunitionDisplay.currentAmmo == 0) {
+      this.spaceship.haveAmmo = false;
+      setTimeout(() => {
+        this.ammunitionDisplay.currentAmmo = 15;
+        this.spaceship.haveAmmo = true;
+      }, 5000);
+    }
+
+    if (this.spaceship.hasLaserFired) {
+      this.ammunitionDisplay.currentAmmo -= 1;
+      this.spaceship.hasLaserFired = false;
+    }
   }
 
   private checkHitEnemy(entity: GameEntity, index: number) {
