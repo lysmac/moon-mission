@@ -28,8 +28,6 @@ class PauseMenu {
     rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
     noStroke();
 
-    //let resumeY = this.y + 60;
-    //let restartY = this.y + 130;
 
     // HEADER AND TITLE
     fill("#FDCA51");
@@ -75,21 +73,6 @@ class PauseMenu {
       this.position.y + 160
     );
 
-    // text("PRESS ESC TO RESUME", this.x + this.width / 2, resumeY + 30);
-    // text("PRESS SPACE TO START NEW GAME", this.x + this.width / 2, restartY + 30);
-
-    // fill(this.color);
-    // rect(this.x, this.y, this.width, this.height, 20);
-    // noStroke();
-
-    // textSize(this.textSize);
-    // textAlign(CENTER - textWidth(this.text));
-    // fill(this.textColor);
-    // textFont("times new roman");
-    // text(this.text, this.x + 140, this.y + 30);
-    // textAlign(CENTER - textWidth(this.textPlay));
-    // text(this.textPlay, this.x + 160, this.y + 60);
-    // textAlign(CENTER - textWidth(this.textHowToPlay));
-    // text(this.textHowToPlay, this.x + 130, this.y + 90);
+   
   }
 }
