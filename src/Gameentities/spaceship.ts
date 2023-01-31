@@ -11,7 +11,7 @@ class SpaceShip extends GameEntity {
   constructor() {
     const size = createVector(50, 200);
     const position = createVector(width / 2 - 25, height - 210);
-    super(position, size, raket3);
+    super(position, size, raket3, 1);
     this.images = [raket3, raket4, raket5];
     this.currentImageIndex = 0;
     this.timer = 0;
