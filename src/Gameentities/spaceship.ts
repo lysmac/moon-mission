@@ -7,6 +7,10 @@ class SpaceShip extends GameEntity {
   private laserBeamTimer: number;
   private laserSoundeffect: p5.SoundFile;
   public laserBeams: LaserBeam[];
+  public immortal: boolean;
+  public dead: boolean;
+  private explodeTimer: number;
+  private exploding: boolean;
 
   constructor() {
     const size = createVector(50, 200);
@@ -19,7 +23,11 @@ class SpaceShip extends GameEntity {
     this.laserBeams = [];
     this.laserBeamDelay = 20;
     this.laserBeamTimer = 0;
-    this.laserSoundeffect = laserSoundeffect
+    this.laserSoundeffect = laserSoundeffect;
+    this.immortal = false;
+    this.dead = false;
+    this.exploding = false;
+    this.explodeTimer = 800;
   }
 
   private moveSpaceship() {
@@ -38,13 +46,18 @@ class SpaceShip extends GameEntity {
   }
 
   private shootLaserBeam() {
-    if (keyIsDown(32) && this.laserBeamTimer % this.laserBeamDelay === 0) {
+    if (keyIsDown(32) && this.laserBeamTimer > this.laserBeamDelay) {
       const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
       this.laserBeams.push(laserBeam);
       this.laserSoundeffect.play();
       this.laserBeamTimer = 0;
     }
     this.laserBeamTimer++;
+  }
+
+  public explode() {
+    // Byt bilder
+    this.exploding = true;
   }
 
   public update() {
@@ -56,6 +69,13 @@ class SpaceShip extends GameEntity {
     }
     for (const laserBeam of this.laserBeams) {
       laserBeam.update();
+    }
+
+    if (this.exploding) {
+      this.explodeTimer -= deltaTime;
+      if (this.explodeTimer < 0) {
+        this.dead = true;
+      }
     }
   }
 
