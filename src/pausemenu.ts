@@ -41,7 +41,7 @@ class PauseMenu {
 
     fill("#D9D9D9");
     tint(255, 100);
-    image(header, 0, 0);
+    image(header, 100, 100, 400,200);
     tint(255, 255);
 
     // MENU TEXT
