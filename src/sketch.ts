@@ -22,6 +22,9 @@ let speedboost: p5.Image
 let sbraket1: p5.Image
 let sbraket2: p5.Image
 let sbraket3: p5.Image
+let deadraket1: p5.Image
+let deadraket2: p5.Image
+let deadraket3: p5.Image
 // let endmusic: p5.SoundFile
 // let gameplaymusic: p5.SoundFile
 // let endmusic: p5.SoundFile
@@ -56,6 +59,9 @@ function preload() {
   sbraket1 = loadImage("assets/sbraket1.png")
   sbraket2 = loadImage("assets/sbraket2.png")
   sbraket3 = loadImage("assets/sbraket3.png")
+  deadraket1 = loadImage("assets/deadraket1.png")
+  deadraket2 = loadImage("assets/deadraket2.png")
+  deadraket3 = loadImage("assets/deadraket3.png")
   speedboost = loadImage("assets/speedboost.png")
   
 }
