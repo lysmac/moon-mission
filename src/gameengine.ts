@@ -28,7 +28,7 @@ class GameEngine {
     this.asteroidSpawnTimout = 1000;
     this.alienSpawnTimout = 5000;
     this.oxygenSpawnTimout = 10000;
-    this.speedBoostSpawnTimout = 500;
+    this.speedBoostSpawnTimout = 20000;
     this.dead = false;
     this.score = 0;
     this.isScoreBlinking = false;
@@ -53,10 +53,13 @@ class GameEngine {
     this.background.update();
     this.spaceship.update();
     this.incrementScore();
-    this.spawnAlien();
-    this.spawnAsteroid();
-    this.spawnOxygenTank();
-    this.spawnSpeedboost();
+
+    setTimeout(() => {
+      this.spawnAlien();
+      this.spawnAsteroid();
+      this.spawnOxygenTank();
+      this.spawnSpeedboost();
+    }, 5000)
     this.clonedGameEntitiy = [...this.gameEntities];
 
     for (let i = 0; i < this.gameEntities.length; i++) {
@@ -125,7 +128,7 @@ class GameEngine {
       if (!(entity instanceof OxygenTank ) && 
       !(entity instanceof SpeedBoost)) {
 
-        this.collidingWithEnemy(index);
+        this.collidingWithEnemy(entity, index);
       } 
 
       if (entity instanceof OxygenTank) {
@@ -140,14 +143,16 @@ class GameEngine {
     }
   }
 
-  private collidingWithEnemy(index: number) {
+  private collidingWithEnemy(entity: GameEntity, index: number) {
     if (this.isSpeedBoostActive) {
       this.clonedGameEntitiy.splice(index, 1);
+      this.gainScoreFromKills(entity);
+      this.enemyDeathSound.play();
     } else {
       // this.spaceship.explode();
       this.dead = true;
+      this.shipCrashSound.play();
     }
-    this.shipCrashSound.play();
   }
 
   private collidingWithOxygenTank(index: number) {
@@ -223,9 +228,35 @@ class GameEngine {
           if (lootRNG < 7) {
             this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
           }
-        }
 
+          this.gainScoreFromKills(entity);
+        }
       }
+    }
+  }
+
+  private gainScoreFromKills(entity: GameEntity) {
+    if (entity instanceof Astroid) {
+      this.score += 10;
+
+      const scoreVisual = "+10";
+      const scorePosition = createVector(
+        entity.position.x + entity.size.x / 2, 
+        entity.position.y + entity.size.y / 2);
+      
+      const scoreEntity = new KillScore(scorePosition, scoreVisual)
+      this.clonedGameEntitiy.push(scoreEntity);
+    }
+    if (entity instanceof Alien) {
+      this.score += 50;
+
+      const scoreVisual = "+50";
+      const scorePosition = createVector(
+        entity.position.x + entity.size.x / 2, 
+        entity.position.y + entity.size.y / 2);
+      
+      const scoreEntity = new KillScore(scorePosition, scoreVisual)
+      this.clonedGameEntitiy.push(scoreEntity);
     }
   }
 
@@ -289,7 +320,7 @@ class GameEngine {
       if(this.isSpeedBoostActive) {
         speedboost.boostCurrentSpeed(this.speedBoostEndTime);
       }
-      this.speedBoostSpawnTimout = random(1000, 2000);
+      this.speedBoostSpawnTimout = random(1000, 30000);
     }
   }
 }
