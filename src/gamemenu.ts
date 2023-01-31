@@ -39,12 +39,6 @@ class GameMenu {
     textAlign(CENTER);
     image(header,0,0);
 
-
-    //textFont("sofia sans");
-    // text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
-    // fill("#D9D9D9");
-
-
     // MENU TEXT
     textFont("secular one");
     fill("#D9D9D9");
