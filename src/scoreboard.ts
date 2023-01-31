@@ -69,10 +69,23 @@ class ScoreBoard {
     }
     textSize(25);
     text(
-      "PRESS M TO RETURN TO MENU",
-      this.position.x + this.size.x / 2,
+      "PRESS",
+      this.position.x +65,
       this.position.y + 270
     );
+    fill("#FDCA51");
+    text(
+      "M",
+      this.position.x + 117,
+      this.position.y + 270
+    );
+    fill("#D9D9D9");
+    text(
+      "TO RETURN TO MENU",
+      this.position.x + 255,
+      this.position.y + 270
+    );
+
   }
 
   private getTopFiveScores() {

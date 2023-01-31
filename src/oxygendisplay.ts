@@ -12,7 +12,7 @@ class OxygenDisplay {
     this.size = createVector(20, 600);
     this.oxygenLevel = 100;
     this.maxOxygenLevel = 100;
-    this.color = '#64D652';
+    this.color = '#7DE96C';
     this.isPaused = false;
 
     this.intervalId = setInterval(() => {
