@@ -43,7 +43,8 @@ class Game implements IStartGame {
   public update(): void {
     this.getScoresFromLS();
     this.togglePause();
-
+    this.toggleMusic();
+    console.log(this.currentScene);
     switch (this.currentScene) {
       case "start":
         if (keyIsDown(72)) {
@@ -60,8 +61,8 @@ class Game implements IStartGame {
 
       case "play":
         this.gameEngine.update();
-        this.playMusic();
-        this.stopMusic();
+        // this.playMusic();
+        // this.stopMusic();
 
         break;
       case "pause":
@@ -75,7 +76,7 @@ class Game implements IStartGame {
   }
 
   public draw(): void {
-    this.toggleMusic();
+    // this.toggleMusic();
     switch (this.currentScene) {
       case "start":
         this.gameMenu.draw();
@@ -104,32 +105,19 @@ class Game implements IStartGame {
 
     this.currentScene = "play";
     this.gameEngine = new GameEngine();
+    
+    
   }
 
   public resumeGame(): void {}
 
   // This function is used to play the right music at the right scene
   public playMusic(): void {
-    if (this.currentScene === "start") {
-      if (!this.menumusic.isPlaying()) {
-        outputVolume(0.1);
-        this.menumusic.play();
-      }
-    } else if (this.currentScene === "play" && this.menumusic.isPlaying()) {
-      if (!this.gameplaymusic.isPlaying()) {
-        outputVolume(0.1);
-        this.gameplaymusic.play();
-      }
-    }
+   
   }
   // This function is used to stop music from playing in the wrong scene
   public stopMusic(): void {
-    if (this.currentScene !== "start" && this.menumusic.isPlaying()) {
-      this.menumusic.stop();
-    }
-    if (this.currentScene !== "play" && this.gameplaymusic.isPlaying()) {
-      this.gameplaymusic.stop();
-    }
+    
   }
 
   // This function is used to toggle the music on and off
@@ -137,33 +125,16 @@ class Game implements IStartGame {
     // check if s key is pressed
     if (keyIsDown(83) && !this.wasSKeyDown) {
       // check if current scene is start and menu music is playing
-      if (
-        (this.currentScene === "start" || this.currentScene === "score") &&
-        this.menumusic.isPlaying()
-      ) {
-        this.menumusic.pause();
-      }
-      // check if current scene is start and menu music is not playing
-      else if (
-        (this.currentScene === "start" || this.currentScene === "score") &&
-        !this.menumusic.isPlaying()
-      ) {
-        outputVolume(0.1);
-        this.menumusic.play();
-      }
-      // check if current scene is play and gameplay music is playing
-      else if (this.currentScene === "play" && this.gameplaymusic.isPlaying()) {
-        outputVolume(0.1);
-        this.gameplaymusic.pause();
-      }
-      // check if current scene is play and gameplay music is not playing
-      else if (
-        this.currentScene === "play" &&
-        !this.gameplaymusic.isPlaying()
-      ) {
-        this.gameplaymusic.play();
+      if (this.wasSKeyDown === false) {
+        outputVolume(0);
+        this.wasSKeyDown = true       }
+        
+      if (this.wasSKeyDown === true) {
+        outputVolume(0.8);
+        this.wasSKeyDown = false;
       }
     }
+  
     this.wasSKeyDown = keyIsDown(83);
   }
 
@@ -177,6 +148,31 @@ class Game implements IStartGame {
 
   public changeCurrentScene(scene: string): void {
     this.currentScene = scene;
+    
+
+    if (scene === "start") {
+      // if (!this.menumusic.isPlaying()) {
+        outputVolume(0.1);
+        this.gameplaymusic.stop()
+        this.menumusic.play();
+      // }
+    } else if (scene === "play") {
+      // if (!this.gameplaymusic.isPlaying()) {
+        outputVolume(0.1);
+        this.menumusic.stop();
+        this.gameplaymusic.play();
+      // }
+    }
+    
+
+    // if (scene !== "start" && this.menumusic.isPlaying()) {
+    //   this.menumusic.stop();
+    // }
+    // if (scene !== "play" && this.gameplaymusic.isPlaying()) {
+    //   this.gameplaymusic.stop();
+    // }
+
+
   }
 
   public readCurrentPlayerScore(): number {
