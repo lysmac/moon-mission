@@ -7,10 +7,17 @@ class SpaceShip extends GameEntity {
   private laserBeamTimer: number;
   private laserSoundeffect: p5.SoundFile;
   public laserBeams: LaserBeam[];
+  public immortal: boolean;
+  public hasLaserFired: boolean;
+  public haveAmmo: boolean;
+
+  // public dead: boolean;
+  // private explodeTimer: number;
+  // private exploding: boolean;
 
   constructor() {
-    const size = createVector(50, 200);
-    const position = createVector(width / 2 - 25, height - 210);
+    const size = createVector(40, 160);
+    const position = createVector(width / 2 - 20, height - 210);
     super(position, size, raket3);
     this.images = [raket3, raket4, raket5];
     this.currentImageIndex = 0;
@@ -19,7 +26,13 @@ class SpaceShip extends GameEntity {
     this.laserBeams = [];
     this.laserBeamDelay = 20;
     this.laserBeamTimer = 0;
-    this.laserSoundeffect = laserSoundeffect
+    this.laserSoundeffect = laserSoundeffect;
+    this.immortal = false;
+    this.hasLaserFired = false;
+    this.haveAmmo = true;
+    // this.dead = false;
+    // this.exploding = false;
+    // this.explodeTimer = 800;
   }
 
   private moveSpaceship() {
@@ -37,15 +50,21 @@ class SpaceShip extends GameEntity {
     }
   }
 
-  private shootLaserBeam() {
-    if (keyIsDown(32) && this.laserBeamTimer % this.laserBeamDelay === 0) {
+  public shootLaserBeam() {
+    if (keyIsDown(32) && this.haveAmmo && this.laserBeamTimer > this.laserBeamDelay) {
       const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
       this.laserBeams.push(laserBeam);
       this.laserSoundeffect.play();
       this.laserBeamTimer = 0;
+      this.hasLaserFired = true;
     }
     this.laserBeamTimer++;
   }
+
+  // public explode() {
+  //   // Byt bilder
+  //   this.exploding = true;
+  // }
 
   public update() {
     this.moveSpaceship();
@@ -57,6 +76,13 @@ class SpaceShip extends GameEntity {
     for (const laserBeam of this.laserBeams) {
       laserBeam.update();
     }
+
+    // if (this.exploding) {
+    //   this.explodeTimer -= deltaTime;
+    //   if (this.explodeTimer < 0) {
+    //     this.dead = true;
+    //   }
+    // }
   }
 
   public draw() {

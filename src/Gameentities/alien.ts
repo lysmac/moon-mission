@@ -5,7 +5,7 @@ class Alien extends GameEntity {
 
   constructor(position: p5.Vector) {
     const size = createVector(130, 100);
-    const hp = 2;
+    const hp = 3;
     super(position, size, alien, hp);
     this.velocity = createVector(0.5, 1);
   }
