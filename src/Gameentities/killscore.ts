@@ -18,7 +18,7 @@ class KillScore extends GameEntity {
 
   public draw() {
     textSize(24);
-    text(this.score, this.position.x, this.position.y);
     fill(this.color)
+    text(this.score, this.position.x, this.position.y);
   }
 }
