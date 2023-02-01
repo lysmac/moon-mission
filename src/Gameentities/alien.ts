@@ -1,7 +1,7 @@
 /// <reference path="enemy.ts" />
 
 class Alien extends GameEntity {
-  private velocity: p5.Vector;
+  public velocity: p5.Vector;
 
   constructor(position: p5.Vector) {
     const size = createVector(130, 100);

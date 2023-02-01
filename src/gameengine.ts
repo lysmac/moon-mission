@@ -41,7 +41,7 @@ class GameEngine {
   }
 
   public update() {
-    if (this.dead) {
+    if (this.spaceship.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();
@@ -154,8 +154,11 @@ class GameEngine {
       this.gainScoreFromKills(entity);
       this.enemyDeathSound.play();
     } else {
-      // this.spaceship.explode();
-      this.dead = true;
+      this.spaceship.explode();
+      if (entity instanceof Alien) {
+        entity.velocity = createVector(0, 0);
+      }
+      entity.currentSpeed = createVector(0, 0);
       this.shipCrashSound.play();
     }
   }
@@ -176,15 +179,17 @@ class GameEngine {
     this.clonedGameEntitiy.splice(index, 1);
     this.spaceship.immortal = true;
     this.isSpeedBoostActive = true;
+    this.spaceship.boostedSpaceship();
     this.speedBoostEndTime = Date.now() + 5000;
 
     for(let i = 0; i < this.clonedGameEntitiy.length; i++ ) {
       this.clonedGameEntitiy[i].boostCurrentSpeed(this.speedBoostEndTime);
     }
-        //loop through sbraket1,2,3
+        
     setTimeout(() => {
       this.spaceship.immortal = false;
       this.isSpeedBoostActive = false;
+      this.spaceship.regularSpaceship();
 
     }, 5000);
   }
