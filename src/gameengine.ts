@@ -190,17 +190,19 @@ class GameEngine {
   }
 
   private checkLaserFired() {
-    if (this.ammunitionDisplay.currentAmmo == 0) {
-      this.spaceship.haveAmmo = false;
-      setTimeout(() => {
-        this.ammunitionDisplay.currentAmmo = 15;
-        this.spaceship.haveAmmo = true;
-      }, 5000);
-    }
-
     if (this.spaceship.hasLaserFired) {
       this.ammunitionDisplay.currentAmmo -= 1;
       this.spaceship.hasLaserFired = false;
+
+      if (this.ammunitionDisplay.currentAmmo == 0) {
+        this.spaceship.haveAmmo = false;
+        this.ammunitionDisplay.cooldownBar = 1;
+
+        setTimeout(() => {
+          this.ammunitionDisplay.currentAmmo = 15;
+          this.spaceship.haveAmmo = true;
+        }, 5000);
+      }
     }
   }
 
