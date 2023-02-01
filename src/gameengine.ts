@@ -176,8 +176,6 @@ class GameEngine {
     for(let i = 0; i < this.clonedGameEntitiy.length; i++ ) {
       this.clonedGameEntitiy[i].boostCurrentSpeed(this.speedBoostEndTime);
     }
-        //loop through sbraket1,2,3
-        
         
     setTimeout(() => {
       this.spaceship.immortal = false;
