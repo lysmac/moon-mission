@@ -56,9 +56,17 @@ class SpaceShip extends GameEntity {
   }
 
   public explode() {
-    // Byt bilder
-  this.image = [deadraket1, deadraket2, deadraket3];
+  this.images = [deadraket1, deadraket2, deadraket3];
   this.exploding = true;
+  }
+
+  public explodingSpaceship() {
+    if (this.exploding) {
+      this.explodeTimer -= deltaTime;
+      if (this.explodeTimer < 0) {
+        this.dead = true;
+   }
+  }
   }
 
   public update() {
@@ -71,13 +79,7 @@ class SpaceShip extends GameEntity {
     for (const laserBeam of this.laserBeams) {
       laserBeam.update();
     }
-
-    if (this.exploding) {
-       this.explodeTimer -= deltaTime;
-       if (this.explodeTimer < 0) {
-         this.dead = true;
-    }
-   }
+    this.explodingSpaceship();
   }
 
   public draw() {

@@ -149,8 +149,7 @@ class GameEngine {
       this.gainScoreFromKills(entity);
       this.enemyDeathSound.play();
     } else {
-      // this.spaceship.explode();
-      this.dead = true;
+      this.spaceship.explode();
       this.shipCrashSound.play();
     }
   }
