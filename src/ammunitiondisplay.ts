@@ -2,7 +2,6 @@ class AmmunitionDisplay {
   private position: p5.Vector;
   private size: p5.Vector;
   private color: string;
-  private speed: number;
   public currentAmmo: number;
   private maxAmmo: number;
   public cooldownBar: number;
