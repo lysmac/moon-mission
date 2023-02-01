@@ -58,6 +58,8 @@ function setup() {
   createCanvas(600, 800);
   frameRate(60);
   game = new Game();
+  outputVolume(0);
+  shipCrashSound.setVolume(0.15);
 }
 
 /**
