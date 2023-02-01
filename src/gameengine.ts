@@ -45,12 +45,10 @@ class GameEngine {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();
-      return;
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       this.dead = true;
       this.game.changeCurrentScene("end");
-      return;
     }
     
     this.background.update();
@@ -60,8 +58,10 @@ class GameEngine {
     this.checkLaserFired();
     
     setTimeout(() => {
-      this.spawnAlien();
       this.spawnAsteroid();
+      if (this.score > 1500) {
+        this.spawnAlien();
+      }
       this.spawnOxygenTank();
       this.spawnSpeedboost();
     }, 5000)
@@ -79,6 +79,8 @@ class GameEngine {
     this.background.draw();
     this.oxygenDisplay.draw();
     this.ammunitionDisplay.draw();
+    
+    this.rechargeAmmo();
     this.spaceship.draw();
     
     for (const gameEntity of this.gameEntities) {
@@ -203,14 +205,14 @@ class GameEngine {
       if (this.ammunitionDisplay.currentAmmo == 0) {
         this.spaceship.haveAmmo = false;
         this.ammunitionDisplay.cooldownBar = 1;
-
-        if (this.dead) {
-          setTimeout(() => {
-            this.ammunitionDisplay.currentAmmo = 15;
-            this.spaceship.haveAmmo = true;
-          }, 5000);
-        }
       }
+    }
+  }
+
+  private rechargeAmmo() {
+    if (this.ammunitionDisplay.currentAmmo == 0 && this.ammunitionDisplay.cooldownBar == 100) {
+      this.ammunitionDisplay.currentAmmo = 15;
+      this.spaceship.haveAmmo = true;
     }
   }
 
@@ -255,7 +257,7 @@ class GameEngine {
             entity.position.x + entity.size.x / 2, 
             entity.position.y + entity.size.y / 2);
           
-          if (lootRNG < 7) {
+          if (lootRNG < 10) {
             this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
           }
 
