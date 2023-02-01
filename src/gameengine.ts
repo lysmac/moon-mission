@@ -39,7 +39,7 @@ class GameEngine {
   }
 
   public update() {
-    if (this.dead) {
+    if (this.spaceship.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();

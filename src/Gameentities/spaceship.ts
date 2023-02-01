@@ -63,10 +63,10 @@ class SpaceShip extends GameEntity {
   public explodingSpaceship() {
     if (this.exploding) {
       this.explodeTimer -= deltaTime;
-      if (this.explodeTimer < 0) {
+      if (this.explodeTimer < 0 ) {
         this.dead = true;
+    }
    }
-  }
   }
 
   public update() {
