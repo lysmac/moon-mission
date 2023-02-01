@@ -102,7 +102,7 @@ class Game implements IStartGame {
 
   public resumeGame(): void {}
 
-  public muteSounds() {
+  private muteSounds() {
     const pWasPressed = !this.wasSKeyDown && keyIsDown(83);
     if (pWasPressed && this.mute === true) {
       this.mute = false;
