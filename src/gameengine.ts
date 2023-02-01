@@ -150,6 +150,10 @@ class GameEngine {
       this.enemyDeathSound.play();
     } else {
       this.spaceship.explode();
+      if (entity instanceof Alien) {
+        entity.velocity = createVector(0, 0);
+      }
+      entity.currentSpeed = createVector(0, 0);
       this.shipCrashSound.play();
     }
   }

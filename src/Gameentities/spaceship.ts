@@ -31,16 +31,16 @@ class SpaceShip extends GameEntity {
   }
 
   private moveSpaceship() {
-    if (keyIsDown(UP_ARROW) && this.position.y > 0) {
+    if (keyIsDown(UP_ARROW) && this.position.y > 0 && !this.exploding) {
       this.position.y -= 10;
     }
-    if (keyIsDown(LEFT_ARROW) && this.position.x > 0 - this.size.x / 2) {
+    if (keyIsDown(LEFT_ARROW) && this.position.x > 0 - this.size.x / 2 && !this.exploding) {
       this.position.x -= 10;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x / 2) {
+    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x / 2 && !this.exploding) {
       this.position.x += 10;
     }
-    if (keyIsDown(DOWN_ARROW) && this.position.y < height - this.size.y) {
+    if (keyIsDown(DOWN_ARROW) && this.position.y < height - this.size.y && !this.exploding) {
       this.position.y += 10;
     }
   }

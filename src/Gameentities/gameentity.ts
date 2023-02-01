@@ -4,7 +4,7 @@ abstract class GameEntity {
   public hp: number
   public image: p5.Image;
   private defaultSpeed: p5.Vector;
-  private currentSpeed: p5.Vector;
+  public currentSpeed: p5.Vector;
   private boostedSpeed: p5.Vector;
 
   constructor(position: p5.Vector, size: p5.Vector, image: p5.Image, hp: number) {
