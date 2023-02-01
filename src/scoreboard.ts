@@ -16,12 +16,6 @@ class ScoreBoard {
   }
 
   public update() {
-    // 32 is keycode for space
-    if (keyIsDown(77)) {
-      console.log("pressed m");
-      this.game.changeCurrentScene("start");
-    }
-
     this.background.update();
   }
 
@@ -35,13 +29,13 @@ class ScoreBoard {
     noStroke();
 
     //TITLE
-    image(header, 0, 0,);
+    image(header, 0, 0);
 
     // SCOREBOARD - SUBTITLE
     fill("#FDCA51");
     textSize(40);
     textAlign(CENTER);
-  
+
     text("SCOREBOARD", this.position.x + this.size.x / 2, this.position.y - 10);
 
     // SCORE LIST
@@ -59,24 +53,11 @@ class ScoreBoard {
       );
     }
     textSize(25);
-    text(
-      "PRESS",
-      this.position.x +65,
-      this.position.y + 270
-    );
+    text("PRESS", this.position.x + 65, this.position.y + 270);
     fill("#FDCA51");
-    text(
-      "M",
-      this.position.x + 117,
-      this.position.y + 270
-    );
+    text("H", this.position.x + 117, this.position.y + 270);
     fill("#D9D9D9");
-    text(
-      "TO RETURN TO MENU",
-      this.position.x + 255,
-      this.position.y + 270
-    );
-
+    text("TO RETURN TO MENU", this.position.x + 255, this.position.y + 270);
   }
 
   private getTopFiveScores() {
