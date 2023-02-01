@@ -12,7 +12,7 @@ class OxygenDisplay {
     this.size = createVector(20, 600);
     this.oxygenLevel = 100;
     this.maxOxygenLevel = 100;
-    this.color = 'green';
+    this.color = '#7DE96C';
     this.isPaused = false;
 
     this.intervalId = setInterval(() => {
@@ -40,8 +40,9 @@ class OxygenDisplay {
     stroke(255);
     fill(this.color);
     let barHeight = this.size.y * (this.oxygenLevel / this.maxOxygenLevel);
-    rect(this.position.x, this.position.y + (this.size.y-barHeight), this.size.x, barHeight);
+    rect(this.position.x, this.position.y + (this.size.y-barHeight), this.size.x, barHeight,20);
     textSize(15);
+    noStroke();
     text(`Oxygen: ${this.oxygenLevel}`, this.position.x, this.position.y - 10);
     this.flashScreen();
   }

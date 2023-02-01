@@ -11,10 +11,12 @@ class SpaceShip extends GameEntity {
   public dead: boolean;
   private explodeTimer: number;
   private exploding: boolean;
+  public hasLaserFired: boolean;
+  public haveAmmo: boolean;
 
   constructor() {
-    const size = createVector(50, 200);
-    const position = createVector(width / 2 - 25, height - 210);
+    const size = createVector(40, 160);
+    const position = createVector(width / 2 - 20, height - 210);
     super(position, size, raket3);
     this.images = [raket3, raket4, raket5];
     this.currentImageIndex = 0;
@@ -28,6 +30,8 @@ class SpaceShip extends GameEntity {
     this.dead = false;
     this.exploding = false;
     this.explodeTimer = 600;
+    this.hasLaserFired = false;
+    this.haveAmmo = true;
   }
 
   private moveSpaceship() {
@@ -45,12 +49,13 @@ class SpaceShip extends GameEntity {
     }
   }
 
-  private shootLaserBeam() {
-    if (keyIsDown(32) && this.laserBeamTimer > this.laserBeamDelay) {
+  public shootLaserBeam() {
+    if (keyIsDown(32) && this.haveAmmo && this.laserBeamTimer > this.laserBeamDelay) {
       const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
       this.laserBeams.push(laserBeam);
       this.laserSoundeffect.play();
       this.laserBeamTimer = 0;
+      this.hasLaserFired = true;
     }
     this.laserBeamTimer++;
   }
