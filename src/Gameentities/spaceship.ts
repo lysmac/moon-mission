@@ -27,7 +27,7 @@ class SpaceShip extends GameEntity {
     this.immortal = false;
     this.dead = false;
     this.exploding = false;
-    this.explodeTimer = 800;
+    this.explodeTimer = 600;
   }
 
   private moveSpaceship() {
@@ -64,6 +64,7 @@ class SpaceShip extends GameEntity {
     if (this.exploding) {
       this.explodeTimer -= deltaTime;
       if (this.explodeTimer < 0 ) {
+        this.currentImageIndex = 2;
         this.dead = true;
     }
    }
