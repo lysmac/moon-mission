@@ -39,12 +39,6 @@ class GameMenu {
     textAlign(CENTER);
     image(header,0,0);
 
-
-    //textFont("sofia sans");
-    // text("MOON MISSION", this.position.x + this.size.x/ 2, this.position.y - 90);
-    // fill("#D9D9D9");
-
-
     // MENU TEXT
     textFont("secular one");
     fill("#D9D9D9");
@@ -84,11 +78,11 @@ class GameMenu {
     fill("#D9D9D9");
     text("TO TOGGLE MUSIC", this.position.x +230, this.position.y+320);
       
-    text("PRESS ", this.position.x +138, this.position.y+340);
+    text("PRESS ", this.position.x +134, this.position.y+340);
     fill("#FDCA51");
-    text("H", this.position.x +162, this.position.y+340);
+    text("H", this.position.x +159, this.position.y+340);
     fill("#D9D9D9");
-    text("TO VIEW HIGH SCORE", this.position.x +234, this.position.y+340);
+    text("TO VIEW HIGH SCORE", this.position.x +231, this.position.y+340);
     
 
     //SPACESHIP

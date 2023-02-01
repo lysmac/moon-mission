@@ -35,25 +35,17 @@ class ScoreBoard {
     noStroke();
 
     //TITLE
-    fill("#FDCA51");
-    textSize(70);
-    textAlign(CENTER);
-
-    textFont("sofia sans");
-    text(
-      "MOON MISSION",
-      this.position.x + this.size.x / 2,
-      this.position.y - 90
-    );
+    image(header, 0, 0,);
 
     // SCOREBOARD - SUBTITLE
-    textSize(55);
+    fill("#FDCA51");
+    textSize(40);
     textAlign(CENTER);
+  
     text("SCOREBOARD", this.position.x + this.size.x / 2, this.position.y - 10);
 
     // SCORE LIST
     let highscores = this.getTopFiveScores();
-
     fill("#D9D9D9");
     textSize(30);
     if (highscores.length === 0) {
@@ -63,15 +55,28 @@ class ScoreBoard {
       text(
         i + 1 + ". " + highscores[i],
         this.position.x + 200,
-        this.position.y + 80 + i * 40
+        this.position.y + 55 + i * 40
       );
     }
     textSize(25);
     text(
-      "PRESS M TO RETURN TO MENU",
-      this.position.x + this.size.x / 2,
-      this.position.y + 280
+      "PRESS",
+      this.position.x +65,
+      this.position.y + 270
     );
+    fill("#FDCA51");
+    text(
+      "M",
+      this.position.x + 117,
+      this.position.y + 270
+    );
+    fill("#D9D9D9");
+    text(
+      "TO RETURN TO MENU",
+      this.position.x + 255,
+      this.position.y + 270
+    );
+
   }
 
   private getTopFiveScores() {
