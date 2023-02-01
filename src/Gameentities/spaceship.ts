@@ -55,6 +55,15 @@ class SpaceShip extends GameEntity {
     this.laserBeamTimer++;
   }
 
+  public boostedSpaceship() {
+    this.images = [sbraket1, sbraket2, sbraket3];
+  }
+
+  public regularSpaceship() {
+    this.images = [raket3, raket4, raket5];
+    
+  }
+
   public explode() {
   this.images = [deadraket1, deadraket2, deadraket3];
   this.exploding = true;

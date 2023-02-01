@@ -170,15 +170,19 @@ class GameEngine {
     this.clonedGameEntitiy.splice(index, 1);
     this.spaceship.immortal = true;
     this.isSpeedBoostActive = true;
+    this.spaceship.boostedSpaceship();
     this.speedBoostEndTime = Date.now() + 5000;
 
     for(let i = 0; i < this.clonedGameEntitiy.length; i++ ) {
       this.clonedGameEntitiy[i].boostCurrentSpeed(this.speedBoostEndTime);
     }
         //loop through sbraket1,2,3
+        
+        
     setTimeout(() => {
       this.spaceship.immortal = false;
       this.isSpeedBoostActive = false;
+      this.spaceship.regularSpaceship();
 
     }, 5000);
   }
