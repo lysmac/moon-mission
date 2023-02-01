@@ -8,12 +8,11 @@ class SpaceShip extends GameEntity {
   private laserSoundeffect: p5.SoundFile;
   public laserBeams: LaserBeam[];
   public immortal: boolean;
+  public dead: boolean;
+  private explodeTimer: number;
+  private exploding: boolean;
   public hasLaserFired: boolean;
   public haveAmmo: boolean;
-
-  // public dead: boolean;
-  // private explodeTimer: number;
-  // private exploding: boolean;
 
   constructor() {
     const size = createVector(40, 160);
@@ -28,24 +27,24 @@ class SpaceShip extends GameEntity {
     this.laserBeamTimer = 0;
     this.laserSoundeffect = laserSoundeffect;
     this.immortal = false;
+    this.dead = false;
+    this.exploding = false;
+    this.explodeTimer = 600;
     this.hasLaserFired = false;
     this.haveAmmo = true;
-    // this.dead = false;
-    // this.exploding = false;
-    // this.explodeTimer = 800;
   }
 
   private moveSpaceship() {
-    if (keyIsDown(UP_ARROW) && this.position.y > 0) {
+    if (keyIsDown(UP_ARROW) && this.position.y > 0 && !this.exploding) {
       this.position.y -= 10;
     }
-    if (keyIsDown(LEFT_ARROW) && this.position.x > 0 - this.size.x / 2) {
+    if (keyIsDown(LEFT_ARROW) && this.position.x > 0 - this.size.x / 2 && !this.exploding) {
       this.position.x -= 10;
     }
-    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x / 2) {
+    if (keyIsDown(RIGHT_ARROW) && this.position.x < width - this.size.x / 2 && !this.exploding) {
       this.position.x += 10;
     }
-    if (keyIsDown(DOWN_ARROW) && this.position.y < height - this.size.y) {
+    if (keyIsDown(DOWN_ARROW) && this.position.y < height - this.size.y && !this.exploding) {
       this.position.y += 10;
     }
   }
@@ -61,10 +60,29 @@ class SpaceShip extends GameEntity {
     this.laserBeamTimer++;
   }
 
-  // public explode() {
-  //   // Byt bilder
-  //   this.exploding = true;
-  // }
+  public boostedSpaceship() {
+    this.images = [sbraket1, sbraket2, sbraket3];
+  }
+
+  public regularSpaceship() {
+    this.images = [raket3, raket4, raket5];
+    
+  }
+
+  public explode() {
+  this.images = [deadraket1, deadraket2, deadraket3];
+  this.exploding = true;
+  }
+
+  public explodingSpaceship() {
+    if (this.exploding) {
+      this.explodeTimer -= deltaTime;
+      if (this.explodeTimer < 0 ) {
+        this.currentImageIndex = 2;
+        this.dead = true;
+    }
+   }
+  }
 
   public update() {
     this.moveSpaceship();
@@ -76,13 +94,7 @@ class SpaceShip extends GameEntity {
     for (const laserBeam of this.laserBeams) {
       laserBeam.update();
     }
-
-    // if (this.exploding) {
-    //   this.explodeTimer -= deltaTime;
-    //   if (this.explodeTimer < 0) {
-    //     this.dead = true;
-    //   }
-    // }
+    this.explodingSpaceship();
   }
 
   public draw() {
