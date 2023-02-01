@@ -35,20 +35,11 @@ class ScoreBoard {
     noStroke();
 
     //TITLE
-    fill("#FDCA51");
-    textSize(70);
-    textAlign(CENTER);
-
-    // textFont("sofia sans");
-    // text(
-    //   "MOON MISSION",
-    //   this.position.x + this.size.x / 2,
-    //   this.position.y - 90
-    // );
     image(header, 0, 0,);
 
     // SCOREBOARD - SUBTITLE
-    textSize(55);
+    fill("#FDCA51");
+    textSize(40);
     textAlign(CENTER);
   
     text("SCOREBOARD", this.position.x + this.size.x / 2, this.position.y - 10);
@@ -64,7 +55,7 @@ class ScoreBoard {
       text(
         i + 1 + ". " + highscores[i],
         this.position.x + 200,
-        this.position.y + 50 + i * 40
+        this.position.y + 55 + i * 40
       );
     }
     textSize(25);
