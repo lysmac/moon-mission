@@ -51,21 +51,21 @@ class GameEngine {
       this.dead = true;
       return;
     }
-    
+
     this.background.update();
     this.spaceship.update();
     this.ammunitionDisplay.update();
     this.incrementScore();
     this.checkLaserFired();
-    
+
     setTimeout(() => {
       this.spawnAlien();
       this.spawnAsteroid();
       this.spawnOxygenTank();
       this.spawnSpeedboost();
-    }, 5000)
+    }, 5000);
     this.clonedGameEntitiy = [...this.gameEntities];
-    
+
     for (let i = 0; i < this.gameEntities.length; i++) {
       this.checkCollision(this.gameEntities[i], i);
       this.checkHitEnemy(this.gameEntities[i], i);
@@ -76,14 +76,14 @@ class GameEngine {
 
   public draw() {
     this.background.draw();
-    this.oxygenDisplay.draw();
-    this.ammunitionDisplay.draw();
-    this.spaceship.draw();
-    
+
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
     this.displayScore();
+    this.oxygenDisplay.draw();
+    this.ammunitionDisplay.draw();
+    this.spaceship.draw();
   }
 
   private moveEntities(entity: GameEntity) {
@@ -130,19 +130,15 @@ class GameEngine {
       this.spaceship.position.y < entity.position.y + entity.size.y &&
       this.spaceship.size.y + this.spaceship.position.y > entity.position.y
     ) {
-      if (!(entity instanceof OxygenTank ) && 
-      !(entity instanceof SpeedBoost)) {
-
+      if (!(entity instanceof OxygenTank) && !(entity instanceof SpeedBoost)) {
         this.collidingWithEnemy(entity, index);
-      } 
+      }
 
       if (entity instanceof OxygenTank) {
-
         this.collidingWithOxygenTank(index);
       }
 
       if (entity instanceof SpeedBoost) {
-
         this.collidingWithSpeedBoost(index);
       }
     }
@@ -165,11 +161,10 @@ class GameEngine {
 
     if (this.oxygenDisplay.oxygenLevel > 90) {
       this.oxygenDisplay.oxygenLevel +=
-      this.oxygenDisplay.maxOxygenLevel - 
-      this.oxygenDisplay.oxygenLevel;
+        this.oxygenDisplay.maxOxygenLevel - this.oxygenDisplay.oxygenLevel;
     } else {
-        this.oxygenDisplay.oxygenLevel += 10;
-      }
+      this.oxygenDisplay.oxygenLevel += 10;
+    }
   }
 
   private collidingWithSpeedBoost(index: number) {
@@ -178,14 +173,13 @@ class GameEngine {
     this.isSpeedBoostActive = true;
     this.speedBoostEndTime = Date.now() + 5000;
 
-    for(let i = 0; i < this.clonedGameEntitiy.length; i++ ) {
+    for (let i = 0; i < this.clonedGameEntitiy.length; i++) {
       this.clonedGameEntitiy[i].boostCurrentSpeed(this.speedBoostEndTime);
     }
-        //loop through sbraket1,2,3
+    //loop through sbraket1,2,3
     setTimeout(() => {
       this.spaceship.immortal = false;
       this.isSpeedBoostActive = false;
-
     }, 5000);
   }
 
@@ -221,32 +215,33 @@ class GameEngine {
         laserBullet.size.y + laserBullet.position.y > entity.position.y
       ) {
         if (entity.hp > 1) {
-          entity.hp -= 1
+          entity.hp -= 1;
           this.spaceship.laserBeams.splice(i, 1);
 
           if (entity instanceof Astroid) {
             entity.image = asteroidHit;
-            setTimeout (() => {
-              entity.image = asteroid
+            setTimeout(() => {
+              entity.image = asteroid;
             }, 150);
           }
 
           if (entity instanceof Alien) {
             entity.image = alienHit;
-            setTimeout (() => {
-              entity.image = alien
+            setTimeout(() => {
+              entity.image = alien;
             }, 150);
           }
         } else {
           this.clonedGameEntitiy.splice(index, 1);
           this.enemyDeathSound.play();
           this.spaceship.laserBeams.splice(i, 1);
-  
+
           const lootRNG = Math.floor(random(1, 100));
           const lootDropPosition = createVector(
-            entity.position.x + entity.size.x / 2, 
-            entity.position.y + entity.size.y / 2);
-          
+            entity.position.x + entity.size.x / 2,
+            entity.position.y + entity.size.y / 2
+          );
+
           if (lootRNG < 7) {
             this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
           }
@@ -263,10 +258,11 @@ class GameEngine {
 
       const scoreVisual = "+10";
       const scorePosition = createVector(
-        entity.position.x + entity.size.x / 2, 
-        entity.position.y + entity.size.y / 2);
-      
-      const scoreEntity = new KillScore(scorePosition, scoreVisual)
+        entity.position.x + entity.size.x / 2,
+        entity.position.y + entity.size.y / 2
+      );
+
+      const scoreEntity = new KillScore(scorePosition, scoreVisual);
       this.clonedGameEntitiy.push(scoreEntity);
     }
     if (entity instanceof Alien) {
@@ -274,10 +270,11 @@ class GameEngine {
 
       const scoreVisual = "+50";
       const scorePosition = createVector(
-        entity.position.x + entity.size.x / 2, 
-        entity.position.y + entity.size.y / 2);
-      
-      const scoreEntity = new KillScore(scorePosition, scoreVisual)
+        entity.position.x + entity.size.x / 2,
+        entity.position.y + entity.size.y / 2
+      );
+
+      const scoreEntity = new KillScore(scorePosition, scoreVisual);
       this.clonedGameEntitiy.push(scoreEntity);
     }
   }
@@ -291,7 +288,7 @@ class GameEngine {
       const asteroid = new Astroid(position);
       this.gameEntities.push(asteroid);
 
-      if(this.isSpeedBoostActive) {
+      if (this.isSpeedBoostActive) {
         asteroid.boostCurrentSpeed(this.speedBoostEndTime);
       }
       this.asteroidSpawnTimout = random(1000, 2000);
@@ -307,7 +304,7 @@ class GameEngine {
       const alien = new Alien(position);
       this.gameEntities.push(alien);
 
-      if(this.isSpeedBoostActive) {
+      if (this.isSpeedBoostActive) {
         alien.boostCurrentSpeed(this.speedBoostEndTime);
       }
       this.alienSpawnTimout = random(1000, 5000);
@@ -323,13 +320,13 @@ class GameEngine {
       const oxygenTank = new OxygenTank(position);
       this.gameEntities.push(oxygenTank);
 
-      if(this.isSpeedBoostActive) {
+      if (this.isSpeedBoostActive) {
         oxygenTank.boostCurrentSpeed(this.speedBoostEndTime);
       }
       this.oxygenSpawnTimout = random(1000, 20000);
     }
   }
-  
+
   private spawnSpeedboost() {
     this.speedBoostSpawnTimout -= deltaTime;
     if (this.speedBoostSpawnTimout < 0) {
@@ -339,7 +336,7 @@ class GameEngine {
       const speedboost = new SpeedBoost(position);
       this.gameEntities.push(speedboost);
 
-      if(this.isSpeedBoostActive) {
+      if (this.isSpeedBoostActive) {
         speedboost.boostCurrentSpeed(this.speedBoostEndTime);
       }
       this.speedBoostSpawnTimout = random(1000, 30000);
