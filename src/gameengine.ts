@@ -49,6 +49,7 @@ class GameEngine {
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       this.dead = true;
+      this.game.changeCurrentScene("end");
       return;
     }
     
@@ -203,10 +204,12 @@ class GameEngine {
         this.spaceship.haveAmmo = false;
         this.ammunitionDisplay.cooldownBar = 1;
 
-        setTimeout(() => {
-          this.ammunitionDisplay.currentAmmo = 15;
-          this.spaceship.haveAmmo = true;
-        }, 5000);
+        if (this.dead) {
+          setTimeout(() => {
+            this.ammunitionDisplay.currentAmmo = 15;
+            this.spaceship.haveAmmo = true;
+          }, 5000);
+        }
       }
     }
   }
