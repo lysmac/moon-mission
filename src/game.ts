@@ -68,7 +68,7 @@ class Game implements IStartGame {
         break
     }
   }
-// This displays the active scene
+  // This displays the active scene
   public draw(): void {
     switch (this.currentScene) {
       case "start":
@@ -90,7 +90,7 @@ class Game implements IStartGame {
         break
     }
   }
-// Starts the game and resets the gameEngine
+  // Starts the game and resets the gameEngine
   public startNewGame(): void {
     this.gameplaymusic.stop()
     this.scoreCheckSet(false)
@@ -98,33 +98,33 @@ class Game implements IStartGame {
     this.gameEngine = new GameEngine()
   }
 
-// Method that mutes all sound and music in the game
+  // Method that mutes all sound and music in the game
   private muteSounds() {
-    const mWasPressed = !this.wasMKeyDown && keyIsDown(77);
+    const mWasPressed = !this.wasMKeyDown && keyIsDown(77)
     if (mWasPressed && this.mute === true) {
-      this.mute = false;
-      outputVolume(0.2);
+      this.mute = false
+      outputVolume(0.2)
       if (this.currentScene === "start" || this.currentScene === "score") {
         if (!this.menumusic.isPlaying()) {
           this.menumusic.play()
         }
       }
     } else if (mWasPressed && this.mute === false) {
-      this.mute = true;
-      outputVolume(0);
+      this.mute = true
+      outputVolume(0)
     }
-    this.wasMKeyDown = keyIsDown(77);
+    this.wasMKeyDown = keyIsDown(77)
   }
-  
-// Reads all playerscore from the gameEngine
+
+  // Reads all playerscore from Game
   public readAllPlayerScores() {
     return this.allPlayerScores
   }
-// Push the current score to the variable allPlayerScores array
+  // Push the current score to the variable allPlayerScores array
   public pushToAllPlayerScores(playerScore: number) {
     this.allPlayerScores.push(playerScore)
   }
-// Change the current scene and stops the current music and starts the new music for active scene
+  // Change the current scene and stops the current music and starts the new music for active scene
   public changeCurrentScene(scene: string): void {
     this.currentScene = scene
 
@@ -141,15 +141,15 @@ class Game implements IStartGame {
       this.gameplaymusic.stop()
     }
   }
-// Reads the current score from the gameEngine
+  // Reads the current score from Game
   public readCurrentPlayerScore(): number {
     return this.currentPlayerScore
   }
-// 
+  // A setter for GameEngine to use to set the player score in the Game class
   public changeCurrentPlayerScore(input: number) {
     this.currentPlayerScore = input
   }
-// Pauses the game and stops the music and the oxygen display
+  // Pauses the game and stops the music and the oxygen display. Also brings player back to main menu when on game over
   public togglePause() {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE)
     if (espaceWasPressed && this.currentScene === "play") {
@@ -157,11 +157,11 @@ class Game implements IStartGame {
       this.gameplaymusic.pause()
       this.gameEngine.oxygenDisplay.pause()
     } else if (espaceWasPressed && this.currentScene === "pause") {
-      this.currentScene = "play";
-      this.gameplaymusic.play();
-      this.gameEngine.oxygenDisplay.resume();
+      this.currentScene = "play"
+      this.gameplaymusic.play()
+      this.gameEngine.oxygenDisplay.resume()
     } else if (espaceWasPressed && this.currentScene === "end") {
-      this.changeCurrentScene("start");
+      this.changeCurrentScene("start")
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE)
@@ -177,14 +177,15 @@ class Game implements IStartGame {
 
     this.wasHKeyDown = keyIsDown(72)
   }
-
+  // Checks if the score has been set. Runs only once.
   public scoreCheckSet(anything: boolean): void {
     this.addedScoreToList = anything
   }
+  // Checks if score has been returned. Runs only once
   public scoreCheckGet() {
     return this.addedScoreToList
   }
-// Loads the playerscore from the local storage
+  // Loads the playerscore from the local storage
   private getScoresFromLS() {
     const scores = localStorage.getItem("playerScores")
     const scoresParsed = JSON.parse(scores!)
