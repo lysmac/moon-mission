@@ -352,7 +352,7 @@ class GameEngine {
       if(this.isSpeedBoostActive) {
         speedboost.boostCurrentSpeed(this.speedBoostEndTime);
       }
-      this.speedBoostSpawnTimout = random(1000, 30000);
+      this.speedBoostSpawnTimout = random(1000, 20000);
     }
   }
 }
