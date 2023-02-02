@@ -79,6 +79,7 @@ class GameEngine {
 
   public draw() {
     this.background.draw();
+
     this.oxygenDisplay.draw();
     this.ammunitionDisplay.draw();
     this.spaceship.draw();
@@ -87,6 +88,9 @@ class GameEngine {
       gameEntity.draw();
     }
     this.displayScore();
+    this.oxygenDisplay.draw();
+    this.ammunitionDisplay.draw();
+    this.spaceship.draw();
   }
 
   private moveEntities(entity: GameEntity) {
