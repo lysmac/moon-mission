@@ -10,14 +10,15 @@ class GameMenu {
     this.size = createVector(400, 370)
     this.background = new Background(true)
   }
-// Press backspace to start new game
   public update() {
+    // Press backspace to start new game
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame();
+      this.game.startNewGame();
     }
+    // Stars from the background class
     this.background.update()
   }
-
+ 
   public draw() {
     this.background.draw()
 
