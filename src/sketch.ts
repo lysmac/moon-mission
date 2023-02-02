@@ -34,7 +34,7 @@ function preload() {
   laserSoundeffect = loadSound("assets/soundeffects/laserBullet.mp3");
   enemyDeathSound = loadSound("assets/soundeffects/enemyDeathSound.mp3");
   shipCrashSound = loadSound("assets/soundeffects/shipCrash.mp3");
-
+  // Images
   alien = loadImage("/assets/Alien.png");
   alienHit = loadImage("/assets/Alien-Hit.png");
   asteroid = loadImage("/assets/Astroid.png");
