@@ -1,7 +1,7 @@
 class Earth {
-  y: number;
-  speed: number;
-  isDisplayed: boolean;
+  private y: number;
+  private speed: number;
+  public isDisplayed: boolean;
 
   constructor() {
     this.y = 0;
@@ -11,10 +11,6 @@ class Earth {
 
   public update() {
     this.y += this.speed;
-    // if (!this.isDisplayed) {
-    //   this.y += this.speed;
-    // }
-    // this.isDisplayed = true;
   }
 
   public draw() {

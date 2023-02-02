@@ -1,8 +1,8 @@
 class Atmosphere {
-  y: number;
-  speed: number;
-  alphaValue: number;
-  isDisplayed: boolean;
+  private y: number;
+  private speed: number;
+  private alphaValue: number;
+  private isDisplayed: boolean;
 
   constructor() {
     this.y = 0;
@@ -11,14 +11,14 @@ class Atmosphere {
     this.isDisplayed = false;
   }
 
-  draw() {
+  public draw() {
     noStroke();
     fill(135, 206, 235, this.alphaValue);
     ellipse(width / 2, this.y + height / 2, width * 2.3, height * 2);
     this.isDisplayed = true;
   }
 
-  update() {
+  public update() {
     this.y += this.speed;
     this.alphaValue -= 0.4;
     if (!this.isDisplayed) {
