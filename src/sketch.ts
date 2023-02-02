@@ -73,7 +73,7 @@ function setup() {
   frameRate(60);
   game = new Game();
   outputVolume(0);
-  shipCrashSound.setVolume(0.15);
+  shipCrashSound.setVolume(0.5);
 }
 
 /**
