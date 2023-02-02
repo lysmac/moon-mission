@@ -1,22 +1,21 @@
 class PauseMenu {
   private position: p5.Vector
   private size: p5.Vector
-  game: IStartGame
+  private game: IStartGame
 
   constructor(game: IStartGame) {
     this.position = createVector(100, 300)
     this.size = createVector(400, 200)
-
     this.game = game
   }
 
-  public update() {
+  public update(): void {
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame();
+      this.game.startNewGame()
     }
   }
 
-  public draw() {
+  public draw(): void {
     //BACKGROUND SQUARE MENU
     fill("rgba(255, 0, 0, 0.4)")
     stroke("#D9D9D9")

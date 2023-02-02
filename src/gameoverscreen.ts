@@ -21,7 +21,7 @@ class GameOver {
     }
 
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame()
+      this.game.startNewGame()
     }
   }
 

@@ -4,20 +4,18 @@ class ScoreBoard {
   private game: IStartGame
   private background: Background
 
-  constructor(
-    game: IStartGame
-  ) {
+  constructor(game: IStartGame) {
     this.game = game
     this.position = createVector(100, 300)
     this.size = createVector(400, 300)
     this.background = new Background(true)
   }
 
-  public update() {
+  public update(): void {
     this.background.update()
   }
 
-  public draw() {
+  public draw(): void {
     this.background.draw()
 
     //BACKGROUND SQUARE MENU
@@ -54,7 +52,8 @@ class ScoreBoard {
     text("TO RETURN TO MENU", this.position.x + 255, this.position.y + 270)
   }
 
-  private getTopFiveScores(): {
+  // Gets top 5 scores, or if less than five available, all scores
+  private getTopFiveScores(): number[] {
     let highscores = this.game.readAllPlayerScores()
     highscores.sort((a, b) => b - a) // sort in descending order
     return highscores.length >= 5 ? highscores.slice(0, 5) : highscores
