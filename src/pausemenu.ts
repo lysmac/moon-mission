@@ -39,31 +39,32 @@ class PauseMenu {
     // MENU TEXT
     textFont("secular one");
     textSize(21);
-    text("PRESS", this.position.x + 123, this.position.y + 90);
+    text("PRESS", this.position.x + 123, this.position.y + 100);
     fill("#FDCA51");
     text(
       "ESC",
       this.position.x + textWidth("PRESS ") + 113,
-      this.position.y + 90
+      this.position.y + 100
     );
     fill("#D9D9D9");
     text(
       "TO RESUME",
       this.position.x + textWidth("PRESS SPACE") + 132,
-      this.position.y + 90
+      this.position.y + 100
     );
 
-    text("PRESS", this.position.x + 60, this.position.y + 160);
+    textSize(18);
+    text("PRESS", this.position.x + 62, this.position.y + 160);
     fill("#FDCA51");
     text(
-      "SPACE",
-      this.position.x + textWidth("PRESS ") + 63,
+      "BACKSPACE",
+      this.position.x + textWidth("PRESS ") + 85,
       this.position.y + 160
     );
     fill("#D9D9D9");
     text(
       " TO START NEW GAME",
-      this.position.x + textWidth("PRESS SPACE") + 140,
+      this.position.x + textWidth("PRESS SPACE") + 172,
       this.position.y + 160
     );
   }
