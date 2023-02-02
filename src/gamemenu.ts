@@ -37,20 +37,20 @@ class GameMenu {
     // MENU TEXT
     textFont("secular one");
     fill("#D9D9D9");
-    textSize(21);
-    text("PRESS", this.position.x + 65, this.position.y + 70);
+    textSize(19);
+    text("PRESS", this.position.x + 50, this.position.y + 70);
     fill("#FDCA51");
 
     text(
-      "SPACE",
-      this.position.x + textWidth("PRESS ") + 69,
+      "BACKSPACE",
+      this.position.x + textWidth("PRESS ") + 78,
       this.position.y + 70
     );
 
     fill("#D9D9D9");
     text(
       " TO START NEW GAME",
-      this.position.x + textWidth("PRESS SPACE") + 145,
+      this.position.x + textWidth("PRESS BACKSPACE") + 128,
       this.position.y + 70
     );
 
@@ -67,9 +67,9 @@ class GameMenu {
     text("SHOOT", this.position.x + 200, this.position.y + 260);
     text("MOVE", this.position.x + 330, this.position.y + 260);
     textSize(13);
-    text("PRESS ", this.position.x + 145, this.position.y + 320);
+    text("PRESS ", this.position.x + 140, this.position.y + 320);
     fill("#FDCA51");
-    text("M", this.position.x + 168, this.position.y + 320);
+    text("M", this.position.x + 166, this.position.y + 320);
     fill("#D9D9D9");
     text("TO TOGGLE MUSIC", this.position.x + 230, this.position.y + 320);
 
