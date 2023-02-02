@@ -1,5 +1,3 @@
-/// <reference path="enemy.ts" />
-
 class Alien extends GameEntity {
   public velocity: p5.Vector;
 
