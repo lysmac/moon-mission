@@ -43,14 +43,14 @@ class GameEngine {
   public update() {
     //Death
     if (this.spaceship.dead) {
-      game.changeCurrentPlayerScore(this.score);
+      this.dead = true;
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();
+      game.changeCurrentPlayerScore(this.score);
     }
     // if oxygen level reaches 0 the game is over
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       game.changeCurrentPlayerScore(this.score);
-
       this.dead = true;
       this.game.changeCurrentScene("end");
     }

@@ -10,7 +10,6 @@ class GameOver {
   }
 
   public update() {
-    // Carl far kommentera lite
     if (!this.game.scoreCheckGet()) {
       let score = this.game.readCurrentPlayerScore()
       this.game.pushToAllPlayerScores(score)
@@ -20,8 +19,8 @@ class GameOver {
       this.game.scoreCheckSet(true)
     }
 
-    if (keyIsDown(32)) {
-      game.startNewGame()
+    if (keyIsDown(BACKSPACE)) {
+      game.startNewGame();
     }
   }
 

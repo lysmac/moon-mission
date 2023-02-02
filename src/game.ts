@@ -100,20 +100,20 @@ class Game implements IStartGame {
 
 // Method that mutes all sound and music in the game
   private muteSounds() {
-    const pWasPressed = !this.wasSKeyDown && keyIsDown(83)
-    if (pWasPressed && this.mute === true) {
-      this.mute = false
-      outputVolume(0.2)
+    const mWasPressed = !this.wasMKeyDown && keyIsDown(77);
+    if (mWasPressed && this.mute === true) {
+      this.mute = false;
+      outputVolume(0.2);
       if (this.currentScene === "start" || this.currentScene === "score") {
         if (!this.menumusic.isPlaying()) {
           this.menumusic.play()
         }
       }
-    } else if (pWasPressed && this.mute === false) {
-      this.mute = true
-      outputVolume(0)
+    } else if (mWasPressed && this.mute === false) {
+      this.mute = true;
+      outputVolume(0);
     }
-    this.wasSKeyDown = keyIsDown(83)
+    this.wasMKeyDown = keyIsDown(77);
   }
   
 // Reads all playerscore from the gameEngine
@@ -157,9 +157,11 @@ class Game implements IStartGame {
       this.gameplaymusic.pause()
       this.gameEngine.oxygenDisplay.pause()
     } else if (espaceWasPressed && this.currentScene === "pause") {
-      this.currentScene = "play"
-      this.gameplaymusic.play()
-      this.gameEngine.oxygenDisplay.resume()
+      this.currentScene = "play";
+      this.gameplaymusic.play();
+      this.gameEngine.oxygenDisplay.resume();
+    } else if (espaceWasPressed && this.currentScene === "end") {
+      this.changeCurrentScene("start");
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE)
