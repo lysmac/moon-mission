@@ -24,10 +24,8 @@ let deadraket1: p5.Image;
 let deadraket2: p5.Image;
 let deadraket3: p5.Image;
 
-
-// Sound and images files 
+// Sound and images files
 function preload() {
-  
   // Music
   menumusic = loadSound("assets/bgm/menu.mp3");
   gameplaymusic = loadSound("assets/bgm/play.mp3");
@@ -35,10 +33,10 @@ function preload() {
   enemyDeathSound = loadSound("assets/soundeffects/enemyDeathSound.mp3");
   shipCrashSound = loadSound("assets/soundeffects/shipCrash.mp3");
   // Images
-  alien = loadImage("/assets/Alien.png");
-  alienHit = loadImage("/assets/Alien-Hit.png");
-  asteroid = loadImage("/assets/Astroid.png");
-  asteroidHit = loadImage("/assets/Astroid-Hit.png");
+  alien = loadImage("assets/Alien.png");
+  alienHit = loadImage("assets/Alien-Hit.png");
+  asteroid = loadImage("assets/Astroid.png");
+  asteroidHit = loadImage("assets/Astroid-Hit.png");
   raket3 = loadImage("assets/Raket3.png");
   raket4 = loadImage("assets/Raket4.png");
   raket5 = loadImage("assets/Raket5.png");
@@ -77,5 +75,3 @@ function draw() {
   game.update();
   game.draw();
 }
-
-
