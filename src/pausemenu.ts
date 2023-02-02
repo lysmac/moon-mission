@@ -11,11 +11,6 @@ class PauseMenu {
   }
 
   public update() {
-    if (keyIsDown(77)) {
-      console.log("pressed m");
-      this.game.changeCurrentScene("start");
-    }
-
     if (keyIsDown(BACKSPACE)) {
       game.startNewGame();
     }
