@@ -5,8 +5,7 @@ class ScoreBoard {
   background: Background;
 
   constructor(
-    //position: p5.Vector,
-    //size: p5.Vector,
+    
     game: IStartGame
   ) {
     this.game = game;

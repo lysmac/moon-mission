@@ -13,7 +13,7 @@ class GameMenu {
 
   public update() {
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame();
+      this.game.startNewGame();
     }
 
     this.background.update();
@@ -50,7 +50,7 @@ class GameMenu {
     fill("#D9D9D9");
     text(
       " TO START NEW GAME",
-      this.position.x + textWidth("PRESS BACKSPACE") + 128,
+      this.position.x + textWidth("PRESS BACKSPACE") + 126,
       this.position.y + 70
     );
 
@@ -86,18 +86,13 @@ class GameMenu {
       raket3,
       310,
       350,
-      80,
+      65,
       250,
       0,
       0,
       raket3.width,
-      raket3.height,
-      CONTAIN,
-      LEFT
+      raket3.height
+      
     );
   }
 }
-
-// font-family: 'Kanit', sans-serif;
-// font-family: 'Secular One', sans-serif;
-// font-family: 'Sofia Sans', sans-serif;
