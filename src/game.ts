@@ -23,6 +23,7 @@ class Game implements IStartGame {
   private currentScene: string;
   private wasEscapeKeyDown: boolean;
   private wasSKeyDown: boolean;
+  private wasHKeyDown: boolean;
   public addedScoreToList: boolean;
   private mute: boolean;
 
@@ -38,6 +39,7 @@ class Game implements IStartGame {
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
     this.wasSKeyDown = false;
+    this.wasHKeyDown = false;
     this.addedScoreToList = false;
     this.mute = true;
   }
@@ -46,12 +48,13 @@ class Game implements IStartGame {
     this.getScoresFromLS();
     this.muteSounds();
     this.togglePause();
+    this.toggleHighScore();
 
     switch (this.currentScene) {
       case "start":
-        if (keyIsDown(72)) {
-          this.changeCurrentScene("score");
-        }
+        // if (keyIsDown(72)) {
+        //   this.changeCurrentScene("score");
+        // }
         this.gameMenu.update();
         break;
       case "score":
@@ -165,6 +168,16 @@ class Game implements IStartGame {
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);
+  }
+  public toggleHighScore() {
+    const hWasPressed = !this.wasHKeyDown && keyIsDown(72);
+    if (hWasPressed && this.currentScene === "start") {
+      this.currentScene = "score";
+    } else if (hWasPressed && this.currentScene === "score") {
+      this.currentScene = "start";
+    }
+
+    this.wasHKeyDown = keyIsDown(72);
   }
 
   public scoreCheckSet(anything: boolean): void {

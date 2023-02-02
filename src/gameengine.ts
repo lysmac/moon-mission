@@ -48,7 +48,10 @@ class GameEngine {
       return;
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
+      game.changeCurrentPlayerScore(this.score);
+
       this.dead = true;
+      this.game.changeCurrentScene("end");
       return;
     }
 
@@ -77,6 +80,10 @@ class GameEngine {
   public draw() {
     this.background.draw();
 
+    this.oxygenDisplay.draw();
+    this.ammunitionDisplay.draw();
+    this.spaceship.draw();
+
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
     }
@@ -102,13 +109,14 @@ class GameEngine {
     text(this.score, 60, 70);
   }
 
-  public scoreForBoard() {
-    if (this.dead) {
-      return this.score;
-    } else {
-      return;
-    }
-  }
+  // Dont know why this was here, it was not used anywhere
+  // public scoreForBoard() {
+  //   if (this.dead) {
+  //     return this.score;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   private incrementScore() {
     if (this.dead) {
@@ -155,7 +163,9 @@ class GameEngine {
         entity.velocity = createVector(0, 0);
       }
       entity.currentSpeed = createVector(0, 0);
-      this.shipCrashSound.play();
+      if (!this.shipCrashSound.isPlaying()) {
+        this.shipCrashSound.play();
+      }
     }
   }
 
@@ -197,10 +207,12 @@ class GameEngine {
         this.spaceship.haveAmmo = false;
         this.ammunitionDisplay.cooldownBar = 1;
 
-        setTimeout(() => {
-          this.ammunitionDisplay.currentAmmo = 15;
-          this.spaceship.haveAmmo = true;
-        }, 5000);
+        if (this.dead) {
+          setTimeout(() => {
+            this.ammunitionDisplay.currentAmmo = 15;
+            this.spaceship.haveAmmo = true;
+          }, 5000);
+        }
       }
     }
   }
