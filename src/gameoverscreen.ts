@@ -1,85 +1,74 @@
 class GameOver {
-  position: p5.Vector;
-  size: p5.Vector;
-  game: IStartGame;
+  private position: p5.Vector
+  private size: p5.Vector
+  private game: IStartGame
 
   constructor(game: IStartGame) {
-    this.position = createVector(100, 300);
-    this.size = createVector(400, 200);
-    this.game = game;
+    this.position = createVector(100, 300)
+    this.size = createVector(400, 200)
+    this.game = game
   }
 
-  public update() {
+  public update(): void {
+    // Checks if scores has been set, pushes into Game and local storage
     if (!this.game.scoreCheckGet()) {
-      let score = this.game.readCurrentPlayerScore();
-      this.game.pushToAllPlayerScores(score);
-      const allScores = this.game.readAllPlayerScores();
-      localStorage.setItem("playerScores", JSON.stringify(allScores));
+      let score = this.game.readCurrentPlayerScore()
+      this.game.pushToAllPlayerScores(score)
+      const allScores = this.game.readAllPlayerScores()
+      localStorage.setItem("playerScores", JSON.stringify(allScores))
 
-      this.game.scoreCheckSet(true);
+      this.game.scoreCheckSet(true)
     }
 
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame();
+      this.game.startNewGame()
     }
   }
 
-  public draw() {
+  public draw(): void {
     //BACKGROUND SQUARE MENU
-    fill("rgba(255, 0, 0, 0.3)");
-    stroke("#D9D9D9");
-    rect(this.position.x, this.position.y, 400, 200, 20);
-    noStroke();
-    textFont("sofia sans");
+    fill("rgba(255, 0, 0, 0.3)")
+    stroke("#D9D9D9")
+    rect(this.position.x, this.position.y, 400, 200, 20)
+    noStroke()
+    textFont("sofia sans")
 
     // TITLE
-    fill(frameCount % 60 < 30 ? "#D9D9D900" : "#c90a0a");
-    textSize(70);
-    textAlign(CENTER);
-    text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60);
+    fill(frameCount % 60 < 30 ? "#D9D9D900" : "#c90a0a")
+    textSize(70)
+    textAlign(CENTER)
+    text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60)
 
     // MENU TEXT
-    // This variable takes the score from gameengine, so it can be displayed here
-    let score = this.game.readCurrentPlayerScore();
-    let highscore = this.getHighestScore();
+    // This variable takes the score from Game, so it can be displayed here
+    let score = this.game.readCurrentPlayerScore()
+    let highscore = this.getHighestScore()
 
     if (score >= highscore) {
-      textSize(55);
-      textAlign(CENTER);
-      fill("#FDCA51");
-      text(
-        "HIGH SCORE!",
-        this.position.x + this.size.x / 2,
-        this.position.y - 10
-      );
+      textSize(55)
+      textAlign(CENTER)
+      fill("#FDCA51")
+      text("HIGH SCORE!", this.position.x + this.size.x / 2, this.position.y - 10)
 
-      fill("#D9D9D9");
-      textSize(26);
-      textAlign(CENTER);
-      text(
-        `YOU SET A NEW HIGH SCORE! `,
-        this.position.x + this.size.x / 2,
-        this.position.y + 60
-      );
-      textSize(40);
-      fill("#FDCA51");
+      fill("#D9D9D9")
+      textSize(26)
+      textAlign(CENTER)
+      text(`YOU SET A NEW HIGH SCORE! `, this.position.x + this.size.x / 2, this.position.y + 60)
+      textSize(40)
+      fill("#FDCA51")
 
-      text(score, this.position.x + this.size.x / 2, this.position.y + 100);
+      text(score, this.position.x + this.size.x / 2, this.position.y + 100)
     } else {
-      fill("#D9D9D9");
-      textSize(26);
-      textAlign(CENTER);
-      text(
-        `YOUR SCORE: ${score}`,
-        this.position.x + this.size.x / 2,
-        this.position.y + 60
-      );
+      fill("#D9D9D9")
+      textSize(26)
+      textAlign(CENTER)
+      text(`YOUR SCORE: ${score}`, this.position.x + this.size.x / 2, this.position.y + 60)
 
       text(
         `CURRENT HIGH SCORE: ${highscore}`,
         this.position.x + this.size.x / 2,
         this.position.y + 90
-      );
+      )
     }
     fill("#D9D9D9");
     textSize(20);
@@ -92,6 +81,7 @@ class GameOver {
       this.position.y + 140
     );
     fill("#D9D9D9");
+
     text(
       " TO START NEW GAME",
       this.position.x + textWidth("PRESS BACKSPACE") + 120,
@@ -114,11 +104,12 @@ class GameOver {
       this.position.x + textWidth("PRESS ESC") + 152,
       this.position.y + 173
     );
-  }
 
-  private getHighestScore() {
-    let highscores = this.game.readAllPlayerScores();
-    let highestNumber = Math.max(...highscores);
-    return highestNumber;
+  }
+  // Get the highest score from the the array in Game
+  private getHighestScore(): number {
+    let highscores = this.game.readAllPlayerScores()
+    let highestNumber = Math.max(...highscores)
+    return highestNumber
   }
 }

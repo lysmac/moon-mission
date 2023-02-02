@@ -9,6 +9,7 @@ class Alien extends GameEntity {
   }
 
   public update() {
+    // moving alien from side to side across the screen
     this.position.x += this.velocity.x * deltaTime;
     if (this.position.x < -width/6 || this.position.x > width) {
       this.velocity.x = -this.velocity.x;

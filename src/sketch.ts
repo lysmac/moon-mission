@@ -23,26 +23,18 @@ let sbraket3: p5.Image;
 let deadraket1: p5.Image;
 let deadraket2: p5.Image;
 let deadraket3: p5.Image;
-// let endmusic: p5.SoundFile
-// let gameplaymusic: p5.SoundFile
-// let endmusic: p5.SoundFile
 
-/**
- * Built in preload function in P5
- * This is a good place to load assets such as
- * sound files, images etc...
- */
+
+// Sound and images files 
 function preload() {
-  // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
-  // Här a´skall alla filer i form av bilder och ljud laddas in.
-
+  
   // Music
   menumusic = loadSound("assets/bgm/menu.mp3");
   gameplaymusic = loadSound("assets/bgm/play.mp3");
   laserSoundeffect = loadSound("assets/soundeffects/laserBullet.mp3");
   enemyDeathSound = loadSound("assets/soundeffects/enemyDeathSound.mp3");
   shipCrashSound = loadSound("assets/soundeffects/shipCrash.mp3");
-
+  // Images
   alien = loadImage("/assets/Alien.png");
   alienHit = loadImage("/assets/Alien-Hit.png");
   asteroid = loadImage("/assets/Astroid.png");
@@ -86,9 +78,4 @@ function draw() {
   game.draw();
 }
 
-/**
- *  Built in windowResize listener function in P5
- */
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
-// }
+

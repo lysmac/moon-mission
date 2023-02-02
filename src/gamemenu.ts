@@ -1,38 +1,40 @@
 class GameMenu {
-  private position: p5.Vector;
-  private size: p5.Vector;
-  private game: IStartGame;
-  background: Background;
+  private position: p5.Vector
+  private size: p5.Vector
+  private game: IStartGame
+  private background: Background
 
   constructor(game: IStartGame) {
-    this.game = game;
-    this.position = createVector(100, 300);
-    this.size = createVector(400, 370);
-    this.background = new Background(true);
+    this.game = game
+    this.position = createVector(100, 300)
+    this.size = createVector(400, 370)
+    this.background = new Background(true)
   }
-
-  public update() {
+  public update(): void {
+    // Press backspace to start new game
     if (keyIsDown(BACKSPACE)) {
-      this.game.startNewGame();
-    }
 
-    this.background.update();
+      this.game.startNewGame()
+
+    }
+    // Stars from the background class
+    this.background.update()
   }
 
-  public draw() {
-    this.background.draw();
+  public draw(): void {
+    this.background.draw()
 
     //BACKGROUND SQUARE MENU
-    fill("rgba(255, 0, 0, 0.4)");
-    stroke("#D9D9D9");
-    rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
-    noStroke();
+    fill("rgba(255, 0, 0, 0.4)")
+    stroke("#D9D9D9")
+    rect(this.position.x, this.position.y, this.size.x, this.size.y, 20)
+    noStroke()
 
     //TITLE
-    fill("#FDCA51");
-    textSize(70);
-    textAlign(CENTER);
-    image(header, 0, 0);
+    fill("#FDCA51")
+    textSize(70)
+    textAlign(CENTER)
+    image(header, 0, 0)
 
     // MENU TEXT
     textFont("secular one");
@@ -47,19 +49,21 @@ class GameMenu {
       this.position.y + 70
     );
 
-    fill("#D9D9D9");
+
+    fill("#D9D9D9")
     text(
       " TO START NEW GAME",
       this.position.x + textWidth("PRESS BACKSPACE") + 126,
       this.position.y + 70
-    );
+    )
 
-    fill("#D9D9D9");
-    textSize(21);
+    fill("#D9D9D9")
+    textSize(21)
 
-    text("HOW TO PLAY", this.position.x + 200, this.position.y + 150);
+    text("HOW TO PLAY", this.position.x + 200, this.position.y + 150)
 
     // IMAGE OF KEYS
+
     image(interactionKeys, 180, 470, 300, 70);
     fill("#D9D9D9");
     textSize(15);
@@ -73,11 +77,11 @@ class GameMenu {
     fill("#D9D9D9");
     text("TO TOGGLE MUSIC", this.position.x + 230, this.position.y + 320);
 
-    text("PRESS ", this.position.x + 134, this.position.y + 340);
-    fill("#FDCA51");
-    text("H", this.position.x + 159, this.position.y + 340);
-    fill("#D9D9D9");
-    text("TO VIEW HIGH SCORE", this.position.x + 231, this.position.y + 340);
+    text("PRESS ", this.position.x + 134, this.position.y + 340)
+    fill("#FDCA51")
+    text("H", this.position.x + 159, this.position.y + 340)
+    fill("#D9D9D9")
+    text("TO VIEW HIGH SCORE", this.position.x + 231, this.position.y + 340)
 
     //SPACESHIP
     angleMode(DEGREES);
@@ -94,5 +98,6 @@ class GameMenu {
       raket3.height
       
     );
+
   }
 }

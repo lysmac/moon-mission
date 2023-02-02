@@ -81,6 +81,7 @@ class SpaceShip extends GameEntity {
     }
   }
 
+  // creates a laserbullet and places it in array when 'space' is presesd
   public shootLaserBeam() {
     if (keyIsDown(32) && this.haveAmmo && this.laserBeamTimer > this.laserBeamDelay) {
       const laserBeam = new LaserBeam(this.position.x + this.size.x / 2 - 2, this.position.y-15);
@@ -91,21 +92,25 @@ class SpaceShip extends GameEntity {
     }
     this.laserBeamTimer++;
   }
-
+  
+  //Changes images to blue boosted spaceship
   public boostedSpaceship() {
     this.images = [sbraket1, sbraket2, sbraket3];
   }
 
+  //Changes images back to regular spaceship
   public regularSpaceship() {
     this.images = [raket3, raket4, raket5];
     
   }
 
+  //Starts explosion and changes images to exploding spaceship
   public explode() {
   this.images = [deadraket1, deadraket2, deadraket3];
   this.exploding = true;
   }
 
+  //Timer for explosion before the game ends
   public explodingSpaceship() {
     if (this.exploding) {
       this.explodeTimer -= deltaTime;
