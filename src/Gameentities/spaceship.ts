@@ -102,5 +102,12 @@ class SpaceShip extends GameEntity {
     for (const laserBeam of this.laserBeams) {
       laserBeam.draw();
     }
+
+    // push();
+    // fill(255)
+    // spaceship hitbox shape
+    // triangle(this.position.x, this.position.y + 40, this.position.x + 20, this.position.y, this.position.x + this.size.x, this.position.y + 40);
+    // quad(this.position.x, this.position.y + 40, this.position.x + this.size.x, this.position.y + 40, this.position.x + this.size.x, this.position.y + this.size.y - 40, this.position.x, this.size.y + this.position.y - 40);
+    // pop();
   }
 }
