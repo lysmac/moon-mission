@@ -8,20 +8,12 @@ class Astroid extends GameEntity {
     super(position, size, asteroid, hp); 
   }
 
-  // public update() {
-  //   super.update();
-  // }
-
-  // public draw() {
-    // image(this.image, this.position.x, this.position.y, this.size.x, this.size.y);
-
-    // asteroid hitbox shape
-    // push();
-    // fill(255);
-    // ellipse(this.position.x + this.size.x / 2,
-    //   this.position.y + this.size.y / 2,
-    //   this.size.x - 5,
-    //   this.size.y - 5);
-    // pop();
-  // }
+  public getHitBox() {
+    return {
+      x: this.position.x + 10,
+      y: this.position.y + 10,
+      width: this.size.x - 20,
+      height: this.size.y - 20,
+    }
+  }
 }
