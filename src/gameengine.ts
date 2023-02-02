@@ -80,11 +80,7 @@ class GameEngine {
   public draw() {
     this.background.draw();
 
-    this.oxygenDisplay.draw();
-    this.ammunitionDisplay.draw();
-    
     this.rechargeAmmo();
-    this.spaceship.draw();
 
     for (const gameEntity of this.gameEntities) {
       gameEntity.draw();
@@ -213,7 +209,10 @@ class GameEngine {
   }
 
   private rechargeAmmo() {
-    if (this.ammunitionDisplay.currentAmmo == 0 && this.ammunitionDisplay.cooldownBar == 100) {
+    if (
+      this.ammunitionDisplay.currentAmmo == 0 &&
+      this.ammunitionDisplay.cooldownBar == 100
+    ) {
       this.ammunitionDisplay.currentAmmo = 15;
       this.spaceship.haveAmmo = true;
     }
@@ -257,11 +256,12 @@ class GameEngine {
 
           const lootRNG = Math.floor(random(1, 100));
           const lootDropPosition = createVector(
-            entity.position.x + entity.size.x / 2, 
-            entity.position.y + entity.size.y / 2);
-          
+            entity.position.x + entity.size.x / 2,
+            entity.position.y + entity.size.y / 2
+          );
+
           if (lootRNG < 10) {
-          this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
+            this.clonedGameEntitiy.push(new OxygenTank(lootDropPosition));
           }
 
           this.gainScoreFromKills(entity);
