@@ -25,6 +25,7 @@ abstract class GameEntity {
     image(this.image, this.position.x, this.position.y, this.size.x, this.size.y);
   }
 
+  // altering speed of entities falling down when speedboost is active
   public boostCurrentSpeed(endTime: number) {
     this.currentSpeed = this.boostedSpeed;
     const remainingTime = endTime - Date.now();

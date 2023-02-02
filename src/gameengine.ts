@@ -41,11 +41,13 @@ class GameEngine {
   }
 
   public update() {
+    //Death
     if (this.spaceship.dead) {
       game.changeCurrentPlayerScore(this.score);
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();
     }
+    // if oxygen level reaches 0 the game is over
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       game.changeCurrentPlayerScore(this.score);
 
@@ -59,6 +61,8 @@ class GameEngine {
     this.incrementScore();
     this.checkLaserFired();
 
+    // enemies start to spawn with delay after the game has started
+    // aliens spawn after certain score is reached
     setTimeout(() => {
       this.spawnAsteroid();
       if (this.score > 1500) {
@@ -69,6 +73,8 @@ class GameEngine {
     }, 5000);
     this.clonedGameEntitiy = [...this.gameEntities];
 
+    // loops through entities, any changes of array are made in a clone
+    // when the loop is complete, original array copies clone
     for (let i = 0; i < this.gameEntities.length; i++) {
       this.checkCollision(this.gameEntities[i], i);
       this.checkHitEnemy(this.gameEntities[i], i);
@@ -91,10 +97,12 @@ class GameEngine {
     this.spaceship.draw();
   }
 
+  // regulates the animation of entities
   private moveEntities(entity: GameEntity) {
     entity.update();
   }
 
+  //Displays score in top left corner
   private displayScore() {
     textFont("secular one");
     textSize(24);
@@ -116,6 +124,7 @@ class GameEngine {
   //   }
   // }
 
+  // score +1 evey frame, score blinks yellow every 500 points
   private incrementScore() {
     if (this.dead) {
       return;
@@ -129,6 +138,8 @@ class GameEngine {
     }
   }
 
+  // Checks collision between the spaceship entity and if it has collided with another entity
+  //by comparing the position and size of entities to see if they overlap
   private checkCollision(entity: GameEntity, index: number) {
     if (
       this.spaceship.position.x < entity.position.x + entity.size.x &&
@@ -150,6 +161,7 @@ class GameEngine {
     }
   }
 
+  //Determines behavior when colliding with enemy with or without speedboost
   private collidingWithEnemy(entity: GameEntity, index: number) {
     if (this.isSpeedBoostActive) {
       this.clonedGameEntitiy.splice(index, 1);
@@ -167,6 +179,7 @@ class GameEngine {
     }
   }
 
+  // fills up oxygen level with 10, if level is > 90 fills up to max 100
   private collidingWithOxygenTank(index: number) {
     this.clonedGameEntitiy.splice(index, 1);
 
@@ -178,6 +191,7 @@ class GameEngine {
     }
   }
 
+  //Increases speed and score, regulates spaceship behavior and limits it to 5 seconds
   private collidingWithSpeedBoost(index: number) {
     this.clonedGameEntitiy.splice(index, 1);
     this.spaceship.immortal = true;
@@ -196,6 +210,8 @@ class GameEngine {
     }, 5000);
   }
 
+  // if a laserbullet is fired, removes 1 from ammunition
+  // if ammunition is 0, reset the values to prepare recharge
   private checkLaserFired() {
     if (this.spaceship.hasLaserFired) {
       this.ammunitionDisplay.currentAmmo -= 1;
@@ -208,6 +224,7 @@ class GameEngine {
     }
   }
 
+  // when ammunition is 0 and the cooldown is complete, reset ammunition
   private rechargeAmmo() {
     if (
       this.ammunitionDisplay.currentAmmo == 0 &&
@@ -218,6 +235,7 @@ class GameEngine {
     }
   }
 
+  // dictaes behaviour of laserbullets and entites upon collision
   private checkHitEnemy(entity: GameEntity, index: number) {
     if (!this.spaceship.laserBeams) return;
     if (entity instanceof OxygenTank) return;
@@ -270,6 +288,7 @@ class GameEngine {
     }
   }
 
+  // when enemy is killed, respective gained score from kill appears with animation
   private gainScoreFromKills(entity: GameEntity) {
     if (entity instanceof Astroid) {
       this.score += 10;
@@ -296,7 +315,8 @@ class GameEngine {
       this.clonedGameEntitiy.push(scoreEntity);
     }
   }
-
+  
+  //Spawns asteroids randomly every 1-2 seconds
   private spawnAsteroid() {
     this.asteroidSpawnTimout -= deltaTime;
     if (this.asteroidSpawnTimout < 0) {
@@ -313,6 +333,7 @@ class GameEngine {
     }
   }
 
+  //Spawns aliens randomly every 1-5 seconds
   private spawnAlien() {
     this.alienSpawnTimout -= deltaTime;
     if (this.alienSpawnTimout < 0) {
@@ -329,6 +350,7 @@ class GameEngine {
     }
   }
 
+  //Spawns oxygen tanks randomly every 1-20 seconds
   private spawnOxygenTank() {
     this.oxygenSpawnTimout -= deltaTime;
     if (this.oxygenSpawnTimout < 0) {
@@ -345,6 +367,7 @@ class GameEngine {
     }
   }
 
+  //Spawns speed boosts randomly every 1-20 seconds
   private spawnSpeedboost() {
     this.speedBoostSpawnTimout -= deltaTime;
     if (this.speedBoostSpawnTimout < 0) {

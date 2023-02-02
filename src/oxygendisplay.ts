@@ -24,6 +24,7 @@ class OxygenDisplay {
   }
 
   public update() {
+    // changes color of the oxygen bar depending on level
     this.oxygenLevel -= 2;
     if (this.oxygenLevel < this.maxOxygenLevel / 2) {
       this.color = 'yellow';
@@ -55,6 +56,7 @@ class OxygenDisplay {
     this.isPaused = false;
   }
 
+  // top and bottom of the screen flashing red when oxygen level is low
   public flashScreen() {
     if (this.color === 'red') {
       let opacity = 50 + 50 * sin(frameCount * 5);
