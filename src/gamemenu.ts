@@ -10,7 +10,7 @@ class GameMenu {
     this.size = createVector(400, 370)
     this.background = new Background(true)
   }
-// Press space to start new game
+// Press backspace to start new game
   public update() {
     if (keyIsDown(BACKSPACE)) {
       game.startNewGame();

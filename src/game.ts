@@ -99,7 +99,7 @@ class Game implements IStartGame {
   }
 
   // Method that mutes all sound and music in the game
-  private muteSounds() {
+  private muteSounds(): void {
     const mWasPressed = !this.wasMKeyDown && keyIsDown(77)
     if (mWasPressed && this.mute === true) {
       this.mute = false
@@ -117,11 +117,11 @@ class Game implements IStartGame {
   }
 
   // Reads all playerscore from Game
-  public readAllPlayerScores() {
+  public readAllPlayerScores(): number[] {
     return this.allPlayerScores
   }
   // Push the current score to the variable allPlayerScores array
-  public pushToAllPlayerScores(playerScore: number) {
+  public pushToAllPlayerScores(playerScore: number): void {
     this.allPlayerScores.push(playerScore)
   }
   // Change the current scene and stops the current music and starts the new music for active scene
@@ -146,11 +146,11 @@ class Game implements IStartGame {
     return this.currentPlayerScore
   }
   // A setter for GameEngine to use to set the player score in the Game class
-  public changeCurrentPlayerScore(input: number) {
+  public changeCurrentPlayerScore(input: number): void {
     this.currentPlayerScore = input
   }
   // Pauses the game and stops the music and the oxygen display. Also brings player back to main menu when on game over
-  public togglePause() {
+  public togglePause(): void {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE)
     if (espaceWasPressed && this.currentScene === "play") {
       this.currentScene = "pause"
@@ -167,7 +167,7 @@ class Game implements IStartGame {
     this.wasEscapeKeyDown = keyIsDown(ESCAPE)
   }
   // Use the H key to toggle between the start and score scene
-  public toggleHighScore() {
+  public toggleHighScore(): void {
     const hWasPressed = !this.wasHKeyDown && keyIsDown(72)
     if (hWasPressed && this.currentScene === "start") {
       this.currentScene = "score"
@@ -182,11 +182,11 @@ class Game implements IStartGame {
     this.addedScoreToList = anything
   }
   // Checks if score has been returned. Runs only once
-  public scoreCheckGet() {
+  public scoreCheckGet(): boolean {
     return this.addedScoreToList
   }
-  // Loads the playerscore from the local storage
-  private getScoresFromLS() {
+  // Loads the playerscore from the local storage. Does nothing if empty
+  private getScoresFromLS(): void | number[] {
     const scores = localStorage.getItem("playerScores")
     const scoresParsed = JSON.parse(scores!)
 
