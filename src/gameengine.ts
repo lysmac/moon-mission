@@ -115,15 +115,6 @@ class GameEngine {
     text(this.score, 60, 70);
   }
 
-  // Dont know why this was here, it was not used anywhere
-  // public scoreForBoard() {
-  //   if (this.dead) {
-  //     return this.score;
-  //   } else {
-  //     return;
-  //   }
-  // }
-
   // score +1 evey frame, score blinks yellow every 500 points
   private incrementScore() {
     if (this.dead) {
@@ -142,10 +133,14 @@ class GameEngine {
   //by comparing the position and size of entities to see if they overlap
   private checkCollision(entity: GameEntity, index: number) {
     if (
-      this.spaceship.getHitBox().x < entity.getHitBox().x + entity.getHitBox().width &&
-      this.spaceship.getHitBox().x + this.spaceship.getHitBox().width > entity.getHitBox().x &&
-      this.spaceship.getHitBox().y < entity.getHitBox().y + entity.getHitBox().height &&
-      this.spaceship.getHitBox().height + this.spaceship.getHitBox().y > entity.getHitBox().y
+      this.spaceship.getHitBox().x <
+        entity.getHitBox().x + entity.getHitBox().width &&
+      this.spaceship.getHitBox().x + this.spaceship.getHitBox().width >
+        entity.getHitBox().x &&
+      this.spaceship.getHitBox().y <
+        entity.getHitBox().y + entity.getHitBox().height &&
+      this.spaceship.getHitBox().height + this.spaceship.getHitBox().y >
+        entity.getHitBox().y
     ) {
       if (!(entity instanceof OxygenTank) && !(entity instanceof SpeedBoost)) {
         this.collidingWithEnemy(entity, index);
@@ -245,9 +240,11 @@ class GameEngine {
       const laserBullet = this.spaceship.laserBeams[i];
 
       if (
-        laserBullet.position.x < entity.getHitBox().x + entity.getHitBox().width &&
+        laserBullet.position.x <
+          entity.getHitBox().x + entity.getHitBox().width &&
         laserBullet.position.x + laserBullet.size.x > entity.getHitBox().x &&
-        laserBullet.position.y < entity.getHitBox().y + entity.getHitBox().height &&
+        laserBullet.position.y <
+          entity.getHitBox().y + entity.getHitBox().height &&
         laserBullet.size.y + laserBullet.position.y > entity.getHitBox().y
       ) {
         if (entity.hp > 1) {
@@ -315,7 +312,7 @@ class GameEngine {
       this.clonedGameEntitiy.push(scoreEntity);
     }
   }
-  
+
   //Spawns asteroids randomly every 1-2 seconds
   private spawnAsteroid() {
     this.asteroidSpawnTimout -= deltaTime;
