@@ -142,10 +142,10 @@ class GameEngine {
   //by comparing the position and size of entities to see if they overlap
   private checkCollision(entity: GameEntity, index: number) {
     if (
-      this.spaceship.position.x < entity.position.x + entity.size.x &&
-      this.spaceship.position.x + this.spaceship.size.x > entity.position.x &&
-      this.spaceship.position.y < entity.position.y + entity.size.y &&
-      this.spaceship.size.y + this.spaceship.position.y > entity.position.y
+      this.spaceship.getHitBox().x < entity.getHitBox().x + entity.getHitBox().width &&
+      this.spaceship.getHitBox().x + this.spaceship.getHitBox().width > entity.getHitBox().x &&
+      this.spaceship.getHitBox().y < entity.getHitBox().y + entity.getHitBox().height &&
+      this.spaceship.getHitBox().height + this.spaceship.getHitBox().y > entity.getHitBox().y
     ) {
       if (!(entity instanceof OxygenTank) && !(entity instanceof SpeedBoost)) {
         this.collidingWithEnemy(entity, index);
@@ -245,10 +245,10 @@ class GameEngine {
       const laserBullet = this.spaceship.laserBeams[i];
 
       if (
-        laserBullet.position.x < entity.position.x + entity.size.x &&
-        laserBullet.position.x + laserBullet.size.x > entity.position.x &&
-        laserBullet.position.y < entity.position.y + entity.size.y &&
-        laserBullet.size.y + laserBullet.position.y > entity.position.y
+        laserBullet.position.x < entity.getHitBox().x + entity.getHitBox().width &&
+        laserBullet.position.x + laserBullet.size.x > entity.getHitBox().x &&
+        laserBullet.position.y < entity.getHitBox().y + entity.getHitBox().height &&
+        laserBullet.size.y + laserBullet.position.y > entity.getHitBox().y
       ) {
         if (entity.hp > 1) {
           entity.hp -= 1;
