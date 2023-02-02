@@ -48,6 +48,8 @@ class GameEngine {
       return;
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
+      game.changeCurrentPlayerScore(this.score);
+
       this.dead = true;
       this.game.changeCurrentScene("end");
       return;
@@ -103,13 +105,14 @@ class GameEngine {
     text(this.score, 60, 70);
   }
 
-  public scoreForBoard() {
-    if (this.dead) {
-      return this.score;
-    } else {
-      return;
-    }
-  }
+  // Dont know why this was here, it was not used anywhere
+  // public scoreForBoard() {
+  //   if (this.dead) {
+  //     return this.score;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   private incrementScore() {
     if (this.dead) {
