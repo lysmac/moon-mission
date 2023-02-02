@@ -42,13 +42,13 @@ class GameEngine {
 
   public update() {
     if (this.spaceship.dead) {
-      game.changeCurrentPlayerScore(this.score);
+      this.dead = true;
       this.game.changeCurrentScene("end");
       this.oxygenDisplay.pause();
+      game.changeCurrentPlayerScore(this.score);
     }
     if (this.oxygenDisplay.oxygenLevel <= 0) {
       game.changeCurrentPlayerScore(this.score);
-
       this.dead = true;
       this.game.changeCurrentScene("end");
     }

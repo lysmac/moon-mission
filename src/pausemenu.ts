@@ -11,12 +11,7 @@ class PauseMenu {
   }
 
   public update() {
-    if (keyIsDown(77)) {
-      console.log("pressed m");
-      this.game.changeCurrentScene("start");
-    }
-
-    if (keyIsDown(32)) {
+    if (keyIsDown(BACKSPACE)) {
       game.startNewGame();
     }
   }
@@ -28,7 +23,6 @@ class PauseMenu {
     rect(this.position.x, this.position.y, this.size.x, this.size.y, 20);
     noStroke();
 
-
     // HEADER AND TITLE
     fill("#FDCA51");
     textSize(30);
@@ -39,7 +33,7 @@ class PauseMenu {
 
     fill("#D9D9D9");
     tint(255, 100);
-    image(header, 100, 100, 400,200);
+    image(header, 100, 100, 400, 200);
     tint(255, 255);
 
     // MENU TEXT
@@ -72,7 +66,5 @@ class PauseMenu {
       this.position.x + textWidth("PRESS SPACE") + 140,
       this.position.y + 160
     );
-
-   
   }
 }
