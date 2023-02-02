@@ -22,7 +22,7 @@ class Game implements IStartGame {
   private currentPlayerScore: number;
   private currentScene: string;
   private wasEscapeKeyDown: boolean;
-  private wasSKeyDown: boolean;
+  private wasMKeyDown: boolean;
   private wasHKeyDown: boolean;
   public addedScoreToList: boolean;
   private mute: boolean;
@@ -38,7 +38,7 @@ class Game implements IStartGame {
     this.currentScene = "start";
     this.currentPlayerScore = 0;
     this.wasEscapeKeyDown = false;
-    this.wasSKeyDown = false;
+    this.wasMKeyDown = false;
     this.wasHKeyDown = false;
     this.addedScoreToList = false;
     this.mute = true;
@@ -52,9 +52,6 @@ class Game implements IStartGame {
 
     switch (this.currentScene) {
       case "start":
-        // if (keyIsDown(72)) {
-        //   this.changeCurrentScene("score");
-        // }
         this.gameMenu.update();
         break;
       case "score":
@@ -106,8 +103,8 @@ class Game implements IStartGame {
   public resumeGame(): void {}
 
   private muteSounds() {
-    const pWasPressed = !this.wasSKeyDown && keyIsDown(83);
-    if (pWasPressed && this.mute === true) {
+    const mWasPressed = !this.wasMKeyDown && keyIsDown(77);
+    if (mWasPressed && this.mute === true) {
       this.mute = false;
       outputVolume(0.2);
       if (this.currentScene === "start" || this.currentScene === "score") {
@@ -115,11 +112,11 @@ class Game implements IStartGame {
           this.menumusic.play();
         }
       }
-    } else if (pWasPressed && this.mute === false) {
+    } else if (mWasPressed && this.mute === false) {
       this.mute = true;
       outputVolume(0);
     }
-    this.wasSKeyDown = keyIsDown(83);
+    this.wasMKeyDown = keyIsDown(77);
   }
 
   public readAllPlayerScores() {
@@ -165,6 +162,8 @@ class Game implements IStartGame {
       this.currentScene = "play";
       this.gameplaymusic.play();
       this.gameEngine.oxygenDisplay.resume();
+    } else if (espaceWasPressed && this.currentScene === "end") {
+      this.changeCurrentScene("start");
     }
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE);

@@ -69,7 +69,7 @@ class GameMenu {
     textSize(13);
     text("PRESS ", this.position.x + 145, this.position.y + 320);
     fill("#FDCA51");
-    text("S", this.position.x + 168, this.position.y + 320);
+    text("M", this.position.x + 168, this.position.y + 320);
     fill("#D9D9D9");
     text("TO TOGGLE MUSIC", this.position.x + 230, this.position.y + 320);
 
