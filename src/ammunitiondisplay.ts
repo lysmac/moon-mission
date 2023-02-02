@@ -20,12 +20,14 @@ class AmmunitionDisplay {
   }
 
   public update() {
+    // changing color of text when low on ammunition
     if (this.currentAmmo < 6) {
       this.color = "red";
     } else {
       this.color = "white";
     }
 
+    // timer for when ammunition recharge
     if (this.timer % this.delay === 0) {
         this.cooldownBar += 1;
         this.timer = 0;
@@ -44,6 +46,7 @@ class AmmunitionDisplay {
     );
     pop();
 
+    // animates a bar filling up while timer for recharge is active
     if (this.currentAmmo == 0) {
       push();
       fill(255)
