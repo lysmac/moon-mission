@@ -18,20 +18,12 @@ class Alien extends GameEntity {
     super.update();
   }
 
-  // public draw() {
-    // image(this.image, this.position.x, this.position.y, this.size.x, this.size.y);
-
-    // alien hitbox shape
-    // push();
-    // fill(255);
-    // triangle(this.position.x + 2, this.position.y + 55, 
-    //   this.position.x + this.size.x / 2, this.position.y - 2, 
-    //   this.position.x + this.size.x - 2, this.position.y + 55);
-
-    // ellipse(this.position.x + this.size.x / 2, 
-    // this.position.y + 65, 
-    // this.size.x, 
-    // this.size.y - 35);
-    // pop();
-  // }
+  public getHitBox() {
+    return {
+      x: this.position.x + 10,
+      y: this.position.y + 10,
+      width: this.size.x - 20,
+      height: this.size.y - 20,
+    }
+  }
 }

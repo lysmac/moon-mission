@@ -34,6 +34,38 @@ class SpaceShip extends GameEntity {
     this.haveAmmo = true;
   }
 
+  
+  public update() {
+    this.moveSpaceship();
+    this.shootLaserBeam();
+    this.timer++;
+    if (this.timer % this.delay === 0) {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }
+    for (const laserBeam of this.laserBeams) {
+      laserBeam.update();
+    }
+    this.explodingSpaceship();
+  }
+
+  public draw() {
+    image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
+    for (const laserBeam of this.laserBeams) {
+      laserBeam.draw();
+    }
+
+    // this.drawHitBox();
+  }
+
+  public getHitBox() {
+    return {
+      x: this.position.x + 5,
+      y: this.position.y + 10,
+      width: this.size.x - 10,
+      height: this.size.y - 50,
+    }
+  }
+
   private moveSpaceship() {
     if (keyIsDown(UP_ARROW) && this.position.y > 0 && !this.exploding) {
       this.position.y -= 10;
@@ -82,32 +114,5 @@ class SpaceShip extends GameEntity {
         this.dead = true;
     }
    }
-  }
-
-  public update() {
-    this.moveSpaceship();
-    this.shootLaserBeam();
-    this.timer++;
-    if (this.timer % this.delay === 0) {
-      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-    }
-    for (const laserBeam of this.laserBeams) {
-      laserBeam.update();
-    }
-    this.explodingSpaceship();
-  }
-
-  public draw() {
-    image(this.images[this.currentImageIndex], this.position.x, this.position.y, this.size.x, this.size.y);
-    for (const laserBeam of this.laserBeams) {
-      laserBeam.draw();
-    }
-
-    // push();
-    // fill(255)
-    // spaceship hitbox shape
-    // triangle(this.position.x, this.position.y + 40, this.position.x + 20, this.position.y, this.position.x + this.size.x, this.position.y + 40);
-    // quad(this.position.x, this.position.y + 40, this.position.x + this.size.x, this.position.y + 40, this.position.x + this.size.x, this.position.y + this.size.y - 40, this.position.x, this.size.y + this.position.y - 40);
-    // pop();
   }
 }
