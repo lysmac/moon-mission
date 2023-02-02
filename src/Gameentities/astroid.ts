@@ -1,5 +1,3 @@
-/// <reference path="enemy.ts" />
-
 class Astroid extends GameEntity {
 
   constructor(position: p5.Vector) {
