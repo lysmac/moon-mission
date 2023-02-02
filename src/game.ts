@@ -15,15 +15,15 @@ class Game implements IStartGame {
   private pauseMenu: PauseMenu
   private gameOver: GameOver
   private scoreboard: ScoreBoard
-  private menumusic: p5.SoundFile
-  private gameplaymusic: p5.SoundFile
+  private menuMusic: p5.SoundFile
+  private gamePlayMusic: p5.SoundFile
   private allPlayerScores: number[] = []
   private currentPlayerScore: number
   private currentScene: string
   private wasEscapeKeyDown: boolean
   private wasMKeyDown: boolean
   private wasHKeyDown: boolean
-  public addedScoreToList: boolean
+  private addedScoreToList: boolean
   private mute: boolean
 
   constructor() {
@@ -32,8 +32,8 @@ class Game implements IStartGame {
     this.gameOver = new GameOver(this)
     this.scoreboard = new ScoreBoard(this)
     this.gameEngine = new GameEngine()
-    this.menumusic = menumusic
-    this.gameplaymusic = gameplaymusic
+    this.menuMusic = menumusic
+    this.gamePlayMusic = gameplaymusic
     this.currentScene = "start"
     this.currentPlayerScore = 0
     this.wasEscapeKeyDown = false
@@ -92,7 +92,7 @@ class Game implements IStartGame {
   }
   // Starts the game and resets the gameEngine
   public startNewGame(): void {
-    this.gameplaymusic.stop()
+    this.gamePlayMusic.stop()
     this.scoreCheckSet(false)
     this.changeCurrentScene("play")
     this.gameEngine = new GameEngine()
@@ -105,8 +105,8 @@ class Game implements IStartGame {
       this.mute = false
       outputVolume(0.2)
       if (this.currentScene === "start" || this.currentScene === "score") {
-        if (!this.menumusic.isPlaying()) {
-          this.menumusic.play()
+        if (!this.menuMusic.isPlaying()) {
+          this.menuMusic.play()
         }
       }
     } else if (mWasPressed && this.mute === false) {
@@ -129,16 +129,16 @@ class Game implements IStartGame {
     this.currentScene = scene
 
     if (scene === "start" || scene === "score") {
-      if (!this.menumusic.isPlaying()) {
-        this.menumusic.play()
+      if (!this.menuMusic.isPlaying()) {
+        this.menuMusic.play()
       }
     }
     if (scene === "play") {
-      this.menumusic.stop()
-      this.gameplaymusic.play()
+      this.menuMusic.stop()
+      this.gamePlayMusic.play()
     }
     if (scene === "end") {
-      this.gameplaymusic.stop()
+      this.gamePlayMusic.stop()
     }
   }
   // Reads the current score from Game
@@ -154,11 +154,11 @@ class Game implements IStartGame {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE)
     if (espaceWasPressed && this.currentScene === "play") {
       this.currentScene = "pause"
-      this.gameplaymusic.pause()
+      this.gamePlayMusic.pause()
       this.gameEngine.oxygenDisplay.pause()
     } else if (espaceWasPressed && this.currentScene === "pause") {
       this.currentScene = "play"
-      this.gameplaymusic.play()
+      this.gamePlayMusic.play()
       this.gameEngine.oxygenDisplay.resume()
     } else if (espaceWasPressed && this.currentScene === "end") {
       this.changeCurrentScene("start")
