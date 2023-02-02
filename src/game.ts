@@ -21,7 +21,7 @@ class Game implements IStartGame {
   private currentPlayerScore: number
   private currentScene: string
   private wasEscapeKeyDown: boolean
-  private wasSKeyDown: boolean
+  private wasMKeyDown: boolean
   private wasHKeyDown: boolean
   public addedScoreToList: boolean
   private mute: boolean
@@ -37,7 +37,7 @@ class Game implements IStartGame {
     this.currentScene = "start"
     this.currentPlayerScore = 0
     this.wasEscapeKeyDown = false
-    this.wasSKeyDown = false
+    this.wasMKeyDown = false
     this.wasHKeyDown = false
     this.addedScoreToList = false
     this.mute = true
@@ -49,7 +49,7 @@ class Game implements IStartGame {
     this.togglePause()
     this.toggleHighScore()
 
-    // This keep track of wich scene is active
+    // This keep track of which scene is active
     switch (this.currentScene) {
       case "start":
         this.gameMenu.update()
