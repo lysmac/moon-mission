@@ -82,20 +82,37 @@ class GameOver {
       );
     }
     fill("#D9D9D9");
-    textSize(21);
-    text("PRESS", this.position.x + 65, this.position.y + 140);
+    textSize(20);
+    text("PRESS", this.position.x + 47, this.position.y + 140);
     fill("#FDCA51");
 
     text(
-      "SPACE",
-      this.position.x + textWidth("PRESS ") + 72,
+      "BACKSPACE",
+      this.position.x + textWidth("PRESS ") + 75,
       this.position.y + 140
     );
     fill("#D9D9D9");
     text(
       " TO START NEW GAME",
-      this.position.x + textWidth("PRESS SPACE") + 145,
+      this.position.x + textWidth("PRESS BACKSPACE") + 120,
       this.position.y + 140
+    );
+
+    fill("#D9D9D9");
+    textSize(20);
+    text("PRESS", this.position.x + 82, this.position.y + 173);
+    fill("#FDCA51");
+
+    text(
+      "ESC",
+      this.position.x + textWidth("PRESS ") + 73,
+      this.position.y + 173
+    );
+    fill("#D9D9D9");
+    text(
+      "TO RETURN TO MENU",
+      this.position.x + textWidth("PRESS ESC") + 152,
+      this.position.y + 173
     );
   }
 
