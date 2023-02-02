@@ -23,6 +23,26 @@ abstract class GameEntity {
 
   public draw() {
     image(this.image, this.position.x, this.position.y, this.size.x, this.size.y);
+    // this.drawHitBox();
+  }
+
+  /** Debug only */
+  protected drawHitBox() {
+    const {x, y, width, height} = this.getHitBox();
+    push()
+    stroke('red');
+    noFill();
+    rect(x, y, width, height);
+    pop()
+  }
+
+  public getHitBox() {
+    return {
+      x: this.position.x,
+      y: this.position.y,
+      width: this.size.x,
+      height: this.size.y,
+    }
   }
 
   public boostCurrentSpeed(endTime: number) {
