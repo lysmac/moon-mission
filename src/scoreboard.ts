@@ -1,14 +1,18 @@
 class ScoreBoard {
-  private position: p5.Vector
-  private size: p5.Vector
-  private game: IStartGame
-  private background: Background
+  private position: p5.Vector;
+  private size: p5.Vector;
+  private game: IStartGame;
+  background: Background;
 
-  constructor(game: IStartGame) {
-    this.game = game
-    this.position = createVector(100, 300)
-    this.size = createVector(400, 300)
-    this.background = new Background(true)
+  constructor(
+    
+    game: IStartGame
+  ) {
+    this.game = game;
+    this.position = createVector(100, 300);
+    this.size = createVector(400, 300);
+    this.background = new Background(true);
+
   }
 
   public update(): void {
