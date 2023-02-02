@@ -2,7 +2,7 @@ class GameMenu {
   private position: p5.Vector
   private size: p5.Vector
   private game: IStartGame
-  background: Background
+  private background: Background
 
   constructor(game: IStartGame) {
     this.game = game
@@ -10,16 +10,16 @@ class GameMenu {
     this.size = createVector(400, 370)
     this.background = new Background(true)
   }
-  public update() {
+  public update(): void {
     // Press backspace to start new game
     if (keyIsDown(BACKSPACE)) {
-      this.game.startNewGame();
+      this.game.startNewGame()
     }
     // Stars from the background class
     this.background.update()
   }
- 
-  public draw() {
+
+  public draw(): void {
     this.background.draw()
 
     //BACKGROUND SQUARE MENU
@@ -56,24 +56,24 @@ class GameMenu {
     text("HOW TO PLAY", this.position.x + 200, this.position.y + 150)
 
     // IMAGE OF KEYS
-    image(interactionKeys, 180, 470, 300, 70);
-    fill("#D9D9D9");
-    textSize(15);
-    text("PAUSE", this.position.x + 100, this.position.y + 260);
-    text("SHOOT", this.position.x + 200, this.position.y + 260);
-    text("MOVE", this.position.x + 330, this.position.y + 260);
-    textSize(13);
-    text("PRESS ", this.position.x + 145, this.position.y + 320);
-    fill("#FDCA51");
-    text("M", this.position.x + 168, this.position.y + 320);
-    fill("#D9D9D9");
-    text("TO TOGGLE MUSIC", this.position.x + 230, this.position.y + 320);
+    image(interactionKeys, 180, 470, 300, 70)
+    fill("#D9D9D9")
+    textSize(15)
+    text("PAUSE", this.position.x + 100, this.position.y + 260)
+    text("SHOOT", this.position.x + 200, this.position.y + 260)
+    text("MOVE", this.position.x + 330, this.position.y + 260)
+    textSize(13)
+    text("PRESS ", this.position.x + 145, this.position.y + 320)
+    fill("#FDCA51")
+    text("M", this.position.x + 168, this.position.y + 320)
+    fill("#D9D9D9")
+    text("TO TOGGLE MUSIC", this.position.x + 230, this.position.y + 320)
 
-    text("PRESS ", this.position.x + 134, this.position.y + 340);
-    fill("#FDCA51");
-    text("H", this.position.x + 159, this.position.y + 340);
-    fill("#D9D9D9");
-    text("TO VIEW HIGH SCORE", this.position.x + 231, this.position.y + 340);
+    text("PRESS ", this.position.x + 134, this.position.y + 340)
+    fill("#FDCA51")
+    text("H", this.position.x + 159, this.position.y + 340)
+    fill("#D9D9D9")
+    text("TO VIEW HIGH SCORE", this.position.x + 231, this.position.y + 340)
 
     //SPACESHIP
     angleMode(DEGREES)

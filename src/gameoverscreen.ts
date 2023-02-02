@@ -1,7 +1,7 @@
 class GameOver {
-  position: p5.Vector
-  size: p5.Vector
-  game: IStartGame
+  private position: p5.Vector
+  private size: p5.Vector
+  private game: IStartGame
 
   constructor(game: IStartGame) {
     this.position = createVector(100, 300)
@@ -9,7 +9,8 @@ class GameOver {
     this.game = game
   }
 
-  public update() {
+  public update(): void {
+    // Checks if scores has been set, pushes into Game and local storage
     if (!this.game.scoreCheckGet()) {
       let score = this.game.readCurrentPlayerScore()
       this.game.pushToAllPlayerScores(score)
@@ -20,11 +21,11 @@ class GameOver {
     }
 
     if (keyIsDown(BACKSPACE)) {
-      game.startNewGame();
+      game.startNewGame()
     }
   }
 
-  public draw() {
+  public draw(): void {
     //BACKGROUND SQUARE MENU
     fill("rgba(255, 0, 0, 0.3)")
     stroke("#D9D9D9")
@@ -39,7 +40,7 @@ class GameOver {
     text("GAME OVER", this.position.x + this.size.x / 2, this.position.y - 60)
 
     // MENU TEXT
-    // This variable takes the score from gameengine, so it can be displayed here
+    // This variable takes the score from Game, so it can be displayed here
     let score = this.game.readCurrentPlayerScore()
     let highscore = this.getHighestScore()
 
@@ -82,8 +83,8 @@ class GameOver {
       this.position.y + 140
     )
   }
-// Get the highest score from the array of readAllPlayerScores
-  private getHighestScore() {
+  // Get the highest score from the the array in Game
+  private getHighestScore(): number {
     let highscores = this.game.readAllPlayerScores()
     let highestNumber = Math.max(...highscores)
     return highestNumber
