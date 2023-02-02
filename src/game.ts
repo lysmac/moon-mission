@@ -90,7 +90,7 @@ class Game implements IStartGame {
         break
     }
   }
-// 
+// Starts the game and resets the gameEngine
   public startNewGame(): void {
     this.gameplaymusic.stop()
     this.scoreCheckSet(false)
@@ -98,7 +98,7 @@ class Game implements IStartGame {
     this.gameEngine = new GameEngine()
   }
 
-
+// Method that mutes all sound and music in the game
   private muteSounds() {
     const pWasPressed = !this.wasSKeyDown && keyIsDown(83)
     if (pWasPressed && this.mute === true) {
@@ -115,15 +115,16 @@ class Game implements IStartGame {
     }
     this.wasSKeyDown = keyIsDown(83)
   }
-
+  
+// Reads all playerscore from the gameEngine
   public readAllPlayerScores() {
     return this.allPlayerScores
   }
-
+// Push the current score to the variable allPlayerScores array
   public pushToAllPlayerScores(playerScore: number) {
     this.allPlayerScores.push(playerScore)
   }
-
+// Change the current scene and stops the current music and starts the new music for active scene
   public changeCurrentScene(scene: string): void {
     this.currentScene = scene
 
@@ -140,15 +141,15 @@ class Game implements IStartGame {
       this.gameplaymusic.stop()
     }
   }
-
+// Reads the current score from the gameEngine
   public readCurrentPlayerScore(): number {
     return this.currentPlayerScore
   }
-
+// 
   public changeCurrentPlayerScore(input: number) {
     this.currentPlayerScore = input
   }
-
+// Pauses the game and stops the music and the oxygen display
   public togglePause() {
     const espaceWasPressed = !this.wasEscapeKeyDown && keyIsDown(ESCAPE)
     if (espaceWasPressed && this.currentScene === "play") {
@@ -163,6 +164,7 @@ class Game implements IStartGame {
 
     this.wasEscapeKeyDown = keyIsDown(ESCAPE)
   }
+  // Use the H key to toggle between the start and score scene
   public toggleHighScore() {
     const hWasPressed = !this.wasHKeyDown && keyIsDown(72)
     if (hWasPressed && this.currentScene === "start") {
@@ -180,7 +182,7 @@ class Game implements IStartGame {
   public scoreCheckGet() {
     return this.addedScoreToList
   }
-
+// Loads the playerscore from the local storage
   private getScoresFromLS() {
     const scores = localStorage.getItem("playerScores")
     const scoresParsed = JSON.parse(scores!)
